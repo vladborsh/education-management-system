@@ -4,13 +4,14 @@
 @color2: #10542a;
 @l-gray: #91A193;
 
+@nav-bg: #36333B;
+@content-bg: #D5DBD5;
+@topbar-bg: @color;
+
 html, body {
 	height: 100%;
 	font-family: 'Roboto Slab', serif;
-}
-
-.container-fluid {
-	height: 100%;
+	color: #444;
 }
 
 a {
@@ -136,7 +137,79 @@ a {
 	}
 }
 
+// Content
+
+.nav {
+	float: left;
+	height: 100%;
+	width: 300px;
+	background: @nav-bg;
+	.user-box {
+		padding: 20px;
+		color: #fff;
+		.username {
+			font-size: 120%;
+			font-weight: bold;
+		}
+	}
+	.nav-box {
+		a {
+			display: block;
+			color: #fff;
+			padding: 5px;
+			padding-left: 15px;
+			font-weight: bold;
+			margin-right: 12px;
+			border-top-right-radius: 3px;
+			border-bottom-right-radius: 3px;
+			text-decoration: none;
+			&.active {
+				background: @color;
+			}
+		}
+	}
+}
+
+.content {
+	height: 100%;
+	margin-left: 300px;
+	background: @content-bg;
+	.topbar {
+		padding: 15px;
+		color: #fff;
+		background: @topbar-bg;
+		.toggle-menu {
+			border-color: #fff;
+			color: #fff;
+			background: @color;
+			padding:5px 9px;
+			margin-right: 15px;
+			font-size: 120%;
+			outline: none;
+			&:hover {
+				background: #fff;
+				color: @color;
+			}
+		}
+	}
+	.main {
+		padding: 20px;
+		padding-bottom: 0;
+	}
+}
+
 // Overrrides 
+
+
+.container-fluid {
+	height: 100%;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.row {
+	margin: 0;
+}
 
 .panel {
 	border-radius: 1px;

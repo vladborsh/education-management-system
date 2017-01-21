@@ -19,6 +19,16 @@ function Config($stateProvider, $urlRouterProvider) {
 			}
 		}
 	})
+	.state('login.forgotpass', {
+		url: '/forgotpass',
+		views: { 
+			'main' : {
+				templateUrl: 'app/forgot-pass/forgot-pass.html',
+				controller: 'ForgotPassController',
+				controllerAs: 'vm'
+			}
+		}
+	})
 	.state('login.signup', {
 		url: '/signup',
 		views: { 
