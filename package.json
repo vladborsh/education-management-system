@@ -1,0 +1,22 @@
+{
+  "name": "lms",
+  "version": "1.0.0",
+  "description": "simple to use lms system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/choogayster/lms.git"
+  },
+  "keywords": [
+    "lms"
+  ],
+  "author": "Vlad Borsh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/choogayster/lms/issues"
+  },
+  "homepage": "https://github.com/choogayster/lms#readme"
+}
