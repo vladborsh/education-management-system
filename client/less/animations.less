@@ -1,0 +1,23 @@
+.fade-down {
+	overflow: auto;
+	width: 100%;
+	transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .3s;
+	&.ng-enter{
+		position: absolute;
+		transform: translate(0, -20px);
+		opacity: 0;
+	}
+	&.ng-leave {
+		position: absolute;
+		opacity: 1;
+		transform: translate(0, 0);
+	}
+	&.ng-enter.ng-enter-active {
+		transform: translate(0, 0);
+		opacity: 1;
+	}
+	&.ng-leave.ng-leave-active {
+		transform: translate(0, -20px);
+		opacity: 0;
+ 	}
+}

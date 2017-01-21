@@ -3,15 +3,24 @@
 <head>
 	<title>Hi there</title>
 	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+	<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="components/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="css/animations.css">
+
+
 	<script src="components/angular/angular.min.js"></script>
 	<script src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+	<script src="components/angular-animate/angular-animate.min.js"></script>
 
-	<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/custom.css">
+	<script src="app/signin/signin.controller.js"></script>
+	<script src="app/signup/signup.controller.js"></script>
+	<script src="app/app.config.js"></script>
+	<script src="app/app.js"></script>
 	
 </head>
-<body>
-	<h1>True page!!!</h1>
+<body ng-app="App">
+	<div ui-view="index" class="container-fluid">
 </body>
 </html>

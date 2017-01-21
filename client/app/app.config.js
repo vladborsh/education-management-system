@@ -1,0 +1,51 @@
+Config.$injector = ['$stateProvider', '$urlRouterProvider'];
+function Config($stateProvider, $urlRouterProvider) {
+	$stateProvider
+	.state('login', {
+		url: '/login',
+		views: { 
+			'index' : {
+				templateUrl: 'app/general/templates/login.html'
+			}
+		}
+	})
+	.state('login.signin', {
+		url: '/signin',
+		views: { 
+			'main' : {
+				templateUrl: 'app/signin/signin.html',
+				controller: 'SignInController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('login.signup', {
+		url: '/signup',
+		views: { 
+			'main' : {
+				templateUrl: 'app/signup/signup.html',
+				controller: 'SignUpController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('content', {
+		url: '/content',
+		views: { 
+			'index' : {
+				templateUrl: 'app/general/templates/content.html',
+			}
+		}
+	})
+	.state('content.home', {
+		url: '/home',
+		views: { 
+			'main' : {
+				templateUrl: 'app/home/home.html',
+				controller: 'HomeController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	$urlRouterProvider.otherwise('/login/signin');
+}
