@@ -1,0 +1,27 @@
+{
+  "name": "lms",
+  "description": "simple to use lms system",
+  "main": "server.js",
+  "authors": [
+    "Vlad Borsh"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "lms"
+  ],
+  "homepage": "https://github.com/choogayster/lms",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-ui-router": "^0.4.2",
+    "bootstrap": "^3.3.7",
+    "angular-bootstrap": "^2.4.0"
+  },
+  "directory" : "client/"
+}
