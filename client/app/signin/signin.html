@@ -2,17 +2,18 @@
 <h2 class="header">Авторизація</h2>
 <form>
   <div class="form-group">
-    <input type="email" class="form-control" placeholder="Пошта">
+    <input type="email" class="form-control" placeholder="Пошта" ng-model="vm.model.email">
   </div>
   <div class="form-group">
-    <input type="password" class="form-control" placeholder="Пароль">
+    <input type="password" class="form-control" placeholder="Пароль" ng-model="vm.model.password">
   </div>
   <div class="left-aligned-text">
   	<small><a ui-sref="login.forgotpass">Забули пароль?</a></small>
   </div>
   <div>
-  	<button type="submit" class="btn btn-default important-btn" ui-sref="content.home">Увійти</button>
+  	<button type="submit" class="btn btn-default important-btn" ng-click="vm.signIn()">Увійти</button>
   </div>
+  <div uib-alert ng-repeat="alert in vm.util.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.closeAlert($index)">{{alert.msg}}</div>
   Ще не користувач? <a ui-sref="login.signup">Зареєструватись!</a>
 </form>
 <hr>

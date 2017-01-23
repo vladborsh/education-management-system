@@ -21,10 +21,13 @@
   },
   "homepage": "https://github.com/choogayster/lms#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.0",
     "bower": "^1.8.0",
     "ejs": "^2.5.5",
     "express": "^4.14.0",
-    "mongojs": "^2.4.0"
+    "json-web-token": "^2.0.3",
+    "mongoose": "^4.7.7",
+    "morgan": "^1.7.0"
   }
 }

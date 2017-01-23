@@ -6,7 +6,9 @@
 
 @nav-bg: #36333B;
 @content-bg: #D5DBD5;
-@topbar-bg: @color;
+@topbar-bg: #fff;
+
+@gray: #555;
 
 html, body {
 	height: 100%;
@@ -118,6 +120,7 @@ a {
 				  margin-top: 20px;
 				  margin-bottom: 20px;
 				  border: none;
+				  outline: none;
 				  &:hover{
 				  	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0e4926+0,1ab23e+100 */
 						background: #0e4926; /* Old browsers */
@@ -147,16 +150,19 @@ a {
 	.user-box {
 		padding: 20px;
 		color: #fff;
+		background: @nav-bg + #111;
 		.username {
 			font-size: 120%;
 			font-weight: bold;
 		}
 	}
 	.nav-box {
+		padding-top: 5px;
 		a {
 			display: block;
 			color: #fff;
 			padding: 5px;
+			margin-top: 5px;
 			padding-left: 15px;
 			font-weight: bold;
 			margin-right: 12px;
@@ -166,6 +172,12 @@ a {
 			&.active {
 				background: @color;
 			}
+			&:hover {
+				background: @nav-bg + #111;
+			}
+		}
+		.title {
+			margin-left: 10px;
 		}
 	}
 }
@@ -176,19 +188,31 @@ a {
 	background: @content-bg;
 	.topbar {
 		padding: 15px;
-		color: #fff;
+		color: @gray;
 		background: @topbar-bg;
 		.toggle-menu {
-			border-color: #fff;
-			color: #fff;
-			background: @color;
+			border-color: @gray;
+			color: @gray;
+			background: @topbar-bg;
 			padding:5px 9px;
 			margin-right: 15px;
 			font-size: 120%;
 			outline: none;
 			&:hover {
-				background: #fff;
-				color: @color;
+				background: @gray;
+				color: #fff;
+			}
+		}
+		.search {
+			border:none;
+			font-size: 110%;
+			outline: none;
+			padding: 5px;
+			border-bottom: 1px solid @gray + #666;
+			color: @gray;
+			transition: all ease-in-out .3;
+			&:focus {
+				border-bottom: 1px solid @gray + #666;
 			}
 		}
 	}
@@ -249,5 +273,18 @@ a {
 	transition: all ease-in-out 0.2s;
 }
 
+.alert {
+	padding: 10px;
+	margin-bottom: 10px;
+	border: none;
+	border-radius: 5px;
+}
+
+.alert-dismissable .close, .alert-dismissible .close {
+    position: relative;
+    top: -2px;
+    right: -5px;
+    color: inherit;
+}
 
 

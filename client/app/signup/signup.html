@@ -1,24 +1,25 @@
 <h2 class="header">Реєстрація</h2>
-<form>
+<form no-validate="true">
   <div class="form-group">
-    <input type="email" class="form-control" placeholder="Пошта">
+    <input type="email" class="form-control" placeholder="Пошта" ng-model="vm.model.email">
   </div>
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Ім'я">
+    <input type="text" class="form-control" placeholder="Ім'я" ng-model="vm.model.firstName">
   </div>
 
   <div class="form-group">
-    <input type="text" class="form-control" placeholder="Прізвище">
+    <input type="text" class="form-control" placeholder="Прізвище" ng-model="vm.model.lastName">
   </div>
   <div class="form-group">
-    <input type="password" class="form-control" placeholder="Пароль">
+    <input type="password" class="form-control" placeholder="Пароль" ng-model="vm.model.password">
   </div>
   <div class="form-group">
-    <input type="password" class="form-control" placeholder="Повотріть пароль">
+    <input type="password" class="form-control" placeholder="Повотріть пароль" ng-model="vm.util.confirmPassword">
   </div>
   <div>
-    <button type="submit" class="btn btn-default important-btn">Зареєструватись</button>  
+    <button type="submit" class="btn btn-default important-btn" ng-click="vm.signUp()">Зареєструватись</button>  
   </div>
+  <div uib-alert ng-repeat="alert in vm.util.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="vm.closeAlert($index)">{{alert.msg}}</div>
   <a ui-sref="login.signin">Увійти</a>
 </form>
 <hr>

@@ -1,13 +1,25 @@
 var express = require('express');
+var app = express();
 var path = require('path');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var morgan = require('morgan');
+var port = process.env.PORT || 3000;
+var router = express.Router();
+var userRoutes = require('./routes/user')(router);
 
 var index = require('./routes/index');
-var tasks = require('./routes/tasks');
 
-var port = 3000;
+mongoose.connect("mongodb://lms-user:qweasdzxc@ds117899.mlab.com:17899/lms-db", function (err) {
+	if (err) {
+		console.log(err);
+	} else {
+		console.log('successfully connected to db');
+	}
+});
 
-var app = express();
+
+app.use(morgan('dev'));
 
 //view engine
 app.set('views', path.join(__dirname, 'client'));
@@ -20,8 +32,9 @@ app.use(express.static(path.join(__dirname + '/client')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+//routes
 app.use('/', index);
-app.use('/api', tasks);
+app.use('/api', userRoutes);
 
 
 app.listen(port, function () {
