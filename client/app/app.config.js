@@ -52,6 +52,8 @@ function Config(
 		views: { 
 			'index' : {
 				templateUrl: 'app/general/templates/content.html',
+				controller: 'WrapContentController',
+				controllerAs: 'wrap'
 			}
 		}
 	})

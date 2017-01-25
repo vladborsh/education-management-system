@@ -147,8 +147,10 @@ a {
 	height: 100%;
 	width: 300px;
 	background: @nav-bg;
+	transition: all linear 0.3s;
 	.user-box {
 		height: 80px;
+		overflow: hidden;
 		padding: 16px;
 		color: #fff;
 		background: @nav-bg + #111;
@@ -176,7 +178,7 @@ a {
 			color: #fff;
 			padding: 5px;
 			margin-top: 5px;
-			padding-left: 15px;
+			padding-left: 20px;
 			font-weight: bold;
 			margin-right: 12px;
 			border-top-right-radius: 3px;
@@ -191,6 +193,24 @@ a {
 		}
 		.title {
 			margin-left: 10px;
+		}
+	}
+	&.hidden-nav {
+		width: 80px; 
+	}
+	&.titles-hidden { 
+		.user-box {
+			.user-details {
+				display: none;
+			}
+		}
+		.nav-box {
+			a {
+				padding-left: 30px;
+			}
+			.title {
+				display: none;
+			}
 		}
 	}
 }
@@ -233,6 +253,9 @@ a {
 	.main {
 		padding: 20px;
 		padding-bottom: 0;
+	}
+	&.hidden-nav {
+		margin-left: 80px;
 	}
 }
 
