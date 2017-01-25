@@ -8,4 +8,5 @@ angular.module('App', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngCookies'])
 .controller('SignInController', SignInController)
 .controller('SignUpController', SignUpController)
 .controller('ForgotPassController', ForgotPassController)
+.controller('TopbarController', TopbarController)
 .controller('HomeController', HomeController);
