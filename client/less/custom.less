@@ -149,9 +149,21 @@ a {
 	background: @nav-bg;
 	.user-box {
 		height: 80px;
-		padding: 20px;
+		padding: 16px;
 		color: #fff;
 		background: @nav-bg + #111;
+		img.user-img {
+			width: 50px;
+			border: 3px solid #fff;
+			display: inline-block;
+			border-radius: 50%;
+			float: left;
+		}
+		.user-details {
+			padding-left: 20px;
+			padding-top: 5px;
+			display: inline-block;
+		}
 		.username {
 			font-size: 120%;
 			font-weight: bold;
@@ -187,6 +199,7 @@ a {
 	height: 100%;
 	margin-left: 300px;
 	background: @content-bg;
+	transition: all linear 0.3s;
 	.topbar {
 		padding: 20px;
 		color: @gray;
