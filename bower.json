@@ -23,7 +23,8 @@
     "bootstrap": "^3.3.7",
     "angular-bootstrap": "^2.4.0",
     "font-awesome": "fontawesome#^4.7.0",
-    "angular-animate": "^1.6.1"
+    "angular-animate": "^1.6.1",
+    "angular-cookies": "^1.6.1"
   },
   "directory": "client/"
 }

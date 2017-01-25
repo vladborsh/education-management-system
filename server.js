@@ -10,7 +10,10 @@ var userRoutes = require('./routes/user')(router);
 
 var index = require('./routes/index');
 
-mongoose.connect("mongodb://lms-user:qweasdzxc@ds117899.mlab.com:17899/lms-db", function (err) {
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
+
+mongoose.connect("mongodb://lms-user:qweasdzxc@ds117899.mlab.com:17899/lms-db", options, function (err) {
 	if (err) {
 		console.log(err);
 	} else {

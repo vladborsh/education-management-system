@@ -22,9 +22,9 @@ function SignUpController(SignUpService) {
 		SignUpService.signUp(vm.model)
 		.then(
 			function (data) {
-				vm.util.alerts.push({type: 'success', msg: data});
+				vm.util.alerts.push({type: 'success', msg: data.message});
 			}, function (err) {
-				vm.util.alerts.push({type: 'danger', msg: err});
+				vm.util.alerts.push({type: 'danger', msg: err.message});
 			}
 		);
 	}

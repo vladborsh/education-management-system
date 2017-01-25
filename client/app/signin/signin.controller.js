@@ -1,5 +1,15 @@
-SignInController.$inject = ['SignInService', '$state']
-function SignInController(SignInService, $state) {
+SignInController.$inject = [
+	'SignInService',
+	'AuthFactory', 
+	'$state'
+]
+
+function SignInController(
+	SignInService, 
+	AuthFactory, 
+	$state) 
+{
+
 	var vm = this;
 
 	vm.model = {
@@ -20,9 +30,10 @@ function SignInController(SignInService, $state) {
 		SignInService.signIn(vm.model)
 		.then(
 			function (data) {
+				AuthFactory.setToken(data.token);
 				$state.go('content.home');
 			}, function (err) {
-				vm.util.alerts.push({type: 'danger', msg: err});
+				vm.util.alerts.push({type: 'danger', msg: err.message});
 			}
 		);
 	}

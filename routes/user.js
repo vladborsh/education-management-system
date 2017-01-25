@@ -1,4 +1,6 @@
 var User = require('../models/user');
+var jwt = require('jsonwebtoken');
+var secret = 'amzingapp';
 
 module.exports = function(router) {
 
@@ -31,7 +33,7 @@ module.exports = function(router) {
 				res.json({success: true, message: 'All users delted'})
 			}
 		})
-	})
+	});
 
 	router.post('/auth', function (req, res) {
 		User
@@ -46,11 +48,34 @@ module.exports = function(router) {
 				if (!validPassword) {
 					res.json({success:false, message: 'Invalid password'});
 				} else {
-					res.json({success:true, message: 'User authenticated'});
+					var token = jwt.sign({ username: user.username, email: user.email }, secret, {expiresIn: '24h'});
+					res.json({success:true, message: 'User authenticated', token: token});
 				}
 			}
 		})
+	});
+
+
+	router.use(function (req, res, next) {
+		var token = req.body.token || req.query.token || req.headers['x-access-token'];
+		if (token) {
+			res.json({success: false, message: 'No token provided'});
+		} else {
+			jwt.verify(token, secret, function (err, decoded) {
+				if (err) { 
+					req.json({success: false, message: 'Token Invalid'});
+				} else {
+					req.decoded = decoded;
+				}
+			})
+		}
 	})
+
+
+	router.post('/me', function (req, res) {
+		
+	})
+
 
 
 	return router;

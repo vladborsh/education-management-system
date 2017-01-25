@@ -1,5 +1,13 @@
-Config.$injector = ['$stateProvider', '$urlRouterProvider'];
-function Config($stateProvider, $urlRouterProvider) {
+Config.$injector = [
+'$stateProvider', 
+'$urlRouterProvider', 
+'$httpProvider'
+];
+function Config(
+	$stateProvider, 
+	$urlRouterProvider,
+	$httpProvider) 
+{
 	$stateProvider
 	.state('login', {
 		url: '/login',
@@ -58,4 +66,6 @@ function Config($stateProvider, $urlRouterProvider) {
 		}
 	})
 	$urlRouterProvider.otherwise('/login/signin');
+
+	$httpProvider.interceptors.push('AuthInterceptorFactory')
 }
