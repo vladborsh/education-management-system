@@ -213,6 +213,35 @@ a {
 			}
 		}
 	}
+	@media (max-width: 992px) {
+		width: 80px; 
+		.user-box {
+			.user-details {
+				display: none;
+			}
+		}
+		.nav-box {
+			a {
+				padding-left: 30px;
+			}
+			.title {
+				display: none;
+			}
+		}
+		&.hidden-nav {
+			width: 0; 
+		}
+		&.titles-hidden { 
+			.user-box {
+				display: none;
+			}
+			.nav-box {
+				a {
+					display: none;
+				}
+			}
+		}
+	}
 }
 
 .content {
@@ -256,6 +285,17 @@ a {
 	}
 	&.hidden-nav {
 		margin-left: 80px;
+	}
+	@media (max-width: 992px) {
+		margin-left: 80px; 
+		&.hidden-nav {
+			margin-left: 0;
+		}
+		.topbar {
+			.search-box {
+				display: none;
+			}
+		}
 	}
 }
 
