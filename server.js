@@ -6,14 +6,15 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var port = process.env.PORT || 3000;
 var router = express.Router();
-var userRoutes = require('./routes/user')(router);
+var userRoutes = require('./routes/user.route')(router);
+var coursesRoutes = require('./routes/course.route')(router);
+var config = require('./config/dev.config')
 
 var index = require('./routes/index');
 
-var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
-                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };
 
-mongoose.connect("mongodb://lms-user:qweasdzxc@ds117899.mlab.com:17899/lms-db", options, function (err) {
+
+mongoose.connect(config.database, function (err) {
 	if (err) {
 		console.log(err);
 	} else {
@@ -38,6 +39,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 //routes
 app.use('/', index);
 app.use('/api', userRoutes);
+app.use('/api', coursesRoutes);
 
 
 app.listen(port, function () {

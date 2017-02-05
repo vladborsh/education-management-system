@@ -1,6 +1,6 @@
-var User = require('../models/user');
+var User = require('../models/user.model');
 var jwt = require('jsonwebtoken');
-var secret = 'amzingapp';
+var secret = require('../config/dev.config').secret;
 
 module.exports = function(router) {
 
@@ -54,29 +54,5 @@ module.exports = function(router) {
 			}
 		})
 	});
-
-
-	router.use(function (req, res, next) {
-		var token = req.body.token || req.query.token || req.headers['x-access-token'];
-		if (token) {
-			res.json({success: false, message: 'No token provided'});
-		} else {
-			jwt.verify(token, secret, function (err, decoded) {
-				if (err) { 
-					req.json({success: false, message: 'Token Invalid'});
-				} else {
-					req.decoded = decoded;
-				}
-			})
-		}
-	})
-
-
-	router.post('/me', function (req, res) {
-		
-	})
-
-
-
 	return router;
 }
