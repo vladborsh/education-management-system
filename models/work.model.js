@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var WorkResultSchema = new Schema({
-	_taskResult : {
+	_task : {
 		type : Schema.Types.ObjectId, ref: 'TaskResult', required: true
 	},
 	body : {

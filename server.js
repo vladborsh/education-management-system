@@ -6,13 +6,7 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var port = process.env.PORT || 3000;
 var router = express.Router();
-var userRoutes = require('./routes/user.route')(router);
-var coursesRoutes = require('./routes/course.route')(router);
 var config = require('./config/dev.config')
-
-var index = require('./routes/index');
-
-
 
 mongoose.connect(config.database, function (err) {
 	if (err) {
@@ -22,25 +16,13 @@ mongoose.connect(config.database, function (err) {
 	}
 });
 
-
 app.use(morgan('dev'));
-
-//view engine
-app.set('views', path.join(__dirname, 'client'));
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
 
 app.use(express.static(path.join(__dirname + '/client')));
 
-//body parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
-//routes
-app.use('/', index);
-app.use('/api', userRoutes);
-app.use('/api', coursesRoutes);
-
+require('./routes/index')(app);
 
 app.listen(port, function () {
 	console.log('server started on port ' + port);
