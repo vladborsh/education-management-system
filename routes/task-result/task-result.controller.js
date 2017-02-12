@@ -89,6 +89,5 @@ function getWorks (req, res) {
 		}
 	})
 }
-}
 
 
