@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans');
 
-@color: #4CB267;
-@color2: #10542a;
+@color: #2c83f4;
+@color2: #044396;
 @l-gray: #91A193;
 
-@nav-bg: #36333B;
+@nav-bg: #212e4f;
 @content-bg: #D5DBD5;
 @topbar-bg: #fff;
 
-@gray: #555;
+@gray: #555;  
 
 html, body {
 	height: 100%;
-	font-family: 'Roboto Slab', serif;
+	font-family: 'Fira Sans', serif;
 	color: #444;
 }
 
@@ -109,11 +109,7 @@ a {
 					margin-bottom: 30px;
 				}
 				.important-btn {
-					background: @color2; /* Old browsers */
-					background: -moz-linear-gradient(45deg, @color2 0%, @color 100%); /* FF3.6-15 */
-					background: -webkit-linear-gradient(45deg, @color2 0%,@color 100%); /* Chrome10-25,Safari5.1-6 */
-					background: linear-gradient(45deg, @color2 0%,@color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color2', endColorstr='@color',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */		
+					background: @color; 
 					color: #fff;
 				  border-radius: 30px;
 				  padding: 15px 40px;
@@ -122,13 +118,8 @@ a {
 				  border: none;
 				  outline: none;
 				  &:hover{
-				  	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#0e4926+0,1ab23e+100 */
-						background: #0e4926; /* Old browsers */
-						background: -moz-linear-gradient(45deg, #0e4926 0%, #1ab23e 100%); /* FF3.6-15 */
-						background: -webkit-linear-gradient(45deg, #0e4926 0%,#1ab23e 100%); /* Chrome10-25,Safari5.1-6 */
-						background: linear-gradient(45deg, #0e4926 0%,#1ab23e 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-						filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e4926', endColorstr='#1ab23e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-				  }
+				  	background: @color - #111; 
+					}
 				}
 				.other-btn {
 				  border-radius: 30px;
@@ -145,7 +136,7 @@ a {
 .nav {
 	float: left;
 	height: 100%;
-	width: 300px;
+	width: 250px;
 	background: @nav-bg;
 	transition: all linear 0.3s;
 	.user-box {
@@ -172,23 +163,19 @@ a {
 		}
 	}
 	.nav-box {
-		padding-top: 5px;
+		//padding-top: 7px;
 		a {
 			display: block;
 			color: #fff;
-			padding: 5px;
-			margin-top: 5px;
+			padding: 15px;
 			padding-left: 20px;
-			font-weight: bold;
-			margin-right: 12px;
-			border-top-right-radius: 3px;
-			border-bottom-right-radius: 3px;
+			//font-weight: bold;
 			text-decoration: none;
 			&.active {
-				background: @color;
+				background: @nav-bg + #111;
 			}
 			&:hover {
-				background: @nav-bg + #111;
+				background: @nav-bg + #333;
 			}
 		}
 		.title {
@@ -246,7 +233,7 @@ a {
 
 .content {
 	height: 100%;
-	margin-left: 300px;
+	margin-left: 250px;
 	background: @content-bg;
 	transition: all linear 0.3s;
 	.topbar {

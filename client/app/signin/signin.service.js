@@ -1,4 +1,4 @@
-SignInService.$inject = ['$http', '$q', AuthFactory]
+SignInService.$inject = ['$http', '$q', 'AuthFactory']
 function SignInService($http, $q, AuthFactory) {
 
 	this.signIn = function (user) {

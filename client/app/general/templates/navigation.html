@@ -1,21 +1,17 @@
-<div class="user-box">
-	<img src="assets/avat.png" alt="" class="user-img">
-	<div class="user-details">
-		<div class="username">Влад Борш</div>
-		<div class="position"><small>Студент</small></div>
+<div ng-controller="NavigationController as navbar">
+	<div class="user-box">
+		<img src="assets/avat.png" alt="" class="user-img">
+		<div class="user-details">
+			<div class="username">Влад Борш</div>
+			<div class="position"><small>Студент</small></div>
+		</div>
 	</div>
-</div>
-<div class="nav-box">
-	<a href="">
-		<i class="fa fa-home" aria-hidden="true"></i> 
-		<span class="title">Домашня</span>
-	</a>
-	<a href="" class="active">
-		<i class="fa fa-check-square-o" aria-hidden="true"></i> 
-		<span class="title">Справи</span>
-	</a>
-	<a href="">
-		<i class="fa fa-calendar" aria-hidden="true"></i> 
-		<span class="title">Календар</span>
-	</a>
+	<div class="nav-box">
+
+		<a ng-repeat="item in navbar.model.nav" ui-sref="{{item.link}}" href="">
+			<i class="fa {{item.icon}}" aria-hidden="true"></i> 
+			<span class="title">{{item.label}}</span>
+		</a>
+
+	</div>
 </div>
