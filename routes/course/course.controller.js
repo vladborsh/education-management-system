@@ -13,7 +13,9 @@ module.exports.getLectures = getLectures;
 module.exports.getEntries = getEntries;
 
 function getAll(req, res) {
-	Course.find(function (err, courses) {
+	Course.find()
+	.populate('_author')
+	.exec(function (err, courses) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find courses ' + err});
 		} else {
@@ -23,7 +25,9 @@ function getAll(req, res) {
 }
 
 function get(req, res) {
-	Course.findById(req.params.id, function (err, course) {
+	Course.findById(req.params.id)
+	.populate('_author')
+	.exec( function (err, course) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find course ' + err});
 		} else {

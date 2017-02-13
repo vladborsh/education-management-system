@@ -10,4 +10,5 @@ angular.module('App', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngCookies'])
 .controller('ForgotPassController', ForgotPassController)
 .controller('WrapContentController', WrapContentController)
 .controller('TopbarController', TopbarController)
+.controller('NavigationController', NavigationController)
 .controller('HomeController', HomeController);

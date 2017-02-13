@@ -6,6 +6,7 @@ module.exports.getAllUsers = getAllUsers;
 module.exports.signup = signup;
 module.exports.deleteUser = deleteUser;
 module.exports.auth = auth;
+module.exports.role = role;
 
 function getAllUsers(req, res) {
 	User.find(function (err, users) {
@@ -14,11 +15,7 @@ function getAllUsers(req, res) {
 }
 
 function signup(req,res) {
-	var user = new User();
-	user.password = req.body.password;
-	user.email = req.body.email;
-	user.lastName = req.body.lastName;
-	user.firstName = req.body.firstName;
+	var user = new User(req.body);
 	user.save(function (err) {
 		if (err) {
 			res.json({success:false, message: 'Cannot create user'});
@@ -60,4 +57,19 @@ function auth (req, res) {
 			}
 		}
 	})
+}
+
+function role(req, res) {
+	var id = req.decoded._id
+	if (!id) {
+		res.status(403).json({message: 'Forbidden'});
+	}
+	User.findById(id, function (err, user) {
+		if (err) throw err;
+		if (!user) {
+			res.json({success:false, message: 'Could not authenticate user'});
+		} else {
+			res.json({success:success, message: user.role});
+		}
+	});
 }

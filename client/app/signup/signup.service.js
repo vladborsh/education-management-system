@@ -3,7 +3,7 @@ function SignUpService($http, $q) {
 	
 	this.signUp = function (user) {
 		var deferred = $q.defer();
-		$http.post('/api/users', user)
+		$http.post('/api/user/signup', user)
 		.then(
 			function (data) {
 				if(data.data.success) {

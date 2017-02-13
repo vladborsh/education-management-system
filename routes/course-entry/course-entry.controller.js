@@ -11,7 +11,10 @@ module.exports.getTasks = getTasks;
 module.exports.getStudents = getStudents;
 
 function getAll(req, res) {
-	CourseEntry.find(function (err, courses) {
+	CourseEntry.find()
+	.populate('_lector')
+	.populate('_course')
+	.exec(function (err, courses) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find courses ' + err});
 		} else {
@@ -21,7 +24,10 @@ function getAll(req, res) {
 }
 
 function get(req, res) {
-	CourseEntry.findById(req.params.id, function (err, course) {
+	CourseEntry.findById(req.params.id)
+	.populate('_lector')
+	.populate('_course')
+	.exec( function (err, course) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find course ' + err});
 		} else {
@@ -31,10 +37,7 @@ function get(req, res) {
 }
 
 function create(req, res) {
-	var course = new CourseEntry();
-	course._course = req.body._course;
-	course.sartDate = req.body.sartDate;
-	course.endDate = req.body.endDate;
+	var course = new CourseEntry(req.body);
 	course.save(function (err) {
 		if (err) {
 			res.json({success: false, message: 'Cannot create course' + err});

@@ -5,6 +5,9 @@ var CourseEntrySchema = new Schema({
 	_course : {
 		type : Schema.Types.ObjectId, ref: 'Course', required: true
 	},
+	_lector : {
+		type : Schema.Types.ObjectId, ref: 'User', required: true
+	},
 	sartDate : {
 		type : Date
 	},

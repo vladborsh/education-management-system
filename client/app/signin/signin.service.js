@@ -1,5 +1,5 @@
-SignInService.$inject = ['$http', '$q']
-function SignInService($http, $q) {
+SignInService.$inject = ['$http', '$q', AuthFactory]
+function SignInService($http, $q, AuthFactory) {
 
 	this.signIn = function (user) {
 		var deferred = $q.defer();
@@ -9,6 +9,7 @@ function SignInService($http, $q) {
 				if(data.data.success) {
 					console.log(data);
 					deferred.resolve(data.data);
+					AuthFactory.setToken(data.data.token);
 				} else {
 					console.log(data);
 					deferred.reject(data.data);
