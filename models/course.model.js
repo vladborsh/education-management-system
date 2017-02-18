@@ -11,6 +11,21 @@ var CourseSchema = new Schema({
 	description : { 
 		type: String, required: true 
 	},
+	active : { 
+		type: Boolean
+	},
+	grade : {
+		type: Number 
+	},
+	createdDate : {
+		type: Date
+	},
+	updatedDate : {
+		type: Date 
+	},
+	views : {
+		type: Number, default: 0 
+	}
 });
 
 module.exports = mongoose.model('Course', CourseSchema);

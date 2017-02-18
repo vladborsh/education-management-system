@@ -1,8 +1,14 @@
 
 angular.module('App', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngCookies'])
 .factory('AuthFactory', AuthFactory)
+.factory('User', User)
 .factory('AuthInterceptorFactory', AuthInterceptorFactory)
 .config(Config)
+
+.service('Remote', Remote)
+.service('Modal', Modal)
+.service('DateService', DateService)
+
 .service('SignInService', SignInService)
 .service('SignUpService', SignUpService)
 .controller('SignInController', SignInController)
@@ -11,4 +17,17 @@ angular.module('App', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngCookies'])
 .controller('WrapContentController', WrapContentController)
 .controller('TopbarController', TopbarController)
 .controller('NavigationController', NavigationController)
-.controller('HomeController', HomeController);
+
+.service('CoursesService', CoursesService)
+.service('TasksService', TasksService)
+.service('LecturesService', LecturesService)
+.service('StudentsService', StudentsService)
+.service('CalendarService', CalendarService)
+
+.controller('HomeController', HomeController)
+.controller('CoursesController', CoursesController)
+.controller('OpenCourseController', OpenCourseController)
+.controller('TasksController', TasksController)
+.controller('LecturesController', LecturesController)
+.controller('StudentsController', StudentsController)
+.controller('CalendarController', CalendarController)

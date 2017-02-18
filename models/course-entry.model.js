@@ -13,6 +13,18 @@ var CourseEntrySchema = new Schema({
 	},
 	endDate : {
 		type : Date
+	},
+	active : {
+		type : Boolean
+	},
+	grade : {
+		type: Number 
+	},
+	createdDate : {
+		type: Date
+	},
+	updatedDate : {
+		type: Date 
 	}
 });
 

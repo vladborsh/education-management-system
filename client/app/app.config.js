@@ -67,6 +67,56 @@ function Config(
 			}
 		}
 	})
+	.state('content.courses', {
+		url: '/courses',
+		views: { 
+			'main' : {
+				templateUrl: 'app/courses/courses.html',
+				controller: 'CoursesController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('content.tasks', {
+		url: '/tasks',
+		views: { 
+			'main' : {
+				templateUrl: 'app/tasks/tasks.html',
+				controller: 'TasksController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('content.lectures', {
+		url: '/lectures',
+		views: { 
+			'main' : {
+				templateUrl: 'app/lectures/lectures.html',
+				controller: 'LecturesController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('content.students', {
+		url: '/students',
+		views: { 
+			'main' : {
+				templateUrl: 'app/students/students.html',
+				controller: 'StudentsController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('content.calendar', {
+		url: '/calendar',
+		views: { 
+			'main' : {
+				templateUrl: 'app/calendar/calendar.html',
+				controller: 'CalendarController',
+				controllerAs: 'vm'
+			}
+		}
+	})
 	$urlRouterProvider.otherwise('/login/signin');
 
 	$httpProvider.interceptors.push('AuthInterceptorFactory')

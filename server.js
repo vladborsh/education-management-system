@@ -28,3 +28,5 @@ app.listen(port, function () {
 	console.log('server started on port ' + port);
 })
 
+// mongod --dbpath D:\apps\lms\db
+

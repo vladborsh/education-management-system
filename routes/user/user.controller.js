@@ -4,7 +4,7 @@ var secret = require('../../config/dev.config').secret;
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.signup = signup;
-module.exports.deleteUser = deleteUser;
+module.exports.remove = remove;
 module.exports.auth = auth;
 module.exports.role = role;
 
@@ -16,6 +16,9 @@ function getAllUsers(req, res) {
 
 function signup(req,res) {
 	var user = new User(req.body);
+	if (!user.role) {
+		user.role = 'Admin';
+	}
 	user.save(function (err) {
 		if (err) {
 			res.json({success:false, message: 'Cannot create user'});
@@ -25,12 +28,12 @@ function signup(req,res) {
 	});
 }
 
-function deleteUser(req, res) {
-	User.remove(function (err) {
-		if(err) {
-			res.json({success: false, message: 'Cannot remove'});
+function remove(req, res) {
+	User.findByIdAndRemove(req.params.id, function (err) {
+		if (err) {
+			res.json({success: false, message: 'Cannot remove ' + err});
 		} else {
-			res.json({success: true, message: 'All users delted'})
+			res.json({success: true, items: 'User removed'});
 		}
 	})
 }
@@ -38,7 +41,7 @@ function deleteUser(req, res) {
 function auth (req, res) {
 	User
 	.findOne({ email: req.body.email })
-	.select('email password _id')
+	.select('email password role firstName lastName _id')
 	.exec(function (err, user) {
 		if (err) throw err;
 		if (!user) {
@@ -52,7 +55,10 @@ function auth (req, res) {
 				res.json({
 					success:true, 
 					message: 'User authenticated', 
-					token: token
+					token: token,
+					role: user.role,
+					id: user._id,
+					username: user.firstName + ' ' + user.lastName
 				});
 			}
 		}

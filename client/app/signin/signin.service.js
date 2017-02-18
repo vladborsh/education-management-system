@@ -7,15 +7,11 @@ function SignInService($http, $q, AuthFactory) {
 		.then(
 			function (data) {
 				if(data.data.success) {
-					console.log(data);
 					deferred.resolve(data.data);
-					AuthFactory.setToken(data.data.token);
 				} else {
-					console.log(data);
 					deferred.reject(data.data);
 				}
 			}, function (err) {
-				console.log(err);
 				deferred.reject(err);
 			}
 		);

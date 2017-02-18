@@ -1,0 +1,58 @@
+@import "variables.less";
+
+.content {
+	width: 100%;
+	height: 100%;
+	padding-left: 250px;
+	background: @content-bg;
+	transition: all linear 0.3s;
+	.topbar {
+		padding: 20px;
+		color: @gray;
+		background: @topbar-bg;
+		height: 80px;
+		.toggle-menu {
+			border: none;
+			color: #fff;
+			background: @color;
+			padding:5px 9px;
+			margin-right: 15px;
+			font-size: 120%;
+			outline: none;
+			&:hover {
+				background: @color2;
+			}
+		}
+		.search {
+			border:none;
+			font-size: 110%;
+			outline: none;
+			padding: 5px;
+			border-bottom: 1px solid @gray + #666;
+			color: @gray;
+			transition: all ease-in-out .3;
+			&:focus {
+				border-bottom: 1px solid @gray + #666;
+			}
+		}
+	}
+	.main {
+		width: 100%;
+		padding-bottom: 0;
+		position: relative;
+	}
+	&.hidden-nav {
+		padding-left: 80px;
+	}
+	@media (max-width: 992px) {
+		padding-left: 80px; 
+		&.hidden-nav {
+			padding-left: 0;
+		}
+		.topbar {
+			.search-box {
+				display: none;
+			}
+		}
+	}
+}

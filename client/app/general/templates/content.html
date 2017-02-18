@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	
-	<div class="nav" ng-class="{'hidden-nav' : wrap.model.menuHidden, 'titles-hidden' : wrap.model.titlesHidden}">
+	<div class="navigation" ng-class="{'hidden-nav' : wrap.model.menuHidden, 'titles-hidden' : wrap.model.titlesHidden}">
 		<div ng-include="'app/general/templates/navigation.html'"></div>	
 	</div>
 
@@ -11,7 +11,7 @@
 		</div>
 		
 		<div class="main">
-			<div ui-view="main"></div>	
+			<div class="fade-right pad-top" ui-view="main"></div>	
 		</div>
 	
 	</div>

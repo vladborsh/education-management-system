@@ -8,6 +8,7 @@ module.exports.get = get;
 module.exports.create = create;
 module.exports.update = update;
 module.exports.remove = remove;
+module.exports.upView = upView;
 module.exports.getTasks = getTasks;
 module.exports.getLectures = getLectures;
 module.exports.getEntries = getEntries;
@@ -38,6 +39,7 @@ function get(req, res) {
 
 function create(req, res) {
 	var course = new Course(req.body);
+	course.createdDate = Date.now();
 	course.save(function (err) {
 		if (err) {
 			res.json({success: false, message: 'Cannot create course' + err});
@@ -48,6 +50,7 @@ function create(req, res) {
 }
 
 function update(req, res) {
+	req.body.updatedDate = Date.now();
 	Course.findByIdAndUpdate(req.params.id, req.body, function(arr) {
 		if (err) {
 			res.json({success: false, message: 'Cannot update course' + err});
@@ -63,6 +66,16 @@ function remove (req, res) {
 			res.json({success: false, message: 'Cannot remove course ' + err});
 		} else {
 			res.json({success: true, items: 'Course removed'});
+		}
+	})
+}
+
+function upView(req, res) {
+	Course.findByIdAndUpdate(req.params.id, { $inc: { views: 1 } }, function(arr) {
+		if (err) {
+			res.json({success: false, message: 'Cannot update course' + err});
+		} else {
+			res.json({success: true, message: 'Course updated'});
 		}
 	})
 }

@@ -1,0 +1,174 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+
+			<div class="panel-heading">
+				<h3>Курси</h3>
+			</div>
+			<!-- Panel body -->
+			<div class="panel-body">
+				<form class="form-inline pull-right">
+					<div class="form-group">
+				  	<input type="text" class="form-control" placeholder="Пошук">
+					</div>
+					<div class="btn-group" uib-dropdown is-open="status.isopen">
+    				<button id="single-button" type="button" style="width: 180px; text-align: left" class="btn btn-default" uib-dropdown-toggle ng-disabled="disabled">
+    			    {{vm.util.filters[vm.model.activeFilter]}} 
+    			    <span class="glyphicon glyphicon-menu-down" aria-hidden="true" style="float: right; font-size: 10px; margin-top: 4px;"></span>
+    			  </button>
+    			  <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+    			    <li role="menuitem">
+    			    	<a ng-click="vm.model.activeFilter = 'popular'">Популярні</a></li>
+    			    <li role="menuitem">
+    			    	<a ng-click="vm.model.activeFilter = 'created'">Створені нещодавно</a></li>
+    			    <li role="menuitem">
+    			    	<a ng-click="vm.model.activeFilter = 'updated'">Оновлені нещодавно</a></li>
+    			  </ul>
+    			</div>
+					<button type="submit" class="btn btn-primary" ng-click="vm.startCourse()">Почати новий</button>
+				</form>
+				<div>
+					<uib-tabset >
+	  			  <uib-tab>
+	  			    <uib-tab-heading>
+	  			      Каталог
+	  			    </uib-tab-heading>
+	  			    <div class="row">
+	  			    	<div class="col-md-12">
+	  			    		<h4>Каталог усіх можливих кусів</h4>
+	  			    		<p>
+	  			    			Данний каталог складає спсок усіх доступних курсів у системі. Список відсортований за обрним фільтром. Додавати курси у каталог можуть лише користувачі із <a href="">відповідними правами</a>. Якщо ви бажаєте додавати нові курси у каталог але не маєте цієї можлевості зверніться до адміністратора
+	  			    		</p>
+	  			    		<table class="table">
+										<thead>
+										  <tr>
+										    <th>Назва</th>
+										    <th>Рейтинг</th>
+										    <th>Перегляди</th>
+										    <th>Створений</th>
+										  </tr>
+										</thead>
+										<tbody>
+										  <tr ng-repeat="item in vm.model.courses">
+										    <td>{{item.name}}</td>
+										    <td>{{item.grade}}</td>
+										    <td>{{item.views}}</td>
+										    <td>{{item.createdDate}}</td>
+										  </tr>
+										</tbody>
+									</table>
+	  			    	</div>
+	  			    </div>
+	  			  </uib-tab>
+	  			  <uib-tab>
+	  			    <uib-tab-heading>
+	  			      Діючі
+	  			    </uib-tab-heading>
+	  			    <div class="row">
+	  			    	<div class="col-md-12">
+	  			    		<h4>Діючі курси</h4>
+	  			    		<p>
+	  			    			Список складають усі діючі курси на данний момент часу. На ці курси є можливість записатись для студентів, а також переглянути інформацію про їх успішність, скаладені іспити та отримані завдання
+	  			    		</p>
+	  			    	</div>
+	  			    </div>
+	  			  </uib-tab>
+	  			  <uib-tab>
+	  			    <uib-tab-heading>
+	  			      Архівовані
+	  			    </uib-tab-heading>
+	  			    <div class="row">
+	  			    	<div class="col-md-12">
+	  			    		<h4>Архівовані курси</h4>
+	  			    		<p>
+	  			    			Дані курсі більше не активні. У стідентів більше немає можливості на них записатись, але віклададачі мають можливість переглядати інформацію про дані курси. Користувачі наділені <a href="">відповідними правами</a> можіть дані курси активувати. Зверніться до адміністратора, якщо вам необхідна ця можливість
+	  			    		</p>
+	  			    	</div>
+	  			    </div>
+	  			  </uib-tab>
+	  			  <uib-tab>
+	  			    <uib-tab-heading>
+	  			      Мої
+	  			    </uib-tab-heading>
+	  			    <div class="row">
+	  			    	<div class="col-md-12">
+	  			    		<h4>Ваші курси</h4>
+	  			    		<p>
+	  			    			Даний список складають курси в котрих ви є викладачем. Ви маєте можливість запрошувати студентів до цих курсів, створювати для даних курсів завдання, а також перевіряти успішність ваших студентів
+	  			    		</p>
+	  			    	</div>
+	  			    </div>
+	  			  </uib-tab>
+	  			</uib-tabset>
+				</div>
+				
+			</div>
+			<!-- Panel body (end) -->
+		</div>
+	</div>
+</div>
+
+
+<!-- Start Course modal -->
+<script type="text/ng-template" id="NewCourseModal.html">
+  <div class="modal-header">
+      <h3 class="modal-title" id="modal-title-{{name}}">Почати курс</h3>
+  </div>
+  <div class="modal-body" id="modal-body-{{name}}">
+    <form>
+    	<div class="form-group">
+    		<b>Головний курс</b>
+    		<p>Оберіть курс із переліку запропонованих, або створіть новий</p>
+    		<div class="row">
+    			<div class="col-md-8 pad-left-rem pad-right-rem">
+    				<input type="text" class="form-control">
+    			</div>
+    			<div class="col-md-4 pad-right-rem">
+    				<button type="submit" class="btn btn-block btn-primary" ng-click="mod.newCourse()">Створити новий</button>
+    			</div>
+    		</div>
+  		</div>
+    	<div class="form-group">
+    		<b>Дата початку</b>
+    		<p>Курс стане доступний для студентів тільки після дати початку</p>
+				<div class="input-group">
+					<input type="text" class="form-control" 
+						ng-model="dt" 
+						popup-placement="bottom-right"
+						uib-datepicker-popup="dd-MMMM-yyyy"
+						is-open="mod.util.sDateOpened" 
+						datepicker-options="vm.util.dateOptions" 
+						close-text="Close"  />
+					<span class="input-group-btn">
+				  	<button type="button" class="btn btn-default" ng-click="mod.util.sDateOpened = true">
+				  		<i class="glyphicon glyphicon-calendar"></i>
+				  	</button>
+					</span>
+				</div>
+  		</div>
+    	<div class="form-group">
+    		<b>Дата завершення</b>
+    		<p>Запланована дата завершення курсу після якої стане неможливо записуватись на нього</p>
+				<div class="input-group">
+					<input type="text" class="form-control" 
+						ng-model="dt" 
+						popup-placement="bottom-right"
+						uib-datepicker-popup="dd-MMMM-yyyy"
+						is-open="mod.util.sDateOpened" 
+						datepicker-options="vm.util.dateOptions" 
+						close-text="Close"  />
+					<span class="input-group-btn">
+				  	<button type="button" class="btn btn-default" ng-click="mod.util.sDateOpened = true">
+				  		<i class="glyphicon glyphicon-calendar"></i>
+				  	</button>
+					</span>
+				</div>
+  		</div>
+	   </form>
+	  <div uib-alert ng-repeat="alert in mod.util.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="mod.closeAlert($index)">{{alert.msg}}</div>
+  </div>
+	<div class="modal-footer">
+	  <button type="submit" class="btn btn-primary" ng-click="mod.startCourse()">Почати</button>
+	  <button type="submit" class="btn btn-default" ng-click="mod.clode()">Закрити</button>
+	</div>
+</script>

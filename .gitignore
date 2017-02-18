@@ -1,4 +1,5 @@
 node_modules
+db
 *.log
 *.zip
 bower_components

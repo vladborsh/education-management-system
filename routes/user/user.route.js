@@ -6,5 +6,6 @@ router.get('/', controller.getAllUsers);
 router.post('/signup', controller.signup);
 router.post('/auth', controller.auth);
 router.get('/role', auth.isAuthenticated, controller.role);
+router.delete('/:id', controller.remove);
 
 module.exports = router;
