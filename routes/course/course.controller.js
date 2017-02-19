@@ -18,7 +18,7 @@ function getAll(req, res) {
 	.populate('_author')
 	.exec(function (err, courses) {
 		if (err) {
-			res.json({success: false, message: 'Cannot find courses ' + err});
+			res.json({success: false, message: 'Неможливо створити курс: ' + err});
 		} else {
 			res.json(courses);
 		}
@@ -30,7 +30,7 @@ function get(req, res) {
 	.populate('_author')
 	.exec( function (err, course) {
 		if (err) {
-			res.json({success: false, message: 'Cannot find course ' + err});
+			res.json({success: false, message: 'Неможливо знайти курс: ' + err});
 		} else {
 			res.json(course);
 		}
@@ -42,9 +42,9 @@ function create(req, res) {
 	course.createdDate = Date.now();
 	course.save(function (err) {
 		if (err) {
-			res.json({success: false, message: 'Cannot create course' + err});
+			res.json({success: false, message: 'Неможливо створити курс: ' + err});
 		} else {
-			res.json({success: true, message: 'Course created'})	
+			res.json({success: true, message: 'Курс успішно створений'})	
 		}
 	})
 }
@@ -53,9 +53,9 @@ function update(req, res) {
 	req.body.updatedDate = Date.now();
 	Course.findByIdAndUpdate(req.params.id, req.body, function(arr) {
 		if (err) {
-			res.json({success: false, message: 'Cannot update course' + err});
+			res.json({success: false, message: 'Неможливо оновити курс: ' + err});
 		} else {
-			res.json({success: true, message: 'Course updated'});
+			res.json({success: true, message: 'Курс успішно оновлений'});
 		}
 	})
 }
@@ -63,9 +63,9 @@ function update(req, res) {
 function remove (req, res) {
 	Course.findByIdAndRemove(req.params.id, function (err) {
 		if (err) {
-			res.json({success: false, message: 'Cannot remove course ' + err});
+			res.json({success: false, message: 'Неможливо видалити курс: ' + err});
 		} else {
-			res.json({success: true, items: 'Course removed'});
+			res.json({success: true, items: 'Курс успішно видалений'});
 		}
 	})
 }
@@ -73,9 +73,9 @@ function remove (req, res) {
 function upView(req, res) {
 	Course.findByIdAndUpdate(req.params.id, { $inc: { views: 1 } }, function(arr) {
 		if (err) {
-			res.json({success: false, message: 'Cannot update course' + err});
+			res.json({success: false, message: 'Неможливо оновити курс: ' + err});
 		} else {
-			res.json({success: true, message: 'Course updated'});
+			res.json({success: true, message: 'Курс успішно оновлений'});
 		}
 	})
 }
@@ -85,7 +85,7 @@ function getTasks (req, res) {
 	.find({_course : req.params.id})
 	.exec(function(err, items) {
 		if (err) {
-			res.json({success: false, message: 'Cannot select tasks ' + err});
+			res.json({success: false, message: 'Неможливо вилучити завдання для курсу: ' + err});
 		} else {
 			res.json({success: true, items: items});
 		}
@@ -97,7 +97,7 @@ function getLectures (req, res) {
 	.find({_course : req.params.id})
 	.exec(function(err, items) {
 		if (err) {
-			res.json({success: false, message: 'Cannot select lectures ' + err});
+			res.json({success: false, message: 'Неможливо вилучити лекції для курсу: ' + err});
 		} else {
 			res.json({success: true, items: items});
 		}
@@ -109,7 +109,7 @@ function getEntries (req, res) {
 	.find({_course : req.params.id})
 	.exec(function(err, items) {
 		if (err) {
-			res.json({success: false, message: 'Cannot select course entries ' + err});
+			res.json({success: false, message: 'Неможливо вилучти курси за цим напрямком: ' + err});
 		} else {
 			res.json({success: true, items: items});
 		}

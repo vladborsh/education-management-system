@@ -8,23 +8,29 @@ var CourseEntrySchema = new Schema({
 	_lector : {
 		type : Schema.Types.ObjectId, ref: 'User', required: true
 	},
-	sartDate : {
+	startDate : {
 		type : Date
 	},
 	endDate : {
 		type : Date
 	},
 	active : {
-		type : Boolean
+		type : Boolean, default: true
 	},
 	grade : {
-		type: Number 
+		type: Number, default: 0
+	},
+	views : {
+		type: Number, default: 0
 	},
 	createdDate : {
 		type: Date
 	},
 	updatedDate : {
 		type: Date 
+	},
+	deactivateReson : {
+		type: String
 	}
 });
 

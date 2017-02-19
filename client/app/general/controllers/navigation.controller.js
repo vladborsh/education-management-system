@@ -12,14 +12,11 @@ function NavigationController (User, $state) {
 			{ label: 'Студенти', 	link: 'content.students', icon: 'fa-users'},
 			{ label: 'Календар', 	link: 'content.calendar', icon: 'fa-calendar'},
 		],
-		username : User.get('username')
+		username : User.getUsername,
+		role : User.getRole
 	};
 
 	vm.init = function () {
-		var role = User.get('role');
-		if (role == 'Admin') vm.model.role = 'Адміністратор'
-		if (role == 'Teacher') vm.model.role = 'Вчитель'
-		if (role == 'User') vm.model.role = 'Студент'
 	}
 
 	vm.init()

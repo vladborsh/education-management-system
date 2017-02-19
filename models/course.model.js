@@ -15,7 +15,7 @@ var CourseSchema = new Schema({
 		type: Boolean
 	},
 	grade : {
-		type: Number 
+		type: Number, default: 0  
 	},
 	createdDate : {
 		type: Date
@@ -25,6 +25,9 @@ var CourseSchema = new Schema({
 	},
 	views : {
 		type: Number, default: 0 
+	},
+	deactivateReson : {
+		type: String
 	}
 });
 

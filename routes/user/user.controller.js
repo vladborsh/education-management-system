@@ -3,10 +3,15 @@ var jwt = require('jsonwebtoken');
 var secret = require('../../config/dev.config').secret;
 
 module.exports.getAllUsers = getAllUsers;
+module.exports.getInfo = getInfo;
 module.exports.signup = signup;
 module.exports.remove = remove;
 module.exports.auth = auth;
 module.exports.role = role;
+module.exports.getAdmins = getAdmins;
+module.exports.getTeachers = getTeachers;
+module.exports.getStudents = getStudents;
+
 
 function getAllUsers(req, res) {
 	User.find(function (err, users) {
@@ -78,4 +83,54 @@ function role(req, res) {
 			res.json({success:success, message: user.role});
 		}
 	});
+}
+
+function getAdmins(req, res) {
+	User
+	.find({role:'Admin'})
+	.select('_id firstName lastName')
+	.exec(function (err, users) {
+		if (err) throw err;
+		res.json({ success: true, users: users});
+	})
+}
+
+function getTeachers(req, res) {
+	User
+	.find({ $or : [ {role:'Admin'}, {role:'Teacher'} ] })
+	.select('_id firstName lastName')
+	.exec(function (err, users) {
+		if (err) throw err;
+		res.json({ success: true, users: users});
+	})
+}
+
+function getStudents(req, res) {
+	User
+	.find({role:'User'})
+	.select('_id firstName lastName')
+	.exec(function (err, users) {
+		if (err) throw err;
+		res.json({ success: true, users: users});
+	})
+}
+
+
+function getInfo (req, res) {
+	var userData = req.decoded;
+	User
+	.findOne({ _id: userData._id })
+	.select('email password role firstName lastName _id')
+	.exec(function (err, user) {
+		if (err) throw err;
+		if (!user) {
+			res.json({success:false, message: 'Could not authenticate user'});
+		} else {
+			res.json({
+				role: user.role,
+				id: user._id,
+				username: user.firstName + ' ' + user.lastName
+			});
+		}
+	})
 }

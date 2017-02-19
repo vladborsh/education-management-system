@@ -1,33 +1,43 @@
 
 angular.module('App', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngCookies'])
 .factory('AuthFactory', AuthFactory)
-.factory('User', User)
 .factory('AuthInterceptorFactory', AuthInterceptorFactory)
 .config(Config)
 
+.factory('User', User)
 .service('Remote', Remote)
 .service('Modal', Modal)
 .service('DateService', DateService)
 
 .service('SignInService', SignInService)
-.service('SignUpService', SignUpService)
 .controller('SignInController', SignInController)
+
+.service('SignUpService', SignUpService)
 .controller('SignUpController', SignUpController)
+
 .controller('ForgotPassController', ForgotPassController)
 .controller('WrapContentController', WrapContentController)
 .controller('TopbarController', TopbarController)
 .controller('NavigationController', NavigationController)
 
 .service('CoursesService', CoursesService)
-.service('TasksService', TasksService)
-.service('LecturesService', LecturesService)
-.service('StudentsService', StudentsService)
-.service('CalendarService', CalendarService)
-
+.factory('CoursesFactory', CoursesFactory)
 .controller('HomeController', HomeController)
 .controller('CoursesController', CoursesController)
 .controller('OpenCourseController', OpenCourseController)
+.controller('NewCourseController', NewCourseController)
+.controller('ActivateCourseController', ActivateCourseController)
+.controller('RemoveCourseController', RemoveCourseController)
+.controller('ArchivateCourseController', ArchivateCourseController)
+
+.service('TasksService', TasksService)
 .controller('TasksController', TasksController)
+
+.service('LecturesService', LecturesService)
 .controller('LecturesController', LecturesController)
+
+.service('StudentsService', StudentsService)
 .controller('StudentsController', StudentsController)
+
+.service('CalendarService', CalendarService)
 .controller('CalendarController', CalendarController)

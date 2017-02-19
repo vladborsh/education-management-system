@@ -1,8 +1,10 @@
-Remote.$inject = ['$q', '$http'];
+Remote.$inject = ['$q', '$http', '$log'];
 
-function Remote($q, $http) {
+function Remote($q, $http, $log) {
 
 	this.do = function (apiName, methodName, requestData) {
+		$log.debug('\n' + methodName + ' ' + apiName);
+		$log.debug(requestData);
 		var deferred = $q.defer();
 		$http({
 		  method: methodName,

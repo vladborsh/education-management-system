@@ -15,7 +15,11 @@
 	.panel-heading {
 		background: #fff;
 		padding: 5px;
-		padding-bottom: 10px;
+		padding-bottom: 0;
+	}
+	.panel-footer {
+		background: #fff;
+		padding: 15px;
 	}
 }
 
@@ -83,7 +87,7 @@
   border-color: @color - #222;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   color: #fff;
   background-color: @color - #111;
   border-color: @color - #333;

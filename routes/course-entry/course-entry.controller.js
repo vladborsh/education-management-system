@@ -16,7 +16,7 @@ function getAll(req, res) {
 	.populate('_course')
 	.exec(function (err, courses) {
 		if (err) {
-			res.json({success: false, message: 'Cannot find courses ' + err});
+			res.json({success: false, message: 'Неможливо знайти курси: ' + err});
 		} else {
 			res.json(courses);
 		}
@@ -29,7 +29,7 @@ function get(req, res) {
 	.populate('_course')
 	.exec( function (err, course) {
 		if (err) {
-			res.json({success: false, message: 'Cannot find course ' + err});
+			res.json({success: false, message: 'Неможливо знайти курс: ' + err});
 		} else {
 			res.json(course);
 		}
@@ -38,21 +38,23 @@ function get(req, res) {
 
 function create(req, res) {
 	var course = new CourseEntry(req.body);
+	course.createdDate = Date.now();
 	course.save(function (err) {
 		if (err) {
-			res.json({success: false, message: 'Cannot create course' + err});
+			res.json({success: false, message: 'Неможливо створити курс: ' + err});
 		} else {
-			res.json({success: true, message: 'Course created'})	
+			res.json({success: true, message: 'Курс успішно створений'})	
 		}
 	})
 }
 
 function update(req, res) {
+	req.body.updatedDate = Date.now();
 	CourseEntry.findByIdAndUpdate(req.params.id, req.body, function(arr) {
 		if (err) {
-			res.json({success: false, message: 'Cannot update course' + err});
+			res.json({success: false, message: 'Неможливо оновити курс: ' + err});
 		} else {
-			res.json({success: true, message: 'Course updated'});
+			res.json({success: true, message: 'Курс успішно оновлений'});
 		}
 	})
 }
@@ -60,9 +62,9 @@ function update(req, res) {
 function remove (req, res) {
 	CourseEntry.findByIdAndRemove(req.params.id, function (err) {
 		if (err) {
-			res.json({success: false, message: 'Cannot remove course ' + err});
+			res.json({success: false, message: 'Неможливо видалити курс: ' + err});
 		} else {
-			res.json({success: true, items: 'Course removed'});
+			res.json({success: true, items: 'Курс успішно видалений'});
 		}
 	})
 }
@@ -72,11 +74,11 @@ function getTasks (req, res) {
 	.find({ _courseEntry : req.params.id})
 	.exec(function(err, items) {
 		if (err) {
-			res.json({success: false, message: 'Cannot select tasks ' + err});
+			res.json({success: false, message: 'Неможливо вилучити завдання для данного курсу: ' + err});
 		} else {
 			TaskEntry.populate(items, {path: '_task'}, function (err, doc) {
 				if (err) {
-					res.json({success: false, message: 'Cannot select tasks ' + err});
+					res.json({success: false, message: 'Неможливо вилучити завдання для данного курсу: ' + err});
 				} else {
 					res.json({success: true, items: doc});
 				}
@@ -90,11 +92,11 @@ function getStudents (req, res) {
 	.find({ _courseEntry : req.params.id})
 	.exec(function(err, items) {
 		if (err) {
-			res.json({success: false, message: 'Cannot select students ' + err});
+			res.json({success: false, message: 'Неможливо вилучити студентів для данного курсу: ' + err});
 		} else {
 			Student.populate(items, {path: '_user'}, function (err, doc) {
 				if (err) {
-					res.json({success: false, message: 'Cannot select students ' + err});
+					res.json({success: false, message: 'Неможливо вилучити студентів для данного курсу: ' + err});
 				} else {
 					res.json({success: true, items: doc});
 				}
