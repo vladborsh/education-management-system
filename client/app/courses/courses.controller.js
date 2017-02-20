@@ -3,7 +3,9 @@ CoursesController.$inject = [
 	'Modal',
 	'DateService',
 	'CoursesFactory',
-	'User'
+	'User',
+	'$stateParams',
+	'$state'
 ];
 
 function CoursesController(
@@ -11,8 +13,12 @@ function CoursesController(
 	Modal,
 	DateService,
 	CoursesFactory,
-	User) 
+	User,
+	$stateParams,
+	$state) 
 {
+
+	console.log($stateParams.id);
 
 	var vm = this;
 
@@ -20,7 +26,6 @@ function CoursesController(
 		activeFilter : 'popular',
 		courses : CoursesFactory.getCourses,
 		courseEntries : CoursesFactory.getCourseEntries,
-		archivedCourses : [],
 		myCourses : [],
 	};
 
@@ -30,15 +35,39 @@ function CoursesController(
 			created : 'Створені нещодавно',
 			updated : 'Оновлені нещодавно'
 		},
-		dateOptions : DateService.getOptions()
+		dateOptions : DateService.getOptions(),
+		isSingleCourse: false
 	};
 
-	vm.startCourse = function () {
+	vm.init = function() {
+		if ($stateParams.id) {
+
+		} else {
+			CoursesService.getCourses()
+			.then(
+				function (data) {
+					CoursesFactory.set('courses', data.data);
+					return CoursesService.getCourseEntries()
+				}
+			)
+			.then(
+				function(data) {
+					CoursesFactory.set('courseEntries', data.data);
+					vm.model.myCourses = _.filter(vm.model.courseEntries(), function (c) {return c._lector._id == User.get('user_id')});
+				}
+			);
+		}
+		
+	};
+	vm.init();
+
+	vm.createNewCourseEntry = function () {
 		var modal = Modal.get(
 			'app/courses/open-course-modal.html',
-			'OpenCourseController', 
+			'CourseEntryController', 
 			{
-				courses : function () { return vm.model.courses }
+				courses : function () { return vm.model.courses },
+				courseEntryRecord : function () { return undefined; },
 			}
 		);
 	};
@@ -51,46 +80,20 @@ function CoursesController(
 		);
   }
 
-  vm.activateCourse = function() {
-  	var modal = Modal.get(
-			'app/courses/activate-course-modal.html',
-			'ActivateCourseController', 
-			{}
-		);
+  vm.viewCourse = function(item) {
+		//$state.go('content.courses', {type: 'c', id: _id});
   }
 
-  vm.removeCourse = function() {
-  	var modal = Modal.get(
-			'app/courses/remove-course-modal.html',
-			'RemoveCourseController', 
-			{}
-		);
-  }
-
-  vm.archivateCourse = function() {
-  	var modal = Modal.get(
-			'app/courses/archivate-course-modal.html',
-			'ArchivateCourseController', 
-			{}
-		);
-  }
-
-	vm.init = function() {
-		CoursesService.getCourses()
-		.then(
-			function (data) {
-				CoursesFactory.set('courses', data.data);
-				return CoursesService.getCourseEntries()
-			}
-		)
-		.then(
-			function(data) {
-				CoursesFactory.set('courseEntries', data.data);
-				vm.model.archivedCourses = _.filter(vm.model.courseEntries(), function (c) {return !c.active});
-				vm.model.myCourses = _.filter(vm.model.courseEntries(), function (c) {return c._lector._id == User.get('user_id')});
+  vm.viewCourseEntry = function(item) {
+		//$state.go('content.courses', {type: 'ce', id: _id});
+		var modal = Modal.get(
+			'app/courses/open-course-modal.html',
+			'CourseEntryController', 
+			{
+				courses : function () { return vm.model.courses },
+				courseEntryRecord : function () { return item; },
 			}
 		);
-	};
-
-	vm.init();
+  }
+  
 }

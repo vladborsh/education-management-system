@@ -68,7 +68,7 @@ function Config(
 		}
 	})
 	.state('content.courses', {
-		url: '/courses',
+		url: '/courses/{type}/{id}',
 		views: { 
 			'main' : {
 				templateUrl: 'app/courses/courses.html',

@@ -28,7 +28,7 @@
     			    	<a ng-click="vm.model.activeFilter = 'updated'">Оновлені нещодавно</a></li>
     			  </ul>
     			</div>
-					<button type="submit" class="btn btn-primary" ng-click="vm.startCourse()">Почати новий</button>
+					<button type="submit" class="btn btn-primary" ng-click="vm.createNewCourseEntry()">Почати новий</button>
 				</form>
 				<div>
 					<uib-tabset >
@@ -43,26 +43,26 @@
 	  			    			Данний каталог складає спсок усіх доступних курсів у системі. Список відсортований за обрним фільтром. Додавати курси у каталог можуть лише користувачі із <a href="">відповідними правами</a>. Якщо ви бажаєте додавати нові курси у каталог але не маєте цієї можлевості зверніться до адміністратора
 	  			    		</p>
 	  			    		<small class="help-block" ng-show="vm.model.courses().length == 0">Курсів назараз немає</small>
-	  			    		<table class="table" ng-show="vm.model.courses().length > 0">
-										<thead>
-										  <tr>
-										  	<th></th>
-										    <th>Назва</th>
-										    <th>Рейтинг</th>
-										    <th>Перегляди</th>
-										    <th>Створений</th>
-										  </tr>
-										</thead>
-										<tbody>
-										  <tr ng-repeat="item in vm.model.courses()">
-										  	<td><a href>Редагувати</a></td>
-										    <td>{{item.name}}</td>
-										    <td>{{item.grade}}</td>
-										    <td>{{item.views}}</td>
-										    <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
-										  </tr>
-										</tbody>
-									</table>
+	  			    		<div class="table-responsive">
+	  			    			<table class="table table-hover" ng-show="vm.model.courses().length > 0">
+											<thead>
+											  <tr>
+											    <th>Назва</th>
+											    <th>Рейтинг</th>
+											    <th>Перегляди</th>
+											    <th>Створений</th>
+											  </tr>
+											</thead>
+											<tbody>
+											  <tr ng-repeat="item in vm.model.courses()" ng-click="vm.viewCourse(item)">
+											    <td>{{item.name}}</td>
+											    <td>{{item.grade}}</td>
+											    <td>{{item.views}}</td>
+											    <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+											  </tr>
+											</tbody>
+										</table>
+									</div>
 	  			    	</div>
 	  			    </div>
 	  			  </uib-tab>
@@ -77,10 +77,9 @@
 	  			    			Список складають усі діючі курси на данний момент часу. На ці курси є можливість записатись для студентів, а також переглянути інформацію про їх успішність, скаладені іспити та отримані завдання
 	  			    		</p>
 	  			    		<small class="help-block" ng-show="vm.model.courseEntries().length == 0">Початих курсів назараз немає</small>
-	  			    		<table class="table" ng-show="vm.model.courseEntries().length > 0">
+	  			    		<table class="table table-hover" ng-show="vm.model.courseEntries().length > 0">
 										<thead>
 										  <tr>
-										  	<th></th>
 										    <th>Назва</th>
 										    <th>Рейтинг</th>
 										    <th>Перегляди</th>
@@ -88,43 +87,8 @@
 										  </tr>
 										</thead>
 										<tbody>
-										  <tr ng-repeat="item in vm.model.courseEntries()">
-										  	<td><a href>Редагувати</a></td>
-										    <td>{{item._course.name}}</td>
-										    <td>{{item.grade}}</td>
-										    <td>{{item.views}}</td>
-										    <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
-										  </tr>
-										</tbody>
-									</table>
-	  			    	</div>
-	  			    </div>
-	  			  </uib-tab>
-	  			  <uib-tab>
-	  			    <uib-tab-heading>
-	  			      Архівовані
-	  			    </uib-tab-heading>
-	  			    <div class="row">
-	  			    	<div class="col-md-12">
-	  			    		<h4>Архівовані курси</h4>
-	  			    		<p>
-	  			    			Дані курсі більше не активні. У стідентів більше немає можливості на них записатись, але віклададачі мають можливість переглядати інформацію про дані курси. Користувачі наділені <a href="">відповідними правами</a> можіть дані курси активувати. Зверніться до адміністратора, якщо вам необхідна ця можливість
-	  			    		</p>
-	  			    		<small class="help-blockt" ng-show="vm.model.archivedCourses.length == 0">Архівованих курсів назараз немає</small>
-	  			    		<table class="table" ng-show="vm.model.archivedCourses.length > 0">
-										<thead>
-										  <tr>
-										  	<th></th>
-										    <th>Назва</th>
-										    <th>Рейтинг</th>
-										    <th>Перегляди</th>
-										    <th>Створений</th>
-										  </tr>
-										</thead>
-										<tbody>
-										  <tr ng-repeat="item in vm.model.archivedCourses">
-										  	<td><a href>Редагувати</a></td>
-										    <td>{{item._course.name}}</td>
+										  <tr ng-repeat="item in vm.model.courseEntries()" ng-click="vm.viewCourseEntry(item)">
+										    <td>{{item.name}}</td>
 										    <td>{{item.grade}}</td>
 										    <td>{{item.views}}</td>
 										    <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
@@ -145,10 +109,9 @@
 	  			    			Даний список складають курси в котрих ви є викладачем. Ви маєте можливість запрошувати студентів до цих курсів, створювати для даних курсів завдання, а також перевіряти успішність ваших студентів
 	  			    		</p>
 	  			    		<small class="help-block" ng-show="vm.model.myCourses.length == 0">Ваших курсів назараз немає</small>
-	  			    		<table class="table" ng-show="vm.model.myCourses.length > 0">
+	  			    		<table class="table table-hover" ng-show="vm.model.myCourses.length > 0">
 										<thead>
 										  <tr>
-										  	<th></th>
 										    <th>Назва</th>
 										    <th>Рейтинг</th>
 										    <th>Перегляди</th>
@@ -156,9 +119,8 @@
 										  </tr>
 										</thead>
 										<tbody>
-										  <tr ng-repeat="item in vm.model.myCourses">
-										  	<td><a href>Редагувати</a></td>
-										    <td>{{item._course.name}}</td>
+										  <tr ng-repeat="item in vm.model.myCourses"  ng-click="vm.viewCourseEntry(item)">
+										    <td>{{item.name}}</td>
 										    <td>{{item.grade}}</td>
 										    <td>{{item.views}}</td>
 										    <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
@@ -175,9 +137,6 @@
 			<!-- Panel body (end) -->
 			<div class="panel-footer">
 				<button type="submit" class="btn btn-primary" ng-click="vm.createNewCourse()">Створити новий</button>
-				<button type="submit" class="btn btn-primary" ng-click="vm.activateCourse()">Активувати</button>
-				<button type="submit" class="btn btn-primary" ng-click="vm.removeCourse()">Видалити</button>
-				<button type="submit" class="btn btn-primary" ng-click="vm.archivateCourse()">Архівувати</button>
 			</div>
 		</div>
 	</div>

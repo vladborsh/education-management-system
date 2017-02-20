@@ -1,3 +1,4 @@
+var Course = require('../../models/course.model');
 var CourseEntry = require('../../models/course-entry.model');
 var TaskEntry = require('../../models/task-entry.model');
 var Student = require('../../models/student.model');
@@ -12,8 +13,7 @@ module.exports.getStudents = getStudents;
 
 function getAll(req, res) {
 	CourseEntry.find()
-	.populate('_lector')
-	.populate('_course')
+	.populate('_lector _course')
 	.exec(function (err, courses) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо знайти курси: ' + err});
@@ -25,13 +25,12 @@ function getAll(req, res) {
 
 function get(req, res) {
 	CourseEntry.findById(req.params.id)
-	.populate('_lector')
-	.populate('_course')
+	.populate('_lector _course')
 	.exec( function (err, course) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо знайти курс: ' + err});
 		} else {
-			res.json(course);
+			res.json({success: true, item: course });
 		}
 	})
 }
@@ -39,22 +38,31 @@ function get(req, res) {
 function create(req, res) {
 	var course = new CourseEntry(req.body);
 	course.createdDate = Date.now();
-	course.save(function (err) {
+	Course.findById(course._course)
+	.exec( function (err, mainCourse) {
 		if (err) {
-			res.json({success: false, message: 'Неможливо створити курс: ' + err});
+			res.json({success: false, message: 'Неможливо знайти курс: ' + err});
 		} else {
-			res.json({success: true, message: 'Курс успішно створений'})	
+			var dt = new Date(course.startDate);
+			course.name = mainCourse.name + '-' + dt.getMonth() + '-' + dt.getFullYear() 
+			course.save(function (err, course) {
+				if (err) {
+					res.json({success: false, message: 'Неможливо створити курс: ' + err});
+				} else {
+					res.json({success: true, message: 'Курс успішно створений', id: course._id})	
+				}
+			})
 		}
 	})
 }
 
 function update(req, res) {
 	req.body.updatedDate = Date.now();
-	CourseEntry.findByIdAndUpdate(req.params.id, req.body, function(arr) {
+	CourseEntry.findByIdAndUpdate(req.params.id, req.body, function(err, course) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо оновити курс: ' + err});
 		} else {
-			res.json({success: true, message: 'Курс успішно оновлений'});
+			res.json({success: true, message: 'Курс успішно оновлений', id: course._id});
 		}
 	})
 }
