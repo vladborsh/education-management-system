@@ -123,8 +123,8 @@ function CourseEntryController(
 					.then(
   					function(data) {
   						console.log(data);
-  						mod.setupCourse(data.data.item);
   						var index = _.findIndex(CoursesFactory.getCourseEntries(), function(c) { return c._id == data.data.item._id; });
+  						mod.setupCourse(data.data.item);
   						CoursesFactory.getCourseEntries()[index] = data.data.item;
   					}
   				);
