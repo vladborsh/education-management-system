@@ -15,6 +15,7 @@ module.exports.getEntries = getEntries;
 
 function getAll(req, res) {
 	Course.find()
+	.select('_id _author name description active createdDate updatedDate')
 	.populate('_author')
 	.exec(function (err, courses) {
 		if (err) {
@@ -27,6 +28,7 @@ function getAll(req, res) {
 
 function get(req, res) {
 	Course.findById(req.params.id)
+	.select('_id _author name description active createdDate updatedDate')
 	.populate('_author')
 	.exec( function (err, course) {
 		if (err) {
@@ -40,18 +42,18 @@ function get(req, res) {
 function create(req, res) {
 	var course = new Course(req.body);
 	course.createdDate = Date.now();
-	course.save(function (err) {
+	course.save(function (err, course) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо створити курс: ' + err});
 		} else {
-			res.json({success: true, message: 'Курс успішно створений'})	
+			res.json({success: true, message: 'Курс успішно створений', id: course._id})	
 		}
 	})
 }
 
 function update(req, res) {
 	req.body.updatedDate = Date.now();
-	Course.findByIdAndUpdate(req.params.id, req.body, function(arr) {
+	Course.findByIdAndUpdate(req.params.id, req.body, function(err) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо оновити курс: ' + err});
 		} else {

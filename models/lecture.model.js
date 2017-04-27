@@ -5,6 +5,9 @@ var LectureSchema = new Schema({
 	_course : {
 		type : Schema.Types.ObjectId, ref: 'Course', required: true
 	},
+	name : {
+		type : String
+	},
 	description : {
 		type : String
 	},

@@ -1,99 +1,107 @@
 CoursesController.$inject = [
-	'CoursesService', 
-	'Modal',
-	'DateService',
-	'CoursesFactory',
-	'User',
-	'$stateParams',
-	'$state'
+  'CoursesService', 
+  'Modal',
+  'DateService',
+  'CoursesFactory',
+  'User',
+  '$stateParams',
+  '$state'
 ];
 
 function CoursesController(
-	CoursesService, 
-	Modal,
-	DateService,
-	CoursesFactory,
-	User,
-	$stateParams,
-	$state) 
+  CoursesService, 
+  Modal,
+  DateService,
+  CoursesFactory,
+  User,
+  $stateParams,
+  $state) 
 {
 
-	console.log($stateParams.id);
+  var vm = this;
 
-	var vm = this;
+  vm.model = CoursesFactory.getModel();
 
-	vm.model = {
-		activeFilter : 'popular',
-		courses : CoursesFactory.getCourses,
-		courseEntries : CoursesFactory.getCourseEntries,
-		myCourses : [],
-	};
+  vm.util = {
+    dateOptions : DateService.getOptions()
+  };
 
-	vm.util = {
-		filters : {
-			popular : 'Популярні',
-			created : 'Створені нещодавно',
-			updated : 'Оновлені нещодавно'
-		},
-		dateOptions : DateService.getOptions(),
-		isSingleCourse: false
-	};
+  vm.init = function() {
+    CoursesService.getCourses()
+    .then(
+      function (data) {
+        vm.model.courses = data.data;
+        return CoursesService.getCourseEntries()
+      }
+    )
+    .then(
+      function(data) {
+        vm.model.courseEntries = data.data;
+        vm.model.myCourses = _.filter(vm.model.courseEntries, function (c) {
+          return c._lector._id == User.get('user_id')
+        });
+      }
+    );
+  };
+  vm.init();
 
-	vm.init = function() {
-		if ($stateParams.id) {
+  vm.createNewCourseEntry = function () {
+    var modal = Modal.get(
+      'app/courses/open-course-modal.html',
+      'NewCourseEntryController', 
+      {}
+    );
+  };
 
-		} else {
-			CoursesService.getCourses()
-			.then(
-				function (data) {
-					CoursesFactory.set('courses', data.data);
-					return CoursesService.getCourseEntries()
-				}
-			)
-			.then(
-				function(data) {
-					CoursesFactory.set('courseEntries', data.data);
-					vm.model.myCourses = _.filter(vm.model.courseEntries(), function (c) {return c._lector._id == User.get('user_id')});
-				}
-			);
-		}
-		
-	};
-	vm.init();
-
-	vm.createNewCourseEntry = function () {
-		var modal = Modal.get(
-			'app/courses/open-course-modal.html',
-			'CourseEntryController', 
-			{
-				courses : function () { return vm.model.courses },
-				courseEntryRecord : function () { return undefined; },
-			}
-		);
-	};
-
-	vm.createNewCourse = function() {
-  	var modal = Modal.get(
-			'app/courses/new-course-modal.html',
-			'NewCourseController', 
-			{}
-		);
+  vm.createNewCourse = function() {
+    var modal = Modal.get(
+      'app/courses/new-course-modal.html',
+      'NewCourseController', 
+      {}
+    );
   }
 
   vm.viewCourse = function(item) {
-		//$state.go('content.courses', {type: 'c', id: _id});
+    $state.go('content.course_item', {id : item._id})
   }
 
   vm.viewCourseEntry = function(item) {
-		//$state.go('content.courses', {type: 'ce', id: _id});
-		var modal = Modal.get(
-			'app/courses/open-course-modal.html',
-			'CourseEntryController', 
-			{
-				courses : function () { return vm.model.courses },
-				courseEntryRecord : function () { return item; },
-			}
-		);
+    $state.go('content.course_e_item', {id : item._id})
+  }
+
+  vm.deleteCourse = function(id) {
+    CoursesService.deleteCourse(id)
+    .then(
+      function( data ) {
+        if(data.data.success) {
+          _.remove(vm.model.courses, function(item) {
+            return item._id == id;
+          });
+        }
+      },
+      function( err ) {
+        console.log(err);
+      }
+    );
+  }
+
+
+  vm.deleteCourseEntry = function(id) {
+    CoursesService.deleteCourseEntry(id)
+    .then(
+      function( data ) {
+        _.remove(vm.model.courseEntries, function(item) {
+          return item._id == id;
+        });
+        _.remove(vm.model.myCourses, function(item) {
+          return item._id == id;
+        });
+        cosole.log(data);
+      },
+      function( err ) {
+        console.log(err);
+      }
+    );
   }
   
 }

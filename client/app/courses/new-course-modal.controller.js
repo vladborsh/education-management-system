@@ -1,67 +1,80 @@
 NewCourseController.$inject = [
-	'$uibModalInstance',
-	'CoursesService',
-	'Modal'
+  '$uibModalInstance',
+  'CoursesService',
+  'CoursesFactory',
+  'Modal'
 ];
 
 function NewCourseController(
-	$uibModalInstance,
-	CoursesService,
-	Modal) 
+  $uibModalInstance,
+  CoursesService,
+  CoursesFactory,
+  Modal) 
 {
 
-	var mod = this;
+  var vm = this;
 
-	mod.model = {
+  vm.model = {
 
-	}
+  }
 
-	mod.util = {
-		author : '',
-		authors : [],
-		alerts : [],
-	}
+  vm.util = {
+    coursesFct : CoursesFactory.getModel(),
+    author : '',
+    authors : [],
+    alerts : [],
+  }
 
-	mod.init = function () {
-		CoursesService.getAdmins()
-		.then(
-			function (data) {
-				if (data.data.success) {
-					mod.util.authors = data.data.users
-				} 
-			}, function (err) {
-				console.log(err);
-			}
-		)
-	}
-	mod.init();
+  vm.init = function () {
+    CoursesService.getAdmins()
+    .then(
+      function (data) {
+        if (data.data.success) {
+          vm.util.authors = data.data.users
+        } 
+      }, function (err) {
+        console.log(err);
+      }
+    )
+  }
+  vm.init();
 
-	mod.closeAlert = function(index) {
-    mod.util.alerts.splice(index, 1);
+  vm.closeAlert = function(index) {
+    vm.util.alerts.splice(index, 1);
   };
 
-  mod.setAuthor = function (author) {
-  	mod.util.author = author.firstName + ' ' + author.lastName;
-  	mod.model._author = author._id; 
+  vm.setAuthor = function (author) {
+    vm.util.author = author.firstName + ' ' + author.lastName;
+    vm.model._author = author._id; 
   }
 
-  mod.createNewCourse = function() {
-  	mod.util.alerts = []
-  	CoursesService.saveCourse(mod.model)
-  	.then(
-  		function(data) {
-  			mod.util.alerts.push({
-  				type: (data.data.success ? 'success' : 'danger'), msg: data.data.message
-  			});
-  		}, function (err) {
-  			mod.util.alerts.push({
-  				type: 'danger', msg: data.data
-  			});
-  		}
-  	)
+  vm.createNewCourse = function() {
+    vm.util.alerts = []
+    CoursesService.saveCourse(vm.model)
+    .then(
+      function(data) {
+        vm.util.alerts.push({
+          type: (data.data.success ? 'success' : 'danger'), msg: data.data.message
+        });
+        if (data.data.success) {
+          CoursesService.getCourse(data.data.id)
+          .then(
+            function(data) {
+              console.log(data);
+              vm.util.coursesFct.courses.push(data.data);
+            }
+          );
+          $uibModalInstance.dismiss('cancel');
+        }
+      }, function (err) {
+        vm.util.alerts.push({
+          type: 'danger', msg: data.data
+        });
+      }
+    )
   }
 
-  mod.close = function () {
+  vm.close = function () {
     $uibModalInstance.dismiss();
   };
 

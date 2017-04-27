@@ -1,20 +1,17 @@
 function CoursesFactory() {
 
-	var model = {}
+  var model = {}
 
-	return {
-		get : function(key) {
-			return model[key];
-		},
-		getCourses : function() {
-			return model['courses'];
-		},
-		getCourseEntries : function() {
-			return model['courseEntries'];
-		},
-		set : function(key, value) {
-			model[key] = value;
-		},
-	}
-	
+  return {
+    get : function(key) {
+      return model[key];
+    },
+    getModel : function () {
+      return model;
+    },
+    set : function(key, value) {
+      model[key] = value;
+    },
+  }
+  
 }

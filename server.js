@@ -1,12 +1,12 @@
-var express = require('express');
-var app = express();
-var path = require('path');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var morgan = require('morgan');
-var port = process.env.PORT || 3000;
-var router = express.Router();
-var config = require('./config/dev.config')
+var express  = require('express'),
+  app        = express(),
+  path       = require('path'),
+  bodyParser = require('body-parser'),
+  mongoose   = require('mongoose'),
+  morgan     = require('morgan'),
+  port       = process.env.PORT || 3000,
+  router     = express.Router(),
+  config     = require('./config/dev.config')
 
 mongoose.connect(config.database, function (err) {
 	if (err) {

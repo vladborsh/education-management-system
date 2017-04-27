@@ -68,11 +68,31 @@ function Config(
 		}
 	})
 	.state('content.courses', {
-		url: '/courses/{type}/{id}',
+		url: '/courses',
 		views: { 
 			'main' : {
 				templateUrl: 'app/courses/courses.html',
 				controller: 'CoursesController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('content.course_item', {
+		url: '/course_item/{id}',
+		views: { 
+			'main' : {
+				templateUrl: 'app/courses/course-item.html',
+				controller: 'CourseItemController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('content.course_e_item', {
+		url: '/course_e_item/{id}',
+		views: { 
+			'main' : {
+				templateUrl: 'app/courses/course-entry-item.html',
+				controller: 'CourseEntryItemController',
 				controllerAs: 'vm'
 			}
 		}

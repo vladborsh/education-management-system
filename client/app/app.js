@@ -2,6 +2,7 @@
 angular.module('App', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngCookies'])
 .factory('AuthFactory', AuthFactory)
 .factory('AuthInterceptorFactory', AuthInterceptorFactory)
+.factory('CommonFactory', CommonFactory)
 .config(Config)
 
 .factory('User', User)
@@ -24,8 +25,9 @@ angular.module('App', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngCookies'])
 .factory('CoursesFactory', CoursesFactory)
 .controller('HomeController', HomeController)
 .controller('CoursesController', CoursesController)
-.controller('CourseEntryController', CourseEntryController)
+.controller('NewCourseEntryController', NewCourseEntryController)
 .controller('NewCourseController', NewCourseController)
+.controller('CourseItemController', CourseItemController)
 
 .service('TasksService', TasksService)
 .controller('TasksController', TasksController)

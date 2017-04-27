@@ -3,92 +3,89 @@
 </div>
 <div class="modal-body" id="modal-body-{{name}}">
   <form>
-  	<div class="form-group">
-  		<label>Головний курс</label>
-  		<small class="help-block">Оберіть курс із переліку запропонованих, або створіть новий</small>
-  		<div class="row">
-  			<div class="col-md-8 pad-left-rem pad-right-rem">
-  			  <span uib-dropdown style="width:100%">
-					  <input type="text" class="form-control" id="courses" 
-  						ng-model="mod.util.course"
-  						uib-dropdown-toggle>
-					  <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
-					    <li ng-repeat="course in mod.util.courses() | filter : mod.util.course">
-					      <a href
-  			  	  		ng-click="mod.setCourse(course)">{{course.name}}</a>
-					    </li>
-					  </ul>
-					</span>
-  			</div>
-  			<div class="col-md-4 pad-right-rem">
-  				<button type="submit" class="btn btn-block btn-primary" ng-click="mod.createNewCourse()">Створити новий</button>
-  			</div>
-  		</div>
-		</div>
+    <div class="form-group">
+      <label>Головний курс</label>
+      <small class="help-block">Оберіть курс із переліку запропонованих, або створіть новий</small>
+      <div class="row">
+        <div class="col-md-8 pad-left-rem pad-right-rem">
+          <span uib-dropdown style="width:100%">
+            <input type="text" class="form-control" id="courses" 
+              ng-model="mod.util.course"
+              uib-dropdown-toggle>
+            <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
+              <li ng-repeat="course in mod.util.coursesFct.courses | filter : mod.util.course">
+                <a href
+                  ng-click="mod.setCourse(course)">{{course.name}}</a>
+              </li>
+            </ul>
+          </span>
+        </div>
+        <div class="col-md-4 pad-right-rem">
+          <button type="submit" class="btn btn-block btn-primary" ng-click="mod.createNewCourse()">Створити новий</button>
+        </div>
+      </div>
+    </div>
 
-  	<div class="form-group">
-  		<label>Викладач</label>
-  		<small class="help-block">Оберіть викладача із переліку запропонованих</small>
-  		<span uib-dropdown style="width:100%">
-			  <input type="text" class="form-control" id="courses" 
-  				ng-model="mod.util.lector"
-  				uib-dropdown-toggle>
-			  <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
-			    <li ng-repeat="lector in mod.util.teachers | filter : mod.model.courseMain">
-			      <a href
-  			  		ng-click="mod.setLector(lector)">
-  			  		{{lector.firstName}} {{lector.lastName}}
-  			  	</a>
-			    </li>
-			  </ul>
-			</span>
-		</div>
-  	<div class="form-group">
-  		<label>Дата початку</label>
-  		<small class="help-block">Курс стане доступний для студентів тільки після дати початку</small>
-			<div class="input-group">
-				<input type="text" class="form-control" 
-					ng-model="mod.model.startDate" 
-					popup-placement="bottom-right"
-					uib-datepicker-popup="dd-MMMM-yyyy"
-					is-open="mod.util.sDateOpened" 
-					datepicker-options="vm.util.dateOptions" 
-					close-text="Close"  />
-				<span class="input-group-btn">
-			  	<button type="button" class="btn btn-default" ng-click="mod.util.sDateOpened = true">
-			  		<i class="glyphicon glyphicon-calendar"></i>
-			  	</button>
-				</span>
-			</div>
-		</div>
-  	<div class="form-group">
-  		<label>Дата завершення</label>
-  		<small class="help-block">Запланована дата завершення курсу після якої стане неможливо записуватись на нього</small>
-			<div class="input-group">
-				<input type="text" class="form-control" 
-					ng-model="mod.model.endDate"
-					popup-placement="bottom-right"
-					uib-datepicker-popup="dd-MMMM-yyyy"
-					is-open="mod.util.eDateOpened" 
-					datepicker-options="vm.util.dateOptions" 
-					close-text="Close"  />
-				<span class="input-group-btn">
-			  	<button type="button" class="btn btn-default" ng-click="mod.util.eDateOpened = true">
-			  		<i class="glyphicon glyphicon-calendar"></i>
-			  	</button>
-				</span>
-			</div>
-		</div>
+    <div class="form-group">
+      <label>Викладач</label>
+      <small class="help-block">Оберіть викладача із переліку запропонованих</small>
+      <span uib-dropdown style="width:100%">
+        <input type="text" class="form-control" id="courses" 
+          ng-model="mod.util.lector"
+          uib-dropdown-toggle>
+        <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
+          <li ng-repeat="lector in mod.util.teachers | filter : mod.model.courseMain">
+            <a href
+              ng-click="mod.setLector(lector)">
+              {{lector.firstName}} {{lector.lastName}}
+            </a>
+          </li>
+        </ul>
+      </span>
+    </div>
+    <div class="form-group">
+      <label>Дата початку</label>
+      <small class="help-block">Курс стане доступний для студентів тільки після дати початку</small>
+      <div class="input-group">
+        <input type="text" class="form-control" 
+          ng-model="mod.model.startDate" 
+          popup-placement="bottom-right"
+          uib-datepicker-popup="dd-MMMM-yyyy"
+          is-open="mod.util.sDateOpened" 
+          datepicker-options="vm.util.dateOptions" 
+          close-text="Close"  />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="mod.util.sDateOpened = true">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Дата завершення</label>
+      <small class="help-block">Запланована дата завершення курсу після якої стане неможливо записуватись на нього</small>
+      <div class="input-group">
+        <input type="text" class="form-control" 
+          ng-model="mod.model.endDate"
+          popup-placement="bottom-right"
+          uib-datepicker-popup="dd-MMMM-yyyy"
+          is-open="mod.util.eDateOpened" 
+          datepicker-options="vm.util.dateOptions" 
+          close-text="Close"  />
+        <span class="input-group-btn">
+          <button type="button" class="btn btn-default" ng-click="mod.util.eDateOpened = true">
+            <i class="glyphicon glyphicon-calendar"></i>
+          </button>
+        </span>
+      </div>
+    </div>
    </form>
   <div uib-alert ng-repeat="alert in mod.util.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="mod.closeAlert($index)">{{alert.msg}}</div>
 </div>
 <div class="modal-footer">
   <button type="submit" class="btn btn-primary" 
-  	ng-hide="mod.util.isUpdatedCourseEntry" 
-  	ng-click="mod.saveCourseEntry()">Почати</button>
-  <button type="submit" class="btn btn-primary" 
-  	ng-show="mod.util.isUpdatedCourseEntry" 
-  	ng-click="mod.updateCourseEntry()">Оновити</button>
+    ng-hide="mod.util.isUpdatedCourseEntry" 
+    ng-click="mod.saveCourseEntry()">Почати</button>
   <button type="submit" class="btn btn-default" 
-  	ng-click="mod.close()">Закрити</button>
+    ng-click="mod.close()">Закрити</button>
 </div>
