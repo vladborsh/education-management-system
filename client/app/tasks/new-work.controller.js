@@ -1,0 +1,6 @@
+NewWorkController.$inject = [
+
+];
+function NewWorkController() {
+    
+}

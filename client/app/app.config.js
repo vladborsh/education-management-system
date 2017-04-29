@@ -107,12 +107,32 @@ function Config(
 			}
 		}
 	})
+	.state('content.task_item', {
+		url: '/task_item/{id}',
+		views: { 
+			'main' : {
+				templateUrl: 'app/tasks/task-item.html',
+				controller: 'TaskItemController',
+				controllerAs: 'vm'
+			}
+		}
+	})
 	.state('content.lectures', {
 		url: '/lectures',
 		views: { 
 			'main' : {
 				templateUrl: 'app/lectures/lectures.html',
 				controller: 'LecturesController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('content.lecture_item', {
+		url: '/lecture_item/{id}',
+		views: { 
+			'main' : {
+				templateUrl: 'app/lectures/lecture-item.html',
+				controller: 'LectureItemController',
 				controllerAs: 'vm'
 			}
 		}

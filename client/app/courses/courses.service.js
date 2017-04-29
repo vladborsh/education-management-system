@@ -50,4 +50,15 @@ function CoursesService(Remote) {
 		return Remote.do('user/teachers', 'GET', {});
 	}
 
+	this.getTasks = function (id) {
+		return Remote.do('course/' + id + '/tasks', 'GET', {});	
+	}
+
+	this.getLectures = function (id) {
+		return Remote.do('course/' + id + '/lectures', 'GET', {});	
+	}
+
+	this.getEntries = function (id) {
+		return Remote.do('course/' + id + '/entries', 'GET', {});	
+	}
 }

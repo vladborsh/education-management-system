@@ -29,6 +29,10 @@ function NewCourseEntryController(
   }
 
   vm.init = function () {
+    if (vm.util.coursesFct.lectureCoursePreset) {
+      vm.model._course = vm.util.coursesFct.courseItem._id;
+      vm.util.course = vm.util.coursesFct.courseItem.name;
+    }
     CoursesService.getTeachers()
     .then(
       function (data) {

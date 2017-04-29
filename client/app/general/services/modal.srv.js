@@ -2,7 +2,7 @@ Modal.$inject = ['$uibModal'];
 
 function Modal($uibModal) {
 	
-	this.get = function(template, controller, resolve) {
+	this.get = function(template, controller, resolve, size) {
 		return $uibModal.open({
       animation: true,
       ariaLabelledBy: 'modal-title',
@@ -10,7 +10,8 @@ function Modal($uibModal) {
       templateUrl: template,
       controller: controller,
       controllerAs: 'mod',
-      resolve: resolve
+      resolve: resolve,
+      size : size || 'md'
     });
 	}
 

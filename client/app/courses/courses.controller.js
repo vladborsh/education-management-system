@@ -96,7 +96,7 @@ function CoursesController(
         _.remove(vm.model.myCourses, function(item) {
           return item._id == id;
         });
-        cosole.log(data);
+        console.log(data);
       },
       function( err ) {
         console.log(err);

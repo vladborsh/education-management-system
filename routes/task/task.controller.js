@@ -1,5 +1,5 @@
 var Task = require('../../models/task.model');
-var Test = require('../../models/test.model');
+var Test = require('../../models/test.model').test;
 var Work = require('../../models/work.model');
 
 module.exports.getAll = getAll;
@@ -31,8 +31,9 @@ function get(req, res) {
 }
 
 function create(req, res) {
-	var tas = new Task(req.body);
-	tas.save(function (err) {
+	var task = new Task(req.body);
+	task.createdDate = Date.now();
+	task.save(function (err) {
 		if (err) {
 			res.json({success: false, message: 'Cannot create task ' + err});
 		} else {
@@ -64,6 +65,8 @@ function remove (req, res) {
 function getTests (req, res) {
 	Test
 	.find({_task: req.params.id})
+	.select('_id questions _task')
+	.populate('questions')
 	.exec( function (err, items) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find tests ' + err});

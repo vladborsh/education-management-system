@@ -1,65 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Yolo-LMS</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
-	<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="components/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/custom.css">
-	<link rel="stylesheet" href="css/animations.css">
+  <title>Yolo-LMS</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+  <link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/animations.css">
 
+  <script src="components/angular/angular.min.js"></script>
+  <script src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+  <script src="components/angular-animate/angular-animate.min.js"></script>
+  <script src="components/angular-cookies/angular-cookies.min.js"></script>
+  <script src="components/angular-sanitize/angular-sanitize.min.js"></script>
+  <script src="components/lodash/dist/lodash.min.js"></script>
 
-	<script src="components/angular/angular.min.js"></script>
-	<script src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
-	<script src="components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-	<script src="components/angular-animate/angular-animate.min.js"></script>
-	<script src="components/angular-cookies/angular-cookies.min.js"></script>
-	<script src="components/lodash/dist/lodash.min.js"></script>
-	
-	<script src="app/general/factories/auth.factory.js"></script>	
-	<script src="app/general/factories/user.factory.js"></script>	
-	<script src="app/general/factories/auth-interceptor.factory.js"></script>
-	<script src="app/general/factories/common.factory.js"></script>
-	<script src="app/general/controllers/topbar.controller.js"></script>
-	<script src="app/general/controllers/navigation.controller.js"></script>
-	<script src="app/general/controllers/wrap-content.controller.js"></script>
-	<script src="app/signin/signin.service.js"></script>
-	<script src="app/signin/signin.controller.js"></script>
-	<script src="app/signup/signup.service.js"></script>
-	<script src="app/signup/signup.controller.js"></script>
-	<script src="app/forgot-pass/forgot-pass.controller.js"></script>
-	
+  <link rel='stylesheet' href='components/textAngular/dist/textAngular.css'>
+  <script src='components/textAngular/dist/textAngular-rangy.min.js'></script>
+  <script src='components/textAngular/dist/textAngular-sanitize.min.js'></script>
+  <script src='components/textAngular/dist/textAngular.min.js'></script>
+  
+  <script src="app/general/factories/auth.factory.js"></script> 
+  <script src="app/general/factories/user.factory.js"></script> 
+  <script src="app/general/factories/auth-interceptor.factory.js"></script>
+  <script src="app/general/factories/common.factory.js"></script>
+  <script src="app/general/controllers/topbar.controller.js"></script>
+  <script src="app/general/controllers/navigation.controller.js"></script>
+  <script src="app/general/controllers/wrap-content.controller.js"></script>
+  <script src="app/signin/signin.service.js"></script>
+  <script src="app/signin/signin.controller.js"></script>
+  <script src="app/signup/signup.service.js"></script>
+  <script src="app/signup/signup.controller.js"></script>
+  <script src="app/forgot-pass/forgot-pass.controller.js"></script>
+  
 
-	<script src="app/courses/courses.controller.js"></script>
-	<script src="app/courses/open-course-modal.controller.js"></script>
-	<script src="app/courses/new-course-modal.controller.js"></script>
-	<script src="app/courses/course-item.controller.js"></script>
-	<script src="app/courses/course-entry-item.controller.js"></script>
-	<script src="app/courses/courses.service.js"></script>
-	<script src="app/courses/courses.factory.js"></script>
+  <script src="app/courses/courses.controller.js"></script>
+  <script src="app/courses/open-course-modal.controller.js"></script>
+  <script src="app/courses/new-course-modal.controller.js"></script>
+  <script src="app/courses/course-item.controller.js"></script>
+  <script src="app/courses/course-entry-item.controller.js"></script>
+  <script src="app/courses/courses.service.js"></script>
+  <script src="app/courses/courses.factory.js"></script>
 
-	<script src="app/tasks/tasks.controller.js"></script>
-	<script src="app/tasks/tasks.service.js"></script>
-	<script src="app/lectures/lectures.controller.js"></script>
-	<script src="app/lectures/lectures.service.js"></script>
-	<script src="app/students/students.controller.js"></script>
-	<script src="app/students/students.service.js"></script>
-	<script src="app/calendar/calendar.controller.js"></script>
-	<script src="app/calendar/calendar.service.js"></script>
-	<script src="app/home/home.controller.js"></script>
+  <script src="app/tasks/tasks.factory.js"></script>
 
-	<script src="app/general/services/remote.srv.js"></script>
-	<script src="app/general/services/modal.srv.js"></script>
-	<script src="app/general/services/date.service.js"></script>	
+  <script src="app/tasks/new-task.controller.js"></script>
+  <script src="app/tasks/new-test.controller.js"></script>
+  <script src="app/tasks/new-work.controller.js"></script>
+  <script src="app/tasks/task-item.controller.js"></script>
+  <script src="app/tasks/tasks.controller.js"></script>
+  <script src="app/tasks/tasks.service.js"></script>
 
-	<script src="app/app.config.js"></script>
-	<script src="app/app.js"></script>
-	
+  <script src="app/lectures/new-lecture.controller.js"></script>
+  <script src="app/lectures/lecture-item.controller.js"></script>
+  <script src="app/lectures/lectures.controller.js"></script>
+  <script src="app/lectures/lectures.service.js"></script>
+  <script src="app/lectures/lectures.factory.js"></script>
+
+  <script src="app/students/students.controller.js"></script>
+  <script src="app/students/students.service.js"></script>
+  <script src="app/calendar/calendar.controller.js"></script>
+  <script src="app/calendar/calendar.service.js"></script>
+  <script src="app/home/home.controller.js"></script>
+
+  <script src="app/general/services/remote.srv.js"></script>
+  <script src="app/general/services/modal.srv.js"></script>
+  <script src="app/general/services/date.service.js"></script>  
+
+  <script src="app/app.config.js"></script>
+  <script src="app/app.js"></script>
+  
 </head>
 <body ng-app="App">
-	<div ui-view="index" class="container-fluid">
-	<!--  -->
+  <div ui-view="index" class="container-fluid">
+  <!--  -->
 </body>
 </html>

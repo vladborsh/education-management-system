@@ -1,5 +1,12 @@
 
-angular.module('App', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngCookies'])
+angular.module('App', [
+  'ui.bootstrap', 
+  'ui.router', 
+  'ngAnimate', 
+  'ngCookies',
+  'ngSanitize',
+  'textAngular'
+])
 .factory('AuthFactory', AuthFactory)
 .factory('AuthInterceptorFactory', AuthInterceptorFactory)
 .factory('CommonFactory', CommonFactory)
@@ -21,19 +28,27 @@ angular.module('App', ['ui.bootstrap', 'ui.router', 'ngAnimate', 'ngCookies'])
 .controller('TopbarController', TopbarController)
 .controller('NavigationController', NavigationController)
 
-.service('CoursesService', CoursesService)
 .factory('CoursesFactory', CoursesFactory)
+.service('CoursesService', CoursesService)
 .controller('HomeController', HomeController)
 .controller('CoursesController', CoursesController)
 .controller('NewCourseEntryController', NewCourseEntryController)
 .controller('NewCourseController', NewCourseController)
 .controller('CourseItemController', CourseItemController)
 
+.factory('TasksFactory', TasksFactory)
 .service('TasksService', TasksService)
 .controller('TasksController', TasksController)
+.controller('NewTaskController', NewTaskController)
+.controller('TaskItemController', TaskItemController)
+.controller('NewTestController', NewTestController)
+.controller('NewWorkController', NewWorkController)
 
+.factory('LecturesFactory', LecturesFactory)
 .service('LecturesService', LecturesService)
 .controller('LecturesController', LecturesController)
+.controller('NewLectureController', NewLectureController)
+.controller('LectureItemController', LectureItemController)
 
 .service('StudentsService', StudentsService)
 .controller('StudentsController', StudentsController)

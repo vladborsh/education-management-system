@@ -97,6 +97,7 @@ function getTasks (req, res) {
 function getLectures (req, res) {
 	Lecture
 	.find({_course : req.params.id})
+	.select('_id _course name description body links createdDate')
 	.exec(function(err, items) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо вилучити лекції для курсу: ' + err});
@@ -109,6 +110,8 @@ function getLectures (req, res) {
 function getEntries (req, res) {
 	CourseEntry
 	.find({_course : req.params.id})
+	.select('_id _course _lector name startDate endDate active grade views createdDate updatedDate deactivateReson')
+	.populate('_lector')
 	.exec(function(err, items) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо вилучти курси за цим напрямком: ' + err});

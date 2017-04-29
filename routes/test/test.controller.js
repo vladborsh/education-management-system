@@ -1,4 +1,5 @@
-var Test = require('../../models/test.model');
+var Test = require('../../models/test.model').test;
+var Question = require('../../models/test.model').question;
 
 module.exports.getAll = getAll;
 module.exports.get = get;
@@ -27,12 +28,14 @@ function get(req, res) {
 }
 
 function create(req, res) {
-	var test = new Test(req.body);
-	Test.save(function (err) {
+	var test = new Test();
+	test._task = req.body._task;
+	test.questions = req.body.questions;
+	test.save(function (err, testItem) {
 		if (err) {
 			res.json({success: false, message: 'Cannot create test ' + err});
 		} else {
-			res.json({success: true, message: 'Test created'})	
+			res.json({success: true, message: 'Test created', test: testItem})	
 		}
 	})
 }

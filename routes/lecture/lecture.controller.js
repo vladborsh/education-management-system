@@ -7,7 +7,9 @@ module.exports.update = update;
 module.exports.remove = remove;
 
 function getAll(req, res) {
-	Lecture.find(function (err, items) {
+	Lecture.find()
+	.select('_course name description body links createdDate')
+	.exec(function (err, items) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find lectures ' + err});
 		} else {
@@ -17,7 +19,9 @@ function getAll(req, res) {
 }
 
 function get(req, res) {
-	Lecture.findById(req.params.id, function (err, item) {
+	Lecture.findById(req.params.id)
+	.select('_course name description body links createdDate')
+	.exec( function (err, item) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find lecture ' + err});
 		} else {
@@ -27,16 +31,13 @@ function get(req, res) {
 }
 
 function create(req, res) {
-	var lecture = new Lecture();
-	lecture._course = req.body._course;
-	lecture.description = req.body.description;
-	lecture.body = req.body.body;
-	lecture.links = req.body.links;
-	lecture.save(function (err) {
+	var lecture = new Lecture(req.body);
+	lecture.createdDate = Date.now();
+	lecture.save(function (err, lecture) {
 		if (err) {
 			res.json({success: false, message: 'Cannot create lecture' + err});
 		} else {
-			res.json({success: true, message: 'Lecture created'})	
+			res.json({success: true, message: 'Lecture created', id: lecture._id})	
 		}
 	})
 }

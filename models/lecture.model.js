@@ -16,6 +16,9 @@ var LectureSchema = new Schema({
 	},
 	links : {
 		type : [ String ]
+	},
+	createdDate : {
+		type: Date
 	}
 });
 

@@ -17,12 +17,13 @@ var Question = new Schema({
 })
 
 var TestSchema = new Schema({
-	_task : {
-		type : Schema.Types.ObjectId, ref: 'Task', required: true
-	},
-	questions : {
-		type : [Question]
-	},
+		_task : {
+			type : Schema.Types.ObjectId, ref: 'Task', required: true
+		},
+		questions : [Question]
 });
 
-module.exports = mongoose.model('Test', TestSchema);
+module.exports = { 
+	test : mongoose.model('Test', TestSchema),
+	question : mongoose.model('Question', Question)
+};

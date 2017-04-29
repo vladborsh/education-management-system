@@ -10,7 +10,10 @@ var TaskSchema = new Schema({
   },
 	description : {
 		type : String
-	}
+	},
+  createdDate : {
+    type: Date
+  }
 });
 
 module.exports = mongoose.model('Task', TaskSchema);
