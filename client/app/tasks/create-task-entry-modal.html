@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h3 class="modal-title">Назначити завдання</h3>
+</div>
+<div class="modal-body">
+  <form class="form-horizontal" name="taskEntry">
+
+    <div class="form-group">
+      <label class="control-label col-md-3">Завдання</label>
+      <div class="col-md-9">
+        <span uib-dropdown style="width:100%">
+          <input type="text" class="form-control" name="task" 
+            ng-model="mod.util.task"
+            uib-dropdown-toggle>
+          <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
+            <li ng-repeat="task in mod.util.coursesFct.courseItemTasks | filter : mod.util.task">
+              <a href ng-click="mod.setTask(task)">{{task.name}}</a>
+            </li>
+          </ul>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-md-3">Студент</label>
+      <div class="col-md-9">
+        <span uib-dropdown style="width:100%">
+          <input type="text" class="form-control" name="student" 
+            ng-model="mod.util.student"
+            uib-dropdown-toggle>
+          <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
+            <li ng-repeat="student in mod.util.coursesFct.courseEntryItemStudents | filter : mod.util.student">
+              <a href ng-click="mod.setStudent(student)">{{student._user.firstName}} {{student._user.lastName}}</a>
+            </li>
+          </ul>
+        </span>
+      </div>
+    </div>
+
+  </form>
+  <div uib-alert ng-repeat="alert in mod.util.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="mod.closeAlert($index)">{{alert.msg}}</div>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary"
+    ng-click="mod.saveTaskEntry()">Назначити</button>
+  <button type="submit" class="btn btn-default" 
+    ng-click="mod.close()">Закрити</button>
+</div>

@@ -9,8 +9,8 @@ function TasksService($q, $http, Remote) {
     return Remote.do('task/' + id, 'GET', {});
   }
   
-  this.save = function (lecture) {
-    return Remote.do('task', 'POST', lecture);
+  this.save = function (task) {
+    return Remote.do('task', 'POST', task);
   }
 
   this.delete = function (id) {
@@ -30,7 +30,7 @@ function TasksService($q, $http, Remote) {
   }
   
   this.getWorks = function (id) {
-    return Remote.do('work/' + id + '/works', 'GET', {});
+    return Remote.do('task/' + id + '/works', 'GET', {});
   }
 
   this.saveWork = function (work) {
@@ -39,6 +39,14 @@ function TasksService($q, $http, Remote) {
 
   this.deleteWork = function (id) {
     return Remote.do('work/' + id, 'DELETE', {});
+  }
+
+  this.saveTaskEntry = function (task_e) {
+    return Remote.do('task_e/', 'POST', task_e);
+  }
+
+  this.deleteEntry = function (id) {
+    return Remote.do('task_e/' + id, 'DELETE', {});
   }
 
 }

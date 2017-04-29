@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h3 class="modal-title">Додати студента</h3>
+</div>
+<div class="modal-body">
+  <span uib-dropdown style="width:100%">
+    <input type="text" class="form-control" name="user" 
+      ng-model="mod.util.user"
+      uib-dropdown-toggle>
+    <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
+      <li ng-repeat="user in mod.util.users | filter : mod.util.user">
+        <a href ng-click="mod.setUser(user)">{{user.firstName}} {{user.lastName}}</a>
+      </li>
+    </ul>
+  </span>
+  <div uib-alert ng-repeat="alert in mod.util.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="mod.closeAlert($index)">{{alert.msg}}</div>
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary"
+    ng-click="mod.saveStudent()">Назначити</button>
+  <button type="submit" class="btn btn-default" 
+    ng-click="mod.close()">Закрити</button>
+</div>

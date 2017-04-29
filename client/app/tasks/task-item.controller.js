@@ -3,41 +3,33 @@ TaskItemController.$inject = [
   'TasksService',
   'Modal',
   '$stateParams',
-  '$state'
+  '$state',
+  '$q'
 ];
 function TaskItemController (
   TasksFactory,
   TasksService,
   Modal,
   $stateParams,
-  $state) 
+  $state,
+  $q) 
 {
   var vm = this;
 
   vm.model = TasksFactory.getModel();
 
   vm.init = function () {
-    TasksService.get($stateParams.id)
-    .then(
+    $q.all([
+      TasksService.get($stateParams.id),
+      TasksService.getTests($stateParams.id),
+      TasksService.getWorks($stateParams.id)
+    ]).then(
       function (data) {
-        console.log(data)
-        vm.model.taskItem = data.data
+        vm.model.taskItem = data[0].data;
+        vm.model.taskTests = data[1].data.items;
+        vm.model.taskWorks = data[2].data.items;
       }
     );
-    TasksService.getTests($stateParams.id)
-    .then(
-      function (data) {
-        console.log(data);
-        vm.model.taskTests = data.data.items;
-      }
-    )
-    TasksService.getWorks($stateParams.id)
-    .then(
-      function (data) {
-        console.log(data);
-        vm.model.taskWorks = data.data.items;
-      }
-    )
   }
   vm.init();
 
@@ -64,7 +56,7 @@ function TaskItemController (
     }
   }
 
-  vm.createTest = function() {
+  vm.createWork = function() {
     var modal = Modal.get(
       'app/tasks/create-work-modal.html',
       'NewWorkController', 
@@ -88,6 +80,21 @@ function TaskItemController (
     .then(
       function( data ) {
         _.remove(vm.model.taskTests, function(item) {
+          return item._id == id;
+        });
+        console.log(data);
+      },
+      function( err ) {
+        console.log(err);
+      }
+    );
+  }
+
+  vm.deleteWork = function (id) {
+    TasksService.deleteWork(id)
+    .then(
+      function( data ) {
+        _.remove(vm.model.taskWorks, function(item) {
           return item._id == id;
         });
         console.log(data);

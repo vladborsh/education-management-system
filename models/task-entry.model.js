@@ -8,9 +8,12 @@ var TaskEntrySchema = new Schema({
 	_task : {
 		type : Schema.Types.ObjectId, ref: 'Task', required: true
 	},
-	forStudents : {
-		type : [Schema.Types.ObjectId], ref: 'Student', required: true
-	}
+	_student : {
+		type : Schema.Types.ObjectId, ref: 'Student', required: true
+	},
+  createdDate : {
+    type: Date
+  }
 });
 
 module.exports = mongoose.model('TaskEntry', TaskEntrySchema);

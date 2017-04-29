@@ -22,15 +22,21 @@ function getAllUsers(req, res) {
 function signup(req,res) {
 	var user = new User(req.body);
 	if (!user.role) {
-		user.role = 'Admin';
+		user.role = 'Student';
 	}
-	user.save(function (err) {
-		if (err) {
-			res.json({success:false, message: 'Cannot create user'});
-		} else {
-			res.json({success:true, message: 'User created'});
+	User.find(function (err, users) {
+		if (users.length == 0) {
+			user.role = 'Admin';
 		}
+		user.save(function (err) {
+			if (err) {
+				res.json({success:false, message: 'Cannot create user. Error: ' + err});
+			} else {
+				res.json({success:true, message: 'User created'});
+			}
+		});
 	});
+	
 }
 
 function remove(req, res) {
@@ -107,8 +113,8 @@ function getTeachers(req, res) {
 
 function getStudents(req, res) {
 	User
-	.find({role:'User'})
-	.select('_id firstName lastName')
+	.find({role:'Student'})
+	.select('_id firstName lastName email')
 	.exec(function (err, users) {
 		if (err) throw err;
 		res.json({ success: true, users: users});

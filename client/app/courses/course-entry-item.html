@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <button type="submit" class="btn btn-default" 
+          ng-show="vm.model.lastViewedCourse" 
+          ng-click="vm.backToCourse()">Назад до курсу</button>
+        <button type="submit" class="btn btn-default" ui-sref="content.courses">Усі курси</button>
+        <h2>{{vm.model.courseEntryItem.name}}</h2>
+      </div>
+      <!-- Panel body -->
+      <div class="panel-body">
+        <p>Створений: {{vm.model.courseEntryItem.createdDate}}</p>
+        <p><b>{{vm.model.courseEntryItem.active ? 'Активний' : 'Неактивний'}}</b></p>
+        <p>{{vm.model.courseEntryItem.startDate |date : 'MMM d, y h:mm:ss a' }} - {{vm.model.courseEntryItem.endDate |date : 'MMM d, y h:mm:ss a' }} </p>
+        <hr>
+
+        <uib-tabset style="margin:10px;">
+
+          <!-- Task entries -->
+          <uib-tab>
+            <uib-tab-heading>
+              Видані завдання
+            </uib-tab-heading>
+              <table class="table table-hover" ng-show="vm.model.courseEntryItemTaskEntries.length > 0">
+              <thead>
+                <tr>
+                  <th>Назва</th>
+                  <th>Опис</th>
+                  <th>Студент</th>
+                  <th>Видано</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in vm.model.courseEntryItemTaskEntries" style="cursor:pointer">
+                  <td ng-click="vm.viewTask(item)">{{item._task.name}}</td>
+                  <td ng-click="vm.viewTask(item)">{{item._task.description}}</td>
+                  <td ng-click="vm.viewTask(item)">{{item._student._user.firstName}} {{item._student._user.lastName}}</td>
+                  <td ng-click="vm.viewTask(item)">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                  <td>
+                    <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteTaskEntry(item._id)">Видалити</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </uib-tab>
+          <!-- Task entries (END) -->
+
+          <!-- Students -->
+          <uib-tab>
+            <uib-tab-heading>
+              Студенти
+            </uib-tab-heading>
+              <table class="table table-hover" ng-show="vm.model.courseEntryItemStudents.length > 0">
+              <thead>
+                <tr>
+                  <th>Ім'я</th>
+                  <th>Пошта</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in vm.model.courseEntryItemStudents" style="cursor:pointer">
+                  <td ng-click="vm.viewTask(item)">{{item._user.firstName}} {{item._user.lastName}}</td>
+                  <td ng-click="vm.viewTask(item)">{{item._user.email}}</td>
+                  <td>
+                    <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteStudent(item._id)">Видалити</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </uib-tab>
+          <!-- Students (END) -->
+
+        </uib-tabset>
+
+      </div>
+      <div class="panel-footer">
+        <button type="button" class="btn btn-primary" ng-click="vm.createTaskEntry()">Назначити завдання</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.createStudent()">Додати студента</button>
+      </div>
+    </div>
+  </div>
+</div>

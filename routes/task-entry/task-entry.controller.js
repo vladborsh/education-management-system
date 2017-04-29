@@ -37,10 +37,8 @@ function get(req, res) {
 }
 
 function create(req, res) {
-	var task = new TaskEntry();
-	task._courseEntry = req.body._courseEntry;
-	task._task = req.body._task;
-	task.forStudents = req.body.forStudents;
+	var task = new TaskEntry(req.body);
+	task.createdDate = Date.now()
 	task.save(function (err) {
 		if (err) {
 			res.json({success: false, message: 'Cannot create task' + err});

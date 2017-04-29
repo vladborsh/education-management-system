@@ -80,17 +80,25 @@ function remove (req, res) {
 function getTasks (req, res) {
 	TaskEntry
 	.find({ _courseEntry : req.params.id})
+	.populate({
+		path: '_student ', 
+		populate: { path: '_user' }
+	})
+	.populate({
+		path: '_task '
+	})
+	.populate({
+		path: '_courseEntry '
+	})
 	.exec(function(err, items) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо вилучити завдання для данного курсу: ' + err});
 		} else {
-			TaskEntry.populate(items, {path: '_task'}, function (err, doc) {
-				if (err) {
-					res.json({success: false, message: 'Неможливо вилучити завдання для данного курсу: ' + err});
-				} else {
-					res.json({success: true, items: doc});
-				}
-			});
+			if (err) {
+				res.json({success: false, message: 'Неможливо вилучити завдання для данного курсу: ' + err});
+			} else {
+				res.json({success: true, items: items});
+			}
 		}
 	})
 }

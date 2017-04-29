@@ -61,4 +61,13 @@ function CoursesService(Remote) {
 	this.getEntries = function (id) {
 		return Remote.do('course/' + id + '/entries', 'GET', {});	
 	}
+
+	this.getTaskEntries = function (id) {
+		return Remote.do('course_e/' + id + '/tasks', 'GET', {});	
+	}
+
+	this.getStudents = function (id) {
+		return Remote.do('course_e/' + id + '/students', 'GET', {});	
+	}
+	
 }

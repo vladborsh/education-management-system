@@ -3,7 +3,7 @@
 </div>
 <div class="modal-body">
   <form novalidate="true">
-    <div class="form-group">
+    <div class="form-group" ng-hide="mod.util.coursesFct.lectureCoursePreset">
       <label>Головний курс</label>
       <small class="help-block">Оберіть курс із переліку запропонованих</small>
       <div class="row">
@@ -11,7 +11,6 @@
           <span uib-dropdown style="width:100%">
             <input type="text" class="form-control" id="courses" 
               ng-model="mod.util.course"
-              ng-disabled="mod.util.coursesFct.lectureCoursePreset"
               uib-dropdown-toggle>
             <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
               <li ng-repeat="course in mod.util.coursesFct.courses | filter : mod.util.course">

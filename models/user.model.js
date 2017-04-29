@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
-var roles = ['Admin', 'Teacher', 'User'];
+var roles = ['Admin', 'Teacher', 'Student'];
 
 var UserSchema = new Schema({
 	password: {

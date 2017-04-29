@@ -37,16 +37,21 @@ function get(req, res) {
 }
 
 function create(req, res) {
-	var student = new Student();
-	student._courseEntry = req.body._courseEntry;
-	student._user = req.body._user;
-	student.save(function (err) {
-		if (err) {
-			res.json({success: false, message: 'Cannot create student' + err});
+	var student = new Student(req.body);
+	Student.find({ _courseEntry : req.body._courseEntry, _student : req.body._student}, function (err, items) {
+		if (items.length == 0) {
+			student.save(function (err) {
+				if (err) {
+					res.json({success: false, message: 'Cannot create student' + err});
+				} else {
+					res.json({success: true, message: 'Student created'})	
+				}
+			})
 		} else {
-			res.json({success: true, message: 'Student created'})	
+			res.json({success: false, message: 'Cannot create student. There is already student'});
 		}
 	})
+	
 }
 
 function update(req, res) {
