@@ -28,9 +28,9 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="item in vm.model.studentUsers | filter : vm.model.searchStudent" style="cursor:pointer">
-                    <td ng-click="vm.viewStudent(item)">{{item.firstName}} {{item.lastName}}</td>
-                    <td ng-click="vm.viewStudent(item)">{{item.email}}</td>
+                  <tr ng-repeat="item in vm.model.studentUsers | filter : vm.model.searchStudent">
+                    <td><a ui-sref="content.student_item({id:item._id})" class="underline">{{item.firstName}} {{item.lastName}}</a></td>
+                    <td>{{item.email}}</td>
                     <td>
                       <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteUser(item._id)">Видалити</button>
                     </td>

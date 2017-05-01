@@ -249,6 +249,13 @@ a:hover {
   color: #009557;
   text-decoration: none;
 }
+a.underline {
+  color: #009557;
+  text-decoration: underline;
+}
+a.underline:hover {
+  color: #006224;
+}
 label {
   margin: 0;
 }

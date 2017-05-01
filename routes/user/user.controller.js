@@ -149,7 +149,7 @@ function getStudents(req, res) {
 function getInfo (req, res) {
 	var userData = req.decoded;
 	User
-	.findOne({ _id: userData.id })
+	.findOne({ _id: userData._id })
 	.select('role firstName lastName _id')
 	.exec(function (err, user) {
 		if (err) throw err;
