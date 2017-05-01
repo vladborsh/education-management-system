@@ -11,7 +11,8 @@ module.exports.getTests = getTests;
 module.exports.getWorks = getWorks;
 
 function getAll(req, res) {
-	Task.find(function (err, courses) {
+	Task.find()
+	.exec(function (err, courses) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find tasks ' + err});
 		} else {

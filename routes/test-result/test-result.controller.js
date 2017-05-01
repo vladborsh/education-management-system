@@ -27,8 +27,7 @@ function get(req, res) {
 }
 
 function create(req, res) {
-	var test = new TestResult(req.body);
-	test.save(function (err) {
+	TestResult.insertMany(req.body, function (err) {
 		if (err) {
 			res.json({success: false, message: 'Cannot create test result ' + err});
 		} else {

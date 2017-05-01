@@ -45,6 +45,8 @@ angular.module('App', [
 .controller('NewTestController', NewTestController)
 .controller('NewWorkController', NewWorkController)
 .controller('NewTaskEntryController', NewTaskEntryController)
+.controller('TaskEntryItemController', TaskEntryItemController)
+.controller('TaskResultItemController', TaskResultItemController)
 
 .factory('LecturesFactory', LecturesFactory)
 .service('LecturesService', LecturesService)
@@ -52,6 +54,7 @@ angular.module('App', [
 .controller('NewLectureController', NewLectureController)
 .controller('LectureItemController', LectureItemController)
 
+.factory('StudentsFactory', StudentsFactory)
 .service('StudentsService', StudentsService)
 .controller('StudentsController', StudentsController)
 .controller('NewStudentController', NewStudentController)

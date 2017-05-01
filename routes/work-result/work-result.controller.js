@@ -27,8 +27,7 @@ function get(req, res) {
 }
 
 function create(req, res) {
-	var work = new WorkResult(req.body);
-	work.save(function (err) {
+	WorkResult.insertMany(req.body, function (err) {
 		if (err) {
 			res.json({success: false, message: 'Cannot create work ' + err});
 		} else {

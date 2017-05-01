@@ -4,6 +4,10 @@ LecturesService.$inject = [
   'Remote'
 ];
 function LecturesService($q, $http, Remote) {
+
+  this.getLectures = function (id) {
+    return Remote.do('lecture', 'GET', {});
+  }
 	
   this.get = function (id) {
     return Remote.do('lecture/' + id, 'GET', {});

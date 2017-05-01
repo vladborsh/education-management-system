@@ -60,6 +60,10 @@ function CourseEntryItemController(
   };
   vm.init();
 
+  vm.viewTaskEntry = function (item) {
+    $state.go('content.task_e_item', {id : item._id});
+  }
+
   vm.createTaskEntry = function () {
     vm.model.lectureCoursePreset = true;
     var modal = Modal.get(
@@ -105,6 +109,9 @@ function CourseEntryItemController(
     .then(
       function( data ) {
         _.remove(vm.model.courseEntryItemTaskEntries, function(item) {
+          return item._id == id;
+        });
+        _.remove(vm.util.tasksFct.taskEntries, function(item) {
           return item._id == id;
         });
         console.log(data);

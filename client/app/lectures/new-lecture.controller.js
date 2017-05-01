@@ -2,6 +2,7 @@ NewLectureController.$inject = [
   'LecturesService',
   'LecturesFactory',
   'CoursesFactory',
+  'CoursesService',
   '$uibModalInstance',
   'textAngularManager'
 ];
@@ -9,6 +10,7 @@ function NewLectureController(
   LecturesService,
   LecturesFactory,
   CoursesFactory,
+  CoursesService,
   $uibModalInstance,
   textAngularManager) 
 {
@@ -23,6 +25,12 @@ function NewLectureController(
   }
 
   vm.init = function () {
+    CoursesService.getCourses()
+    .then(
+      function (data) {
+        vm.util.coursesFct.courses = data.data;
+      }
+    )
     if (vm.util.coursesFct.lectureCoursePreset) {
       vm.model._course = vm.util.coursesFct.courseItem._id;
       vm.util.course = vm.util.coursesFct.courseItem.name;

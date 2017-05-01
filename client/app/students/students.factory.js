@@ -1,8 +1,6 @@
-function TasksFactory() {
+function StudentsFactory() {
 
-  var model = {
-    tasks : []
-  }
+  var model = {}
 
   return {
     get : function(key) {

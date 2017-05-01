@@ -11,37 +11,53 @@ module.exports.getTests = getTests;
 module.exports.getWorks = getWorks;
 
 function getAll(req, res) {
-	TaskResult.find(function (err, courses) {
+	TaskResult
+	.find()
+	.populate({
+		path: '_taskEntry',
+		populate: { path: '_task' }
+	})
+	.populate({
+		path: '_student ', 
+		populate: { path: '_user' }
+	})
+	.exec(function (err, tasks) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find task results ' + err});
 		} else {
-			res.json(courses);
+			res.json(tasks);
 		}
 	})
 }
 
 function get(req, res) {
-	TaskResult.findById(req.params.id, function (err, course) {
+	TaskResult
+	.findById(req.params.id)
+	.populate({
+		path: '_taskEntry',
+		populate: { path: '_task' }
+	})
+	.populate({
+		path: '_student ', 
+		populate: { path: '_user' }
+	})
+	.exec(function (err, task) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find task result ' + err});
 		} else {
-			res.json(course);
+			res.json(task);
 		}
 	})
 }
 
 function create(req, res) {
-	var tasResult = new TaskResult();
-	tasResult._taskEntry = req.body._taskEntry;
-	tasResult._student = req.body._student;
-	tasResult.comment = req.body.comment;
-	tasResult.createdDate = req.body.createdDate;
-	tasResult.mark = req.body.mark;
-	tasResult.save(function (err) {
+	var tasResult = new TaskResult(req.body);
+	tasResult.createdDate = Date.now();
+	tasResult.save(function (err, task_result) {
 		if (err) {
 			res.json({success: false, message: 'Cannot create task result' + err});
 		} else {
-			res.json({success: true, message: 'Task result created'})	
+			res.json({success: true, message: 'Task result created', task_result: task_result})	
 		}
 	})
 }

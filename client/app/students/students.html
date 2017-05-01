@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+
+      <div class="panel-heading">
+        <h3>Студенти</h3>
+      </div>
+      <!-- Panel body -->
+      <div class="panel-body">
+        <form class="form-inline pull-right">
+          <div class="form-group">
+            <div class="col-md-12 pad-right-rem">
+              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.lectureSearch">
+              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Lectures -->
+            <div class="table-responsive">
+              <table class="table table-hover" ng-show="vm.model.studentUsers.length > 0">
+                <thead>
+                  <tr>
+                    <th>Ім'я</th>
+                    <th>Пошта</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in vm.model.studentUsers" style="cursor:pointer">
+                    <td ng-click="vm.viewStudent(item)">{{item.firstName}} {{item.lastName}}</td>
+                    <td ng-click="vm.viewStudent(item)">{{item.email}}</td>
+                    <td>
+                      <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteUser(item._id)">Видалити</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        <!-- Lectures (END)-->
+        </div>
+      </div>
+      <!-- Panel body (end) -->
+      <div class="panel-footer">
+        <button type="submit" class="btn btn-primary" ng-click="vm.createStudent()">Назначити студента на курс</button>
+      </div>
+    </div>
+  </div>
+</div>

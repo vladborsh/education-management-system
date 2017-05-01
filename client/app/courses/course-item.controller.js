@@ -167,6 +167,9 @@ function CourseItemController(
         _.remove(vm.model.courseItemTasks, function(item) {
           return item._id == id;
         });
+        _.remove(vm.util.tasksFct.tasks, function(item) {
+          return item._id == id;
+        });
         console.log(data);
       },
       function( err ) {

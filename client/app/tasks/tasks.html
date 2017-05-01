@@ -14,7 +14,6 @@
               <span class="glyphicon glyphicon-search form-control-feedback"></span>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" ng-click="vm.createNewTaskEntry()">Назначити нове</button>
         </form>
         <div>
           <uib-tabset >
@@ -34,13 +33,19 @@
                       <thead>
                         <tr>
                           <th>Назва</th>
-                          <th>Створений</th>
+                          <th>Опис</th>
+                          <th>Дата створення</th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="item in vm.model.tasks" ng-click="vm.viewCourse(item)">
-                          <td>{{item.name}}</td>
-                          <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                        <tr ng-repeat="item in vm.model.tasks" ng-click="vm.viewTask(item)" style="cursor:pointer">
+                          <td ng-click="vm.viewTask(item)">{{item.name}}</td>
+                          <td ng-click="vm.viewTask(item)">{{item.description}}</td>
+                          <td ng-click="vm.viewTask(item)">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                          <td>
+                            <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteTask(item._id)">Видалити</button>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -63,13 +68,21 @@
                     <thead>
                       <tr>
                         <th>Назва</th>
-                        <th>Створений</th>
+                        <th>Курс</th>
+                        <th>Студент</th>
+                        <th>Видано</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="item in vm.model.taskEntries" ng-click="vm.viewTaskEntry(item)">
-                        <td>{{item.name}}</td>
-                        <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                      <tr ng-repeat="item in vm.model.taskEntries" ng-click="vm.viewTaskEntry(item)" style="cursor:pointer">
+                        <td ng-click="vm.viewTaskEntry(item)">{{item._task.name}}</td>
+                        <td ng-click="vm.viewTaskEntry(item)">{{item._courseEntry.name}}</td>
+                        <td ng-click="vm.viewTaskEntry(item)">{{item._student._user.firstName}} {{item._student._user.lastName}}</td>
+                        <td ng-click="vm.viewTaskEntry(item)">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                        <td>
+                          <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteTaskEntry(item._id)">Видалити</button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -84,20 +97,28 @@
                 <div class="col-md-12">
                   <h4>Ваші завдання</h4>
                   <p>
-                    Список завдань що були створені мною
+                    Список завдань що були назначені мною
                   </p>
                   <small class="help-block" ng-show="vm.model.myTasks.length == 0">Ваших завдань назараз немає</small>
                   <table class="table table-hover" ng-show="vm.model.myTasks.length > 0">
                     <thead>
                       <tr>
                         <th>Назва</th>
-                        <th>Створений</th>
+                        <th>Курс</th>
+                        <th>Студент</th>
+                        <th>Видано</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="item in vm.model.myCourses"  ng-click="vm.viewTaskEntry(item)">
-                        <td>{{item.name}}</td>
+                      <tr ng-repeat="item in vm.model.taskEntries" ng-click="vm.viewTaskEntry(item)">
+                        <td>{{item._task.name}}</td>
+                        <td>{{item._courseEntry.name}}</td>
+                        <td>{{item._student._user.firstName}} {{item._student._user.lastName}}</td>
                         <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                        <td>
+                          <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteTaskEntry(item._id)">Видалити</button>
+                        </td>
                       </tr>
                     </tbody>
                   </table>

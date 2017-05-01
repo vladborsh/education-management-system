@@ -9,6 +9,7 @@ module.exports.remove = remove;
 function getAll(req, res) {
 	Lecture.find()
 	.select('_course name description body links createdDate')
+	.populate('_course')
 	.exec(function (err, items) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find lectures ' + err});
@@ -21,6 +22,7 @@ function getAll(req, res) {
 function get(req, res) {
 	Lecture.findById(req.params.id)
 	.select('_course name description body links createdDate')
+	.populate('_course')
 	.exec( function (err, item) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find lecture ' + err});
