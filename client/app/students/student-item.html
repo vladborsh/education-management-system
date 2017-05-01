@@ -23,15 +23,15 @@
               <thead>
                 <tr>
                   <th>Головний курс</th>
-                  <th>Поток</th>
+                  <th>Потік</th>
                   <th>Записаний</th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="item in vm.model.studentCourseEntries" style="cursor:pointer">
-                  <td ui-sref="content.course_e_item({id : item._courseEntry._id})">{{item._courseEntry._course.name}}</td>
-                  <td ui-sref="content.course_e_item({id : item._courseEntry._id})">{{item._courseEntry.name}}</td>
-                  <td ui-sref="content.course_e_item({id : item._courseEntry._id})">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                <tr ng-repeat="item in vm.model.studentCourseEntries">
+                  <td><a ui-sref="content.course_item({id:item._courseEntry._course._id})" class="underline">{{item._courseEntry._course.name}}</a></td>
+                  <td><a ui-sref="content.course_e_item({id:item._courseEntry._id})" class="underline">{{item._courseEntry.name}}</a></td>
+                  <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                 </tr>
               </tbody>
             </table>
@@ -54,11 +54,11 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="item in vm.model.studentTaskEntries" style="cursor:pointer">
-                  <td ui-sref="content.task_e_item({id : item._id})">{{item._task.name}}</td>
-                  <td ui-sref="content.task_e_item({id : item._id})">{{item._task.description}}</td>
-                  <td ui-sref="content.task_e_item({id : item._id})">{{item._courseEntry.name}}</td>
-                  <td ui-sref="content.task_e_item({id : item._id})">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                <tr ng-repeat="item in vm.model.studentTaskEntries">
+                  <td><a ui-sref="content.task_item({id:item._task._id})" class="underline">{{item._task.name}}</a></td>
+                  <td>{{item._task.description}}</td>
+                  <td><a ui-sref="content.course_e_item({id:item._courseEntry._id})" class="underline">{{item._courseEntry.name}}</a></td>
+                  <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                 </tr>
               </tbody>
             </table>
@@ -80,10 +80,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="item in vm.model.studentTaskResults" style="cursor:pointer">
-                  <td ui-sref="content.task_result({id : item._id})">{{item._taskEntry._task.name}}</td>
-                  <td ui-sref="content.task_e_item({id : item._id})">{{item._taskEntry._task.description}}</td>
-                  <td ui-sref="content.task_result({id : item._id})">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                <tr ng-repeat="item in vm.model.studentTaskResults">
+                  <td><a ui-sref="content.task_result({id:item._id})" class="underline">{{item._taskEntry._task.name}}</a></td>
+                  <td>{{item._taskEntry._task.description}}</td>
+                  <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                 </tr>
               </tbody>
             </table>

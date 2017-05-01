@@ -8,7 +8,8 @@
       </div>
       <!-- Panel body -->
       <div class="panel-body">
-        <p>Створена: {{vm.model.taskItem.createdDate}}</p>
+        <p><label>Створена</label>: {{vm.model.taskItem.createdDate}}</p>
+        <p><label>Курс</label>: <a ui-sref="content.course_item({id:vm.model.taskItem._course._id})" class="underline">{{vm.model.taskItem._course.name}}</a></p>
         <p>{{vm.model.taskItem.description}}</p>
         <hr>
 

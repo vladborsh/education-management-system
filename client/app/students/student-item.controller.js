@@ -5,6 +5,7 @@ StudentItemController.$inject = [
   'UsersService',
   'Modal',
   '$stateParams',
+  '$state',
   '$q'
 ];
 function StudentItemController(
@@ -14,6 +15,7 @@ function StudentItemController(
   UsersService,
   Modal,
   $stateParams,
+  $state,
   $q) 
 {
   var vm = this;
@@ -71,6 +73,7 @@ function StudentItemController(
     .then(
       function (data) {
         console.log(data);
+        $state.go('content.students')
       }
     );
   }

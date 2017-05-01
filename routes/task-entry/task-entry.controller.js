@@ -43,10 +43,24 @@ function getAll(req, res) {
 function get(req, res) {
 	TaskEntry
 	.findOne({_id : req.params.id})
-	.populate('_task')
 	.populate({
 		path: '_student ', 
 		populate: { path: '_user' }
+	})
+	.populate({
+		path: '_task '
+	})
+	.populate({
+		path: '_courseEntry',
+		populate: { 
+			path: '_lector'
+		}
+	})
+	.populate({
+		path: '_courseEntry',
+		populate: { 
+			path: '_course'
+		}
 	})
 	.exec(function (err, course) {
 		if (err) {

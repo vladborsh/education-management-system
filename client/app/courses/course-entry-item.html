@@ -10,8 +10,9 @@
       </div>
       <!-- Panel body -->
       <div class="panel-body">
-        <p>Створений: {{vm.model.courseEntryItem.createdDate}}</p>
-        <p><b>{{vm.model.courseEntryItem.active ? 'Активний' : 'Неактивний'}}</b></p>
+        <p><label>Створений</label>: {{vm.model.courseEntryItem.createdDate | date : 'MMM d, y h:mm:ss a' }}</p>
+        <p><label>Курс</label>: <a ui-sref="content.course_item({id:vm.model.courseEntryItem._course._id})" class="underline">{{vm.model.courseEntryItem._course.name}}</a></p>
+        <p><label>Статус</label>: {{vm.model.courseEntryItem.active ? 'Активний' : 'Неактивний'}}</p>
         <p>{{vm.model.courseEntryItem.startDate |date : 'MMM d, y h:mm:ss a' }} - {{vm.model.courseEntryItem.endDate |date : 'MMM d, y h:mm:ss a' }} </p>
         <hr>
 
@@ -34,7 +35,7 @@
               </thead>
               <tbody>
                 <tr ng-repeat="item in vm.model.courseEntryItemTaskEntries">
-                  <td><a ui-sref="content.task_item({id:item._id})" class="underline">{{item._task.name}}</a></td>
+                  <td><a ui-sref="content.task_e_item({id:item._id})" class="underline">{{item._task.name}}</a></td>
                   <td>{{item._task.description}}</td>
                   <td><a ui-sref="content.student_item({id:item._id})" class="underline">{{item._student._user.firstName}} {{item._student._user.lastName}}</a></td>
                   <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
