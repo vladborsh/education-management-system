@@ -28,6 +28,11 @@ function TaskResultItemController (
       function (data) {
         console.log(data.data);
         vm.model.taskResultItem = data.data;
+        if (vm.model.taskResultItem.completed) {
+          vm.model.viewTaskResult = true;
+        } else {
+          vm.model.viewTaskResult = false;
+        }
         return $q.all([
           TasksService.getTests(vm.model.taskResultItem._taskEntry._task._id),
           TasksService.getWorks(vm.model.taskResultItem._taskEntry._task._id)
@@ -45,14 +50,31 @@ function TaskResultItemController (
         _.each(vm.model.taskWorks, function (work) {
           vm.model.workResults.push({ _taskResult: vm.model.taskResultItem._id, body : '' });
         })
+        /* If task is completed, hide form items and show only selected answers and work result body */
+        if (vm.model.viewTaskResult) {
+          $q.all([
+            TasksService.getTaskResultTestResults($stateParams.id),
+            TasksService.getTaskResultWorkResults($stateParams.id)
+          ])
+          .then(
+            function (data) {
+              console.log(data[0].data.items);
+              console.log(data[1].data.items);
+              vm.model.taskTestResults = data[0].data.items;
+              vm.model.taskWorkResults = data[1].data.items;
+            }
+          );
+        }
       }
     );
+    
   }
   vm.init();
 
   vm.makeAnswer = function () {
     console.log(vm.model.testResults)
     console.log(vm.model.workResults)
+    /* Save test results, save work results, update tsk result to copleted */
     TasksService.saveTestResults(vm.model.testResults)
     .then(
       function (data) {
@@ -62,9 +84,17 @@ function TaskResultItemController (
     ).then(
       function (data) {
         console.log(data.data);
-        $state.go('content.tasks')
+        return TasksService.updateTaskResult({
+          _id : $stateParams.id,
+          completed: true
+        })
       }
-    );
+    ).then(
+      function (data) {
+        console.log(data.data)
+        $state.go('content.task_e_item', {id : vm.model.taskResultItem._taskEntry})
+      }
+    )
   }
 
 }

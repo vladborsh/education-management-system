@@ -7,14 +7,14 @@
       </div>
       <!-- Panel body -->
       <div class="panel-body">
-        <form class="form-inline pull-right">
-          <div class="form-group">
-            <div class="col-md-12 pad-right-rem">
-              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.lectureSearch">
-              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-12">
+              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.searchLecture">
+              <span class="glyphicon glyphicon-search form-control-feedback" style="right: 15px;"></span>
             </div>
           </div>
-        </form>
+        </div>
         <div class="row">
           <div class="col-md-12">
             <!-- Lectures -->
@@ -30,7 +30,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="item in vm.model.lectures" style="cursor:pointer">
+                  <tr ng-repeat="item in vm.model.lectures | filter : vm.model.searchLecture" style="cursor:pointer">
                     <td ng-click="vm.viewLecture(item)">{{item.name}}</td>
                     <td ng-click="vm.viewLecture(item)">{{item._course.name}}</td>
                     <td ng-click="vm.viewLecture(item)">{{item.description}}</td>

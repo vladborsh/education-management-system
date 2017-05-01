@@ -65,6 +65,10 @@ function TasksService($q, $http, Remote) {
     return Remote.do('task_e/' + id + '/results', 'GET', {});
   }
 
+  this.getTaskResults = function () {
+    return Remote.do('task_result', 'GET', {});
+  }
+
   this.getTaskResult = function (id) {
     return Remote.do('task_result/' + id, 'GET', {});
   }
@@ -73,8 +77,20 @@ function TasksService($q, $http, Remote) {
     return Remote.do('task_result/', 'POST', task_result);
   }
 
+  this.updateTaskResult = function (task_result) {
+    return Remote.do('task_result/' + task_result._id, 'POST', task_result);
+  }
+
   this.deleteTaskResult = function (id) {
     return Remote.do('task_result/' + id, 'DELETE', {});
+  }
+
+  this.getTaskResultTestResults = function (id) {
+    return Remote.do('task_result/' + id + '/tests', 'GET', {});
+  }
+
+  this.getTaskResultWorkResults = function (id) {
+    return Remote.do('task_result/' + id + '/works', 'GET', {});
   }
 
   this.saveTestResults = function (items) {

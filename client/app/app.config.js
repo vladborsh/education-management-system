@@ -167,12 +167,22 @@ function Config(
 			}
 		}
 	})
-	.state('content.calendar', {
-		url: '/calendar',
+	.state('content.student_item', {
+		url: '/student_item/{id}',
 		views: { 
 			'main' : {
-				templateUrl: 'app/calendar/calendar.html',
-				controller: 'CalendarController',
+				templateUrl: 'app/students/student-item.html',
+				controller: 'StudentItemController',
+				controllerAs: 'vm'
+			}
+		}
+	})
+	.state('content.users', {
+		url: '/users',
+		views: { 
+			'main' : {
+				templateUrl: 'app/users/users.html',
+				controller: 'UsersController',
 				controllerAs: 'vm'
 			}
 		}

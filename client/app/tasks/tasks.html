@@ -10,7 +10,7 @@
         <form class="form-inline pull-right">
           <div class="form-group">
             <div class="col-md-12 pad-right-rem">
-              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.taskSearch">
+              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.searchTask">
               <span class="glyphicon glyphicon-search form-control-feedback"></span>
             </div>
           </div>
@@ -33,14 +33,16 @@
                       <thead>
                         <tr>
                           <th>Назва</th>
+                          <th>Курс</th>
                           <th>Опис</th>
                           <th>Дата створення</th>
                           <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="item in vm.model.tasks" ng-click="vm.viewTask(item)" style="cursor:pointer">
+                        <tr ng-repeat="item in vm.model.tasks | filter : vm.model.searchTask" ng-click="vm.viewTask(item)" style="cursor:pointer">
                           <td ng-click="vm.viewTask(item)">{{item.name}}</td>
+                          <td ng-click="vm.viewTask(item)">{{item._course.name}}</td>
                           <td ng-click="vm.viewTask(item)">{{item.description}}</td>
                           <td ng-click="vm.viewTask(item)">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                           <td>
@@ -75,7 +77,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="item in vm.model.taskEntries" ng-click="vm.viewTaskEntry(item)" style="cursor:pointer">
+                      <tr ng-repeat="item in vm.model.taskEntries | filter : vm.model.searchTask" style="cursor:pointer">
                         <td ng-click="vm.viewTaskEntry(item)">{{item._task.name}}</td>
                         <td ng-click="vm.viewTaskEntry(item)">{{item._courseEntry.name}}</td>
                         <td ng-click="vm.viewTaskEntry(item)">{{item._student._user.firstName}} {{item._student._user.lastName}}</td>
@@ -111,11 +113,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="item in vm.model.taskEntries" ng-click="vm.viewTaskEntry(item)">
-                        <td>{{item._task.name}}</td>
-                        <td>{{item._courseEntry.name}}</td>
-                        <td>{{item._student._user.firstName}} {{item._student._user.lastName}}</td>
-                        <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                      <tr ng-repeat="item in vm.model.taskEntries | filter : vm.model.searchTask">
+                        <td ng-click="vm.viewTaskEntry(item)">{{item._task.name}}</td>
+                        <td ng-click="vm.viewTaskEntry(item)">{{item._courseEntry.name}}</td>
+                        <td ng-click="vm.viewTaskEntry(item)">{{item._student._user.firstName}} {{item._student._user.lastName}}</td>
+                        <td ng-click="vm.viewTaskEntry(item)">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                         <td>
                           <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteTaskEntry(item._id)">Видалити</button>
                         </td>

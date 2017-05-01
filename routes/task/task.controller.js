@@ -12,6 +12,7 @@ module.exports.getWorks = getWorks;
 
 function getAll(req, res) {
 	Task.find()
+	.populate('_course')
 	.exec(function (err, courses) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find tasks ' + err});
@@ -22,7 +23,9 @@ function getAll(req, res) {
 }
 
 function get(req, res) {
-	Task.findById(req.params.id, function (err, course) {
+	Task.findById(req.params.id)
+	.populate('_course')
+	.exec(function (err, course) {
 		if (err) {
 			res.json({success: false, message: 'Cannot find task ' + err});
 		} else {

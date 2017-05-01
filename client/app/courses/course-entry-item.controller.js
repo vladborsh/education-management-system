@@ -3,6 +3,7 @@ CourseEntryItemController.$inject = [
   'LecturesService',
   'TasksService',
   'StudentsService',
+  'StudentsFactory',
   'Modal',
   'CoursesFactory',
   'LecturesFactory',
@@ -18,6 +19,7 @@ function CourseEntryItemController(
   LecturesService,
   TasksService, 
   StudentsService,
+  StudentsFactory,
   Modal,
   CoursesFactory,
   LecturesFactory,
@@ -34,6 +36,7 @@ function CourseEntryItemController(
 
   vm.util = {
     tasksFct : TasksFactory.getModel(),
+    studentsFct : StudentsFactory.getModel()
   }
 
   vm.init = function() {
@@ -65,7 +68,7 @@ function CourseEntryItemController(
   }
 
   vm.createTaskEntry = function () {
-    vm.model.lectureCoursePreset = true;
+    vm.util.studentsFct.coursePreset = true;
     var modal = Modal.get(
       'app/tasks/create-task-entry-modal.html',
       'NewTaskEntryController', 
@@ -78,6 +81,7 @@ function CourseEntryItemController(
       .then(
         function (data) {
           console.log(data.data)
+          vm.util.studentsFct.coursePreset = false;
           vm.model.courseEntryItemTaskEntries = data.data.items;
         }
       )
@@ -85,7 +89,7 @@ function CourseEntryItemController(
   }
 
   vm.createStudent = function () {
-    vm.model.lectureCoursePreset = true;
+    vm.util.studentsFct.coursePreset = true;
     var modal = Modal.get(
       'app/students/create-student-modal.html',
       'NewStudentController', 
@@ -98,6 +102,7 @@ function CourseEntryItemController(
       .then(
         function (data) {
           console.log(data.data)
+          vm.util.studentsFct.coursePreset = false;
           vm.model.courseEntryItemStudents = data.data.items;
         }
       )

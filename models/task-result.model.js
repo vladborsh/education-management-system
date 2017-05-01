@@ -8,11 +8,11 @@ var TaskResultSchema = new Schema({
 	_student : {
 		type : Schema.Types.ObjectId, ref: 'Student', required: true
 	},
-	comment : {
-		type : String
-	},
 	createdDate : {
 		type : Date
+	},
+	completed : {
+		type : Boolean
 	},
 	mark : {
 		type : Number

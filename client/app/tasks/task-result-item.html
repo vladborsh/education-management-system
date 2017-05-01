@@ -4,24 +4,34 @@
       <div class="panel-heading">
         <button type="submit" class="btn btn-default"
           ui-sref="content.tasks">Усі завдання</button>
+        <button type="submit" class="btn btn-default" ng-if="vm.model.lastTaskEntry"
+          ui-sref="content.task_e_item({ id: vm.model.lastTaskEntry })">Переглянути завдання</button>
+
         <h2>{{vm.model.taskResultItem._taskEntry._task.name}}</h2>
+        <p ng-if="!vm.model.viewTaskResult">Виконання</p>
         <p>{{vm.model.taskResultItem._taskEntry._task.description}}</p>
       </div>
       <!-- Panel body -->
       <div class="panel-body">
         <!-- Tests -->
-        <h3>Тести</h3>
+        <h3 ng-if="!vm.model.viewTaskResult">Тести</h3>
+        <h3 ng-if="vm.model.viewTaskResult">Відповіді на тести</h3>
         <div ng-repeat="item in vm.model.taskTests">
           <div class="row">
             <div class="col-md-12">
               <form novalidate="true" name="testResult{{$index}}">
                 <div ng-repeat="q in item.questions" style="margin-bottom: 10px;">
                   <div><b>{{q.question}}</b></div>
-                  <div ng-repeat="a in q.answers track by $index">
+                  <div ng-repeat="a in q.answers track by $index" ng-if="!vm.model.viewTaskResult">
                     <label>
-                      <input type="radio" ng-model="vm.model.testResults[$parent.$parent.$index].answers[$parent.$index]" ng-value="$index">
+                      <input type="radio" 
+                        ng-model="vm.model.testResults[$parent.$parent.$parent.$index].answers[$parent.$parent.$index]" 
+                        ng-value="$index">
                       {{a}}
                     </label><br/>
+                  </div>
+                  <div ng-if="vm.model.viewTaskResult">
+                    <p>{{$parent.$index+1}}) {{q.answers[vm.model.taskTestResults[$parent.$parent.$index].answers[$parent.$index]]}}</p>
                   </div>
                 </div>
               </form>
@@ -33,23 +43,30 @@
 
         <!-- Works -->
         <hr>
-        <h3>Роботи на виконання</h3>
+        <h3 ng-if="!vm.model.viewTaskResult">Роботи на виконання</h3>
+        <h3 ng-if="vm.model.viewTaskResult">Виконані роботи</h3>
         <div ng-repeat="item in vm.model.taskWorks">
           <div class="row">
             <div class="col-md-12">
               <div ng-bind-html="item.body"></div>
-              <div text-angular="text-angular" name="body" ng-model="vm.model.workResults[$index].body"></div>
+              <div ng-if="!vm.model.viewTaskResult" text-angular="text-angular" name="body" ng-model="vm.model.workResults[$index].body"></div>
+              <div ng-if="vm.model.viewTaskResult">
+                <hr>
+                <div ng-bind-html="vm.model.taskWorkResults[$index].body"></div>
+              </div>
             </div>
           </div>
           <hr ng-if="$index != vm.model.taskWorks.length-1">
         </div>
         <!-- Works (END) -->
 
-    </div>
-    <div class="panel-footer">
-      <button type="submit" class="btn btn-primary"
-        ng-click="vm.makeAnswer()">Завершити
-      </button>
+      </div>
+      <div class="panel-footer">
+        <button type="submit" class="btn btn-primary"
+          ng-click="vm.makeAnswer()"
+          ng-if="!vm.model.viewTaskResult">Завершити
+        </button>
+      </div>
     </div>
   </div>
 </div>

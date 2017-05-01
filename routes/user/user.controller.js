@@ -1,8 +1,10 @@
 var User = require('../../models/user.model');
+var Student = require('../../models/student.model');
 var jwt = require('jsonwebtoken');
 var secret = require('../../config/dev.config').secret;
 
 module.exports.getAllUsers = getAllUsers;
+module.exports.get = get;
 module.exports.getInfo = getInfo;
 module.exports.signup = signup;
 module.exports.remove = remove;
@@ -11,6 +13,7 @@ module.exports.role = role;
 module.exports.getAdmins = getAdmins;
 module.exports.getTeachers = getTeachers;
 module.exports.getStudents = getStudents;
+module.exports.getStudentItemsForUser = getStudentItemsForUser;
 
 
 function getAllUsers(req, res) {
@@ -19,11 +22,32 @@ function getAllUsers(req, res) {
 	});
 }
 
+function get(req, res) {
+	var userData = req.decoded;
+	User
+	.findOne({ _id: req.params.id })
+	.select('email password role firstName lastName _id')
+	.exec(function (err, user) {
+		if (err) throw err;
+		if (!user) {
+			res.json({success:false, message: 'Could not authenticate user'});
+		} else {
+			res.json({
+				role: user.role,
+				id: user._id,
+				email: user.email,
+				username: user.firstName + ' ' + user.lastName
+			});
+		}
+	})
+}
+
 function signup(req,res) {
 	var user = new User(req.body);
 	if (!user.role) {
 		user.role = 'Student';
 	}
+	user.createdDate = Date.now();
 	User.find(function (err, users) {
 		if (users.length == 0) {
 			user.role = 'Admin';
@@ -125,8 +149,8 @@ function getStudents(req, res) {
 function getInfo (req, res) {
 	var userData = req.decoded;
 	User
-	.findOne({ _id: userData._id })
-	.select('email password role firstName lastName _id')
+	.findOne({ _id: userData.id })
+	.select('role firstName lastName _id')
 	.exec(function (err, user) {
 		if (err) throw err;
 		if (!user) {
@@ -137,6 +161,22 @@ function getInfo (req, res) {
 				id: user._id,
 				username: user.firstName + ' ' + user.lastName
 			});
+		}
+	})
+}
+
+function getStudentItemsForUser (req, res) {
+	Student
+	.find({_user : req.params.id})
+	.populate({
+		path : '_courseEntry',
+		populate : { path: '_course' }
+	}) 
+	.exec( function (err, courses) {
+		if (err) {
+			res.json({success: false, message: 'Cannot find courses ' + err});
+		} else {
+			res.json(courses);
 		}
 	})
 }

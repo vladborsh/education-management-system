@@ -11,5 +11,7 @@ router.get('/admins', auth.isAuthenticated, controller.getAdmins);
 router.get('/teachers', auth.isAuthenticated, controller.getTeachers);
 router.get('/students', auth.isAuthenticated, controller.getStudents);
 router.get('/info', auth.isAuthenticated, controller.getInfo);
+router.get('/:id', auth.isAuthenticated, controller.get);
+router.get('/:id/student_items', auth.isAuthenticated, controller.getStudentItemsForUser);
 
 module.exports = router;

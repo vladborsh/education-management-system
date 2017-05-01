@@ -7,14 +7,14 @@
       </div>
       <!-- Panel body -->
       <div class="panel-body">
-        <form class="form-inline pull-right">
-          <div class="form-group">
-            <div class="col-md-12 pad-right-rem">
-              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.lectureSearch">
-              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-md-12">
+              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.searchStudent">
+              <span class="glyphicon glyphicon-search form-control-feedback" style="right: 15px;"></span>
             </div>
           </div>
-        </form>
+        </div>
         <div class="row">
           <div class="col-md-12">
             <!-- Lectures -->
@@ -28,7 +28,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="item in vm.model.studentUsers" style="cursor:pointer">
+                  <tr ng-repeat="item in vm.model.studentUsers | filter : vm.model.searchStudent" style="cursor:pointer">
                     <td ng-click="vm.viewStudent(item)">{{item.firstName}} {{item.lastName}}</td>
                     <td ng-click="vm.viewStudent(item)">{{item.email}}</td>
                     <td>
@@ -43,9 +43,6 @@
         </div>
       </div>
       <!-- Panel body (end) -->
-      <div class="panel-footer">
-        <button type="submit" class="btn btn-primary" ng-click="vm.createStudent()">Назначити студента на курс</button>
-      </div>
     </div>
   </div>
 </div>

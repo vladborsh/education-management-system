@@ -38,8 +38,13 @@ function get(req, res) {
 
 function create(req, res) {
 	var student = new Student(req.body);
-	Student.find({ _courseEntry : req.body._courseEntry, _student : req.body._student}, function (err, items) {
+	Student.find({ 
+		_courseEntry : req.body._courseEntry, 
+		_user : req.body._user
+	})
+	.exec( function (err, items) {
 		if (items.length == 0) {
+			student.createdDate = Date.now();
 			student.save(function (err) {
 				if (err) {
 					res.json({success: false, message: 'Cannot create student' + err});
@@ -76,7 +81,7 @@ function remove (req, res) {
 
 function getTasks (req, res) {
 	TaskEntry
-	.find({forStudents : req.params.id})
+	.find({ _student : req.params.id})
 	.populate('_task')
 	.exec(function(err, items) {
 		if (err) {

@@ -19,6 +19,9 @@ var UserSchema = new Schema({
 	},
 	role: { 
 		type: String, enum: roles
+	},
+	createdDate : {
+		type: Date
 	}
 });
 

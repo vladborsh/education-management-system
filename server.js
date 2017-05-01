@@ -7,6 +7,7 @@ var express  = require('express'),
   port       = process.env.PORT || 3000,
   router     = express.Router(),
   config     = require('./config/dev.config')
+  favicon    = require('serve-favicon')
 
 mongoose.connect(config.database, function (err) {
 	if (err) {
@@ -18,7 +19,9 @@ mongoose.connect(config.database, function (err) {
 
 app.use(morgan('dev'));
 
-app.use(express.static(path.join(__dirname + '/client')));
+app.use(express.static(path.join(__dirname + '/client'))); /**/
+
+app.use(favicon(path.join(__dirname, 'client', 'favicon.png')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

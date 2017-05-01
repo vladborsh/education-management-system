@@ -1,0 +1,100 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <button type="submit" class="btn btn-default" 
+          ui-sref="content.students">Усі студенти</button>
+        <h2>{{vm.model.studentItem.firstName}} {{vm.model.studentItem.lastName}}</h2>
+      </div>
+      <!-- Panel body -->
+      <div class="panel-body">
+        <p><b>E-mail</b> : {{vm.model.studentItem.email}}</p>
+        <p><b>Роль</b> : {{vm.model.studentItem.role}}</p>
+        <hr>
+        <uib-tabset >
+          <uib-tab>
+            <uib-tab-heading>
+              Записаний на курси
+            </uib-tab-heading>
+            <!-- Course Entries -->
+            <br>
+            <small class="help-block" ng-show="vm.model.studentCourseEntries.length == 0">Початих курсів назараз немає</small>
+            <table class="table table-hover" ng-show="vm.model.studentCourseEntries.length > 0">
+              <thead>
+                <tr>
+                  <th>Головний курс</th>
+                  <th>Поток</th>
+                  <th>Записаний</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in vm.model.studentCourseEntries" style="cursor:pointer">
+                  <td ui-sref="content.course_e_item({id : item._courseEntry._id})">{{item._courseEntry._course.name}}</td>
+                  <td ui-sref="content.course_e_item({id : item._courseEntry._id})">{{item._courseEntry.name}}</td>
+                  <td ui-sref="content.course_e_item({id : item._courseEntry._id})">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Course Entries (END) -->
+          </uib-tab>
+          <uib-tab>
+            <uib-tab-heading>
+              Має завдання
+            </uib-tab-heading>
+            <!-- Task Entries -->
+            <br>
+            <small class="help-block" ng-show="vm.model.studentTaskEntries.length == 0">Завдань немає</small>
+            <table class="table table-hover" ng-show="vm.model.studentTaskEntries.length > 0">
+              <thead>
+                <tr>
+                  <th>Назва</th>
+                  <th>Опис</th>
+                  <th>Курс</th>
+                  <th>Видано</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in vm.model.studentTaskEntries" style="cursor:pointer">
+                  <td ui-sref="content.task_e_item({id : item._id})">{{item._task.name}}</td>
+                  <td ui-sref="content.task_e_item({id : item._id})">{{item._task.description}}</td>
+                  <td ui-sref="content.task_e_item({id : item._id})">{{item._courseEntry.name}}</td>
+                  <td ui-sref="content.task_e_item({id : item._id})">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Task Entries (END) -->
+          </uib-tab>
+          <uib-tab>
+            <uib-tab-heading>
+              Виконав завдання
+            </uib-tab-heading>
+            <!-- Task Entries -->
+            <br>
+            <small class="help-block" ng-show="vm.model.studentTaskResults.length == 0">Виконаних завдань немає</small>
+            <table class="table table-hover" ng-show="vm.model.studentTaskResults.length > 0">
+              <thead>
+                <tr>
+                  <th>Назва</th>
+                  <th>Опис</th>
+                  <th>Виконано</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in vm.model.studentTaskResults" style="cursor:pointer">
+                  <td ui-sref="content.task_result({id : item._id})">{{item._taskEntry._task.name}}</td>
+                  <td ui-sref="content.task_e_item({id : item._id})">{{item._taskEntry._task.description}}</td>
+                  <td ui-sref="content.task_result({id : item._id})">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- Task Entries (END) -->
+          </uib-tab>
+        </uib-tabset>
+      </div>
+      <div class="panel-footer">
+        <button type="button" class="btn btn-primary" ng-click="vm.createStudent()">Назначити на курс</button>
+        <button type="button" class="btn btn-primary" ng-click="vm.createTest()">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>

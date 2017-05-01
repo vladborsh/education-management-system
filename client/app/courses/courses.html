@@ -10,11 +10,11 @@
         <form class="form-inline pull-right">
           <div class="form-group">
             <div class="col-md-12 pad-right-rem">
-              <input type="text" class="form-control" placeholder="Пошук">
+              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.serachCourse">
               <span class="glyphicon glyphicon-search form-control-feedback"></span>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary" ng-click="vm.createNewCourseEntry()">Почати новий</button>
+          <button type="submit" class="btn btn-primary" ng-click="vm.createNewCourseEntry()">Почати</button>
         </form>
         <div>
           <uib-tabset >
@@ -26,7 +26,7 @@
                 <div class="col-md-12">
                   <h4>Каталог усіх можливих кусів</h4>
                   <p>
-                    Данний каталог складає спсок усіх доступних курсів у системі. Список відсортований за обрним фільтром. Додавати курси у каталог можуть лише користувачі із <a href="">відповідними правами</a>. Якщо ви бажаєте додавати нові курси у каталог але не маєте цієї можлевості зверніться до адміністратора
+                    Данний каталог складає спсок усіх доступних курсів у системі. 
                   </p>
                   <small class="help-block" ng-show="vm.model.courses.length == 0">Курсів назараз немає</small>
                   <div class="table-responsive">
@@ -39,7 +39,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr ng-repeat="item in vm.model.courses" style="cursor:pointer">
+                        <tr ng-repeat="item in vm.model.courses | filter : vm.model.serachCourse" style="cursor:pointer">
                           <td ng-click="vm.viewCourse(item)">{{item.name}}</td>
                           <td ng-click="vm.viewCourse(item)">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                           <td>
@@ -60,7 +60,7 @@
                 <div class="col-md-12">
                   <h4>Діючі курси</h4>
                   <p>
-                    Список складають усі діючі курси на данний момент часу. На ці курси є можливість записатись для студентів, а також переглянути інформацію про їх успішність, скаладені іспити та отримані завдання
+                    Список складають усі діючі курси на данний момент часу. 
                   </p>
                   <small class="help-block" ng-show="vm.model.courseEntries.length == 0">Початих курсів назараз немає</small>
                   <table class="table table-hover" ng-show="vm.model.courseEntries.length > 0">
@@ -72,7 +72,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="item in vm.model.courseEntries" style="cursor:pointer">
+                      <tr ng-repeat="item in vm.model.courseEntries | filter : vm.model.serachCourse" style="cursor:pointer">
                         <td ng-click="vm.viewCourseEntry(item)">{{item.name}}</td>
                         <td ng-click="vm.viewCourseEntry(item)">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                         <td>
@@ -92,7 +92,7 @@
                 <div class="col-md-12">
                   <h4>Ваші курси</h4>
                   <p>
-                    Даний список складають курси в котрих ви є викладачем. Ви маєте можливість запрошувати студентів до цих курсів, створювати для даних курсів завдання, а також перевіряти успішність ваших студентів
+                    Даний список складають курси в котрих ви є викладачем. 
                   </p>
                   <small class="help-block" ng-show="vm.model.myCourses.length == 0">Ваших курсів назараз немає</small>
                   <table class="table table-hover" ng-show="vm.model.myCourses.length > 0">
@@ -104,7 +104,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr ng-repeat="item in vm.model.myCourses"  style="cursor:pointer">
+                      <tr ng-repeat="item in vm.model.myCourses | filter : vm.model.serachCourse"  style="cursor:pointer">
                         <td ng-click="vm.viewCourseEntry(item)">{{item.name}}</td>
                         <td ng-click="vm.viewCourseEntry(item)">{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                         <td>
@@ -122,7 +122,7 @@
       </div>
       <!-- Panel body (end) -->
       <div class="panel-footer">
-        <button type="submit" class="btn btn-primary" ng-click="vm.createNewCourse()">Створити новий</button>
+        <button type="submit" class="btn btn-primary" ng-click="vm.createNewCourse()">Створити курс</button>
       </div>
     </div>
   </div>

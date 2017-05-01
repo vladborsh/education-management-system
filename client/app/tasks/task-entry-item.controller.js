@@ -42,6 +42,7 @@ function TaskEntryItemController (
   vm.init();
 
   vm.createTaskResult = function () {
+    vm.model.lastTaskEntry = $stateParams.id;
     TasksService.createTaskResult({
       _taskEntry : vm.model.taskEntryItem._id,
       _student : vm.model.taskEntryItem._student._id
@@ -51,6 +52,11 @@ function TaskEntryItemController (
         $state.go('content.task_result', {id : data.data.task_result._id});
       }
     )
+  }
+
+  vm.viewTaskResult = function (item) {
+    vm.model.lastTaskEntry = $stateParams.id;
+    $state.go('content.task_result', {id : item._id});
   }
 
   vm.deleteTaskResult = function (id) {

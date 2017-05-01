@@ -2,16 +2,32 @@
   <h3 class="modal-title">Додати студента</h3>
 </div>
 <div class="modal-body">
-  <span uib-dropdown style="width:100%">
-    <input type="text" class="form-control" name="user" 
-      ng-model="mod.util.user"
-      uib-dropdown-toggle>
-    <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
-      <li ng-repeat="user in mod.util.users | filter : mod.util.user">
-        <a href ng-click="mod.setUser(user)">{{user.firstName}} {{user.lastName}}</a>
-      </li>
-    </ul>
-  </span>
+    <div class="form-group">
+      <span uib-dropdown style="width:100%" ng-if="!mod.util.studentsFct.coursePreset">
+        <label>Курс</label>
+        <input type="text" class="form-control" name="user" 
+          ng-model="mod.util.course"
+          uib-dropdown-toggle>
+        <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
+          <li ng-repeat="course in mod.util.courseEntries | filter : mod.util.course">
+            <a href ng-click="mod.setCourse(course)">{{course.name}}</a>
+          </li>
+        </ul>
+      </span>
+    </div>
+    <div class="form-group">
+      <span uib-dropdown style="width:100%" ng-if="!mod.util.studentsFct.userPreset">
+        <label>Студент</label>
+        <input type="text" class="form-control" name="user" 
+          ng-model="mod.util.user"
+          uib-dropdown-toggle>
+        <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
+          <li ng-repeat="user in mod.util.users | filter : mod.util.user">
+            <a href ng-click="mod.setUser(user)">{{user.firstName}} {{user.lastName}}</a>
+          </li>
+        </ul>
+      </span>
+  </div>
   <div uib-alert ng-repeat="alert in mod.util.alerts" ng-class="'alert-' + (alert.type || 'warning')" close="mod.closeAlert($index)">{{alert.msg}}</div>
 </div>
 <div class="modal-footer">

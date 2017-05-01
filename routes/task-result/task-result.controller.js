@@ -63,7 +63,7 @@ function create(req, res) {
 }
 
 function update(req, res) {
-	TaskResult.findByIdAndUpdate(req.params.id, req.body, function(arr) {
+	TaskResult.findByIdAndUpdate(req.params.id, req.body, function(err) {
 		if (err) {
 			res.json({success: false, message: 'Cannot update task result' + err});
 		} else {

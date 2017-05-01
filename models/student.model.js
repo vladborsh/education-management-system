@@ -7,7 +7,10 @@ var StudentSchema = new Schema({
 	},
 	_user : {
 		type : Schema.Types.ObjectId, ref: 'User', required: true,	
-	}
+	},
+  createdDate : {
+    type : Date
+  }
 });
 
 module.exports = mongoose.model('Student', StudentSchema);

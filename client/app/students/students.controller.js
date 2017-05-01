@@ -27,7 +27,7 @@ function StudentsController(
   vm.init();
 
   vm.viewStudent = function (item) {
-    $state.go('content.user_item', {id : item._id});
+    $state.go('content.student_item', {id : item._id});
   }
 
   vm.createStudent = function () {

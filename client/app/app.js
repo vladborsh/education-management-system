@@ -58,7 +58,8 @@ angular.module('App', [
 .service('StudentsService', StudentsService)
 .controller('StudentsController', StudentsController)
 .controller('NewStudentController', NewStudentController)
+.controller('StudentItemController', StudentItemController)
 
-
-.service('CalendarService', CalendarService)
-.controller('CalendarController', CalendarController)
+.factory('UsersFactory', UsersFactory)
+.service('UsersService', UsersService)
+.controller('UsersController', UsersController)

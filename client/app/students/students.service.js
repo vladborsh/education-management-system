@@ -10,7 +10,19 @@ function StudentsService($q, $http, Remote) {
   }
 
   this.delete = function (id) {
-    return Remote.do('student/' + id, 'DELETE', id);
+    return Remote.do('student/' + id, 'DELETE', {});
+  }
+
+  this.getTaskEntries = function (id) {
+    return Remote.do('student/' + id + '/tasks', 'GET', {});
+  }
+
+  this.getTaskResults = function (id) {
+    return Remote.do('student/' + id + '/results', 'GET', {});
+  }
+
+  this.getStudentItems = function (id) {
+    return Remote.do('user/' + id + '/student_items', 'GET', {});
   }
   
 }
