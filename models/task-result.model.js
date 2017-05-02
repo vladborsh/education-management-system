@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var TestResult = require('../models/test-result.model').test;
+var TestResult = require('../models/test-result.model');
 var WorkResult = require('../models/work-result.model');
 
 var TaskResultSchema = new Schema({
@@ -21,9 +21,9 @@ var TaskResultSchema = new Schema({
 	}
 });
 
-TaskResultSchema.post('remove', function(next) {
-  TestResult.remove({ _taskResult: this._id }, function () {
-    WorkResult.remove({ _taskResult: this._id }, next);
+TaskResultSchema.post('remove', function(doc, next) {
+  TestResult.remove({ _taskResult: doc._id }, function (err, items) {
+    WorkResult.remove({ _taskResult: doc._id }, next);
   });
 });
 

@@ -10,7 +10,6 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-md-6">
-            <div ng-if="!vm.model.viewTaskResult">Виконання</div>
             <div>
               <label>Завдання</label>:
               <a ui-sref="content.task_e_item({id:vm.model.taskResultItem._taskEntry._id})" class="underline">
@@ -24,8 +23,9 @@
               </a>
             </div>
             <div>{{vm.model.taskResultItem._taskEntry._task.description}}</div>
+            <div ng-if="!vm.model.viewTaskResult"><h4>Виконання</h4></div>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" ng-if="vm.model.viewTaskResult">
             <div class="form-group">
               <label class="control-label col-sm-2">
                 Оцінка

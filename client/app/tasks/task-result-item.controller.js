@@ -96,7 +96,7 @@ function TaskResultItemController (
     ).then(
       function (data) {
         console.log(data.data)
-        $state.go('content.task_e_item', {id : vm.model.taskResultItem._taskEntry})
+        $state.go('content.task_e_item', {id : vm.model.taskResultItem._taskEntry._id})
       }
     )
   }
