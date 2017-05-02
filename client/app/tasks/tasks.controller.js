@@ -38,7 +38,9 @@ function TasksController(
         console.log(data.data)
         vm.model.taskEntries = data.data;
         vm.model.myTasks = _.filter(vm.model.taskEntries, function (t) {
-          return t._courseEntry._lector._id == User.get('user_id')
+          if (t._courseEntry && t._courseEntry._lector)
+            return t._courseEntry._lector._id == User.get('user_id')
+          return false;
         });
       }
     )

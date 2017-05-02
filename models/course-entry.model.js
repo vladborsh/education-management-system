@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var TaskEntry = require('../models/task-entry.model');
+var Student = require('../models/student.model');
 
 var CourseEntrySchema = new Schema({
 	_course : {
@@ -35,6 +37,16 @@ var CourseEntrySchema = new Schema({
 	deactivateReson : {
 		type: String
 	}
+});
+
+CourseEntrySchema.post('remove', function(doc, next) {
+	console.log('CourseEntry pre remove')
+  TaskEntry.remove({_courseEntry : doc.id}, function(err, items) {
+		Student.remove({TaskEntry : doc.id}, function(err, items) {
+			next()
+		})
+	})
+	
 });
 
 module.exports = mongoose.model('CourseEntry', CourseEntrySchema);

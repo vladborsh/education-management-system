@@ -94,10 +94,11 @@ function update(req, res) {
 }
 
 function remove (req, res) {
-	TaskEntry.findByIdAndRemove(req.params.id, function (err) {
+	TaskEntry.findById(req.params.id, function (err, item) {
 		if (err) {
 			res.json({success: false, message: 'Cannot remove task ' + err});
 		} else {
+			item.remove()
 			res.json({success: true, items: 'Task removed'});
 		}
 	})

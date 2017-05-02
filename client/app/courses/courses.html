@@ -24,6 +24,7 @@
               </uib-tab-heading>
               <div class="row">
                 <div class="col-md-12">
+                  <br>
                   <h4>Каталог усіх можливих кусів</h4>
                   <p>
                     Данний каталог складає спсок усіх доступних курсів у системі. 
@@ -54,13 +55,14 @@
             </uib-tab>
             <uib-tab>
               <uib-tab-heading>
-                Діючі
+                Потоки
               </uib-tab-heading>
               <div class="row">
                 <div class="col-md-12">
-                  <h4>Діючі курси</h4>
+                  <br>
+                  <h4>Список усіх потоків</h4>
                   <p>
-                    Список складають усі діючі курси на данний момент часу. 
+                    Список складають усі потоки на данний момент часу. 
                   </p>
                   <small class="help-block" ng-show="vm.model.courseEntries.length == 0">Початих курсів назараз немає</small>
                   <table class="table table-hover" ng-show="vm.model.courseEntries.length > 0">
@@ -92,9 +94,10 @@
               </uib-tab-heading>
               <div class="row">
                 <div class="col-md-12">
-                  <h4>Ваші курси</h4>
+                  <br>
+                  <h4>Ваші потоки</h4>
                   <p>
-                    Даний список складають курси в котрих ви є викладачем. 
+                    Даний список складають потоки в котрих ви є викладачем. 
                   </p>
                   <small class="help-block" ng-show="vm.model.myCourses.length == 0">Ваших курсів назараз немає</small>
                   <table class="table table-hover" ng-show="vm.model.myCourses.length > 0">

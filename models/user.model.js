@@ -1,8 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
+var Student = require('../models/student.model');
 
 var roles = ['Admin', 'Teacher', 'Student'];
+
 
 var UserSchema = new Schema({
 	password: {
@@ -32,6 +34,10 @@ UserSchema.pre('save', function (next) {
 		user.password = hash;
 		next();
 	});
+});
+
+UserSchema.post('remove', function(doc, next) {
+  Student.remove({ _user: doc._id }, next);
 });
 
 UserSchema.methods.comparePassword = function (password) {

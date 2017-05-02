@@ -82,10 +82,11 @@ function signup(req,res) {
 }
 
 function remove(req, res) {
-	User.findByIdAndRemove(req.params.id, function (err) {
+	User.findById(req.params.id, function (err, item) {
 		if (err) {
 			res.json({success: false, message: 'Cannot remove ' + err});
 		} else {
+			item.remove();
 			res.json({success: true, items: 'User removed'});
 		}
 	})

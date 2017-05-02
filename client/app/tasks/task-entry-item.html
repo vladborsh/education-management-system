@@ -22,7 +22,9 @@
             <uib-tab-heading>
               Завдання
             </uib-tab-heading>
-            <!-- Tests -->
+            <br>
+            <label>Назва</label>:
+            <a ui-sref="content.task_item({id:vm.model.taskEntryItem._task._id})" class="underline">{{vm.model.taskEntryItem._task.name}}</a>
             <h3>Тести</h3>
             <div ng-repeat="item in vm.model.taskTests">
               <hr>
@@ -35,9 +37,6 @@
                 </div>
               </div>
             </div>
-            <!-- Tests (END) -->
-
-            <!-- Works -->
             <hr>
             <h3>Роботи</h3>
             <div ng-repeat="item in vm.model.taskWorks">
@@ -48,7 +47,6 @@
                 </div>
               </div>
             </div>
-            <!-- Works (END) -->
           </uib-tab>
           <!-- Task info (END) -->
           <!-- Task results-->
@@ -56,6 +54,7 @@
             <uib-tab-heading>
               Виконання
             </uib-tab-heading>
+            <br>
             <div class="row">
               <div class="col-md-12">
                 <table class="table table-hover" ng-show="vm.model.taskEntryTaskResults.length > 0">

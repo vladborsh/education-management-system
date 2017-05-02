@@ -9,12 +9,16 @@
 					<!-- Course entries -->
           <uib-tab>
             <uib-tab-heading>
-              Мої курси
+              Мої потоки
             </uib-tab-heading>
             <br>
             <div class="row">
               <div class="col-md-12">
-                <small class="help-block" ng-show="vm.model.courseEntries.length == 0">Початих курсів назараз немає</small>
+                <h4>Ваші потоки</h4>
+                <p>
+                  Даний список складають потоки в котрих ви є викладачем. 
+                </p>
+                <small class="help-block" ng-show="vm.model.courseEntries.length == 0">Початих потоків назараз немає</small>
                 <table class="table table-hover" ng-show="vm.model.courseEntries.length > 0">
                   <thead>
                     <tr>
@@ -47,6 +51,10 @@
             <br>
             <div class="row">
               <div class="col-md-12">
+                <h4>Ваші завдання</h4>
+                <p>
+                  Даний список складають видані вами для студентів завдання 
+                </p>
                 <small class="help-block" ng-show="vm.model.taskEntries.length == 0">Завдань немає</small>
                 <table class="table table-hover" ng-show="vm.model.taskEntries.length > 0">
                   <thead>
@@ -82,6 +90,10 @@
             <br>
             <div class="row">
               <div class="col-md-12">
+                <h4>Ваші завдання</h4>
+                <p>
+                  Даний список усі студенти на ваших курсах 
+                </p>
                 <small class="help-block" ng-show="vm.model.students.length == 0">Студентів немає</small>
                 <table class="table table-hover" ng-show="vm.model.students.length > 0">
                   <thead>

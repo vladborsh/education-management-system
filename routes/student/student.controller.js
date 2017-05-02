@@ -70,10 +70,11 @@ function update(req, res) {
 }
 
 function remove (req, res) {
-	Student.findByIdAndRemove(req.params.id, function (err) {
+	Student.findById(req.params.id, function (err, item) {
 		if (err) {
 			res.json({success: false, message: 'Cannot remove student ' + err});
 		} else {
+			item.remove()
 			res.json({success: true, items: 'Student removed'});
 		}
 	})

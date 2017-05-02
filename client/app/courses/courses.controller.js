@@ -51,6 +51,19 @@ function CoursesController(
       'NewCourseEntryController', 
       {}
     );
+    modal.result.then(update);
+    modal.closed.then(update);
+    function update() {
+      CoursesService.getCourseEntries()
+      .then(
+        function (data) {
+          vm.model.courseEntries = data.data;
+          vm.model.myCourses = _.filter(vm.model.courseEntries, function (c) {
+            return c._lector._id == User.get('user_id')
+          });
+        }
+      )
+    }
   };
 
   vm.createNewCourse = function() {
@@ -59,6 +72,16 @@ function CoursesController(
       'NewCourseController', 
       {}
     );
+    modal.result.then(update);
+    modal.closed.then(update);
+    function update() {
+      CoursesService.getCourses()
+      .then(
+        function (data) {
+          vm.model.courses = data.data;
+        }
+      )
+    }
   }
 
   vm.deleteCourse = function(id) {
@@ -68,6 +91,12 @@ function CoursesController(
         if(data.data.success) {
           _.remove(vm.model.courses, function(item) {
             return item._id == id;
+          });
+           _.remove(vm.model.courseEntries, function(item) {
+            return item._course._id == id;
+          });
+           _.remove(vm.model.myCourses, function(item) {
+            return item._course._id == id;
           });
         }
       },
@@ -81,13 +110,14 @@ function CoursesController(
     CoursesService.deleteCourseEntry(id)
     .then(
       function( data ) {
-        _.remove(vm.model.courseEntries, function(item) {
-          return item._id == id;
-        });
-        _.remove(vm.model.myCourses, function(item) {
-          return item._id == id;
-        });
-        console.log(data);
+        if(data.data.success) {
+          _.remove(vm.model.courseEntries, function(item) {
+            return item._id == id;
+          });
+          _.remove(vm.model.myCourses, function(item) {
+            return item._id == id;
+          });
+        }
       },
       function( err ) {
         console.log(err);

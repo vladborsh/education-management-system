@@ -18,7 +18,7 @@ function NewTestController(
     questions : [],
     newQuestion : {
       question : '',
-      correctAnswer : '',
+      correctAnswer : 0,
       answers : ['', '']
     }
   }
@@ -29,11 +29,15 @@ function NewTestController(
     }
   }
 
+  vm.selectTrueAnswer = function(i) {
+    vm.model.newQuestion.correctAnswer = i;
+  }
+
   vm.addQuestions = function () {
     vm.model.questions.push(vm.model.newQuestion);
     vm.model.newQuestion = {
       question : '',
-      correctAnswer : '',
+      correctAnswer : 0,
       answers : ['', '']
     }
   }
@@ -44,6 +48,9 @@ function NewTestController(
 
   vm.removeAnswer = function (index) {
     vm.model.newQuestion.answers.splice(index, 1);
+    if (vm.model.newQuestion.correctAnswer == index) {
+      vm.model.newQuestion.correctAnswer = 0;
+    }
   }
 
   vm.saveTest = function () {

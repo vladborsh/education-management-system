@@ -1,5 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var CourseEntry = require('../models/course-entry.model');
+var Task = require('../models/task.model');
+var Lecture = require('../models/lecture.model');
 
 var CourseSchema = new Schema({
 	_author : {
@@ -30,5 +33,17 @@ var CourseSchema = new Schema({
 		type: String
 	}
 });
+
+CourseSchema.post('remove', function (doc, next) {
+	CourseEntry.remove({_course : doc.id}, function(err, items) {
+		Lecture.remove({_course : doc.id}, function(err, items) {
+			Task.remove({_course : doc.id}, function(err, items) {
+				next()
+			})
+		})
+	})
+	
+})
+
 
 module.exports = mongoose.model('Course', CourseSchema);

@@ -67,10 +67,11 @@ function update(req, res) {
 }
 
 function remove (req, res) {
-	Course.findByIdAndRemove(req.params.id, function (err) {
+	Course.findById(req.params.id, function (err, item) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо видалити курс: ' + err});
 		} else {
+			item.remove();
 			res.json({success: true, items: 'Курс успішно видалений'});
 		}
 	})

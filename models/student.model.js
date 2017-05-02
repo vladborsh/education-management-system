@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var TaskResult = require('../models/task-result.model');
+var TaskEntry = require('../models/task-entry.model');
 
 var StudentSchema = new Schema({
 	_courseEntry : {
@@ -11,6 +13,12 @@ var StudentSchema = new Schema({
   createdDate : {
     type : Date
   }
+});
+
+StudentSchema.post('task', function(doc, next) {
+  TaskResult.remove({ _student: doc._id }, function () {
+    TaskEntry.remove({ _student: doc._id }, next)
+  });
 });
 
 module.exports = mongoose.model('Student', StudentSchema);

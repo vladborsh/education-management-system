@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var TestResult = require('../models/test-result.model').test;
+var WorkResult = require('../models/work-result.model');
 
 var TaskResultSchema = new Schema({
 	_taskEntry : {
@@ -17,6 +19,12 @@ var TaskResultSchema = new Schema({
 	mark : {
 		type : Number
 	}
+});
+
+TaskResultSchema.post('remove', function(next) {
+  TestResult.remove({ _taskResult: this._id }, function () {
+    WorkResult.remove({ _taskResult: this._id }, next);
+  });
 });
 
 module.exports = mongoose.model('TaskResult', TaskResultSchema);
