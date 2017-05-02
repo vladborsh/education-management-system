@@ -23,14 +23,19 @@ angular.module('App', [
 .service('SignUpService', SignUpService)
 .controller('SignUpController', SignUpController)
 
+.factory('SearchFactory', SearchFactory)
+.controller('SearchController', SearchController)
+
 .controller('ForgotPassController', ForgotPassController)
 .controller('WrapContentController', WrapContentController)
 .controller('TopbarController', TopbarController)
 .controller('NavigationController', NavigationController)
 
+.factory('HomeFactory', HomeFactory)
+.controller('HomeController', HomeController)
+
 .factory('CoursesFactory', CoursesFactory)
 .service('CoursesService', CoursesService)
-.controller('HomeController', HomeController)
 .controller('CoursesController', CoursesController)
 .controller('NewCourseEntryController', NewCourseEntryController)
 .controller('NewCourseController', NewCourseController)

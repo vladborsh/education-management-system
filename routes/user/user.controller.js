@@ -45,7 +45,7 @@ function get(req, res) {
 		if (!user) {
 			res.json({success:false, message: 'Could not authenticate user'});
 		} else {
-			res.json(user);
+			res.json(user);/**/
 		}
 	})
 }
@@ -154,8 +154,22 @@ function getTeachers(req, res) {
 }
 
 function getStudents(req, res) {
+	var selector = {
+		role:'Student'
+	}
+	if (req.query.name) {
+		var selector = {
+			'$and' : [ /**/
+				{ role : 'Student' } ,
+				{'$or' : [
+					{firstName : {$regex : new RegExp(".*" + req.query.name + ".*", "i") }},
+					{lastName : {$regex : new RegExp(".*" + req.query.name + ".*", "i") }}
+				]}
+			]
+		}
+	}
 	User
-	.find({role:'Student'})
+	.find(selector)
 	.select('email firstName lastName _id createdDate')
 	.exec(function (err, users) {
 		if (err) throw err;

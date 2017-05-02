@@ -12,7 +12,14 @@ module.exports.getTasks = getTasks;
 module.exports.getStudents = getStudents;
 
 function getAll(req, res) {
-	CourseEntry.find()
+	var selector= {}
+	if (req.query.lector) {
+		selector._lector = req.query.lector;
+	}
+	if (req.query.name) {
+		selector.name = {$regex : new RegExp(".*" + req.query.name + ".*", "i") }
+	}
+	CourseEntry.find(selector)
 	.populate('_lector _course')
 	.exec(function (err, courses) {
 		if (err) {
@@ -106,6 +113,9 @@ function getTasks (req, res) {
 function getStudents (req, res) {
 	Student
 	.find({ _courseEntry : req.params.id})
+	.populate({
+		path: '_user '
+	})
 	.exec(function(err, items) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо вилучити студентів для данного курсу: ' + err});

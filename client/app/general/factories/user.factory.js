@@ -1,20 +1,29 @@
-User.$inject = ['AuthFactory', 'Remote', '$log'];
+User.$inject = ['AuthFactory', 'Remote', '$log', '$q'];
 
-function User(AuthFactory, Remote, $log) {
+function User(AuthFactory, Remote, $log, $q) {
 
-	var model = { }
+	var model = {}
 
-	if (AuthFactory.isLoggedIn()) {
-		Remote.do('user/info', 'GET', {})
-		.then(
-			function (data) {
-				model['username'] = data.data.username;
-				model['user_id'] = data.data.id;
-				model['role'] = data.data.role;
-			}, function (err) {
-				$log.error(err);
-			}
-		);
+	setup ()
+
+	function setup () {
+		var deferred = $q.defer();
+		if (AuthFactory.isLoggedIn()) {
+			Remote.do('user/info', 'GET', {})
+			.then(
+				function (data) {
+					console.log('USER', data.data)
+					model['username'] = data.data.username;
+					model['user_id'] = data.data.id;
+					model['role'] = data.data.role;
+					deferred.resolve();
+				}, function (err) {
+					$log.error(err);
+					deferred.reject(err);
+				}
+			);
+		}
+		return deferred.promise;
 	}
 	
 	return {
@@ -32,7 +41,8 @@ function User(AuthFactory, Remote, $log) {
 		},
 		set : function (key,value) {
 			model[key] = value;
-		}
+		},
+		setup : setup
 	}
 
 }

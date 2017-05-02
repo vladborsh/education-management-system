@@ -4,6 +4,9 @@ function StudentsService($q, $http, Remote) {
 	this.getUsers = function () {
     return Remote.do('user/students', 'GET', {});
   }
+    this.getStudentsByName = function (name) {
+    return Remote.do('user/students?name=' + name, 'GET', {});
+  }
 
   this.saveStudent = function (student) {
     return Remote.do('student/', 'POST', student);

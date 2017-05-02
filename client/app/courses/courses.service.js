@@ -6,6 +6,10 @@ function CoursesService(Remote) {
 		return Remote.do('course', 'GET', {});
 	}
 
+	this.getCoursesByName = function (name) {
+		return Remote.do('course?name=' + name, 'GET', {});
+	}
+
 	this.getCourse = function (id) {
 		return Remote.do('course/' + id, 'GET', {});
 	}
@@ -24,6 +28,14 @@ function CoursesService(Remote) {
 
 	this.getCourseEntries = function () {
 		return Remote.do('course_e', 'GET', {});
+	}
+
+	this.getCourseEntriesByName = function (name) {
+		return Remote.do('course_e?name=' + name, 'GET', {});
+	}
+
+	this.getCourseEntriesByLector = function (lector_id) {
+		return Remote.do('course_e?lector=' + lector_id, 'GET', {});
 	}
 
 	this.getCourseEntry = function (id) {

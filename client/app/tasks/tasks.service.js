@@ -9,6 +9,10 @@ function TasksService($q, $http, Remote) {
     return Remote.do('task', 'GET', {});
   }
 
+  this.getTasksByName = function (name) {
+    return Remote.do('task?name=' + name, 'GET', {});
+  }
+
   this.getTaskEntries = function (id) {
     return Remote.do('task_e', 'GET', {});
   }

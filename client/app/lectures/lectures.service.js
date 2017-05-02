@@ -5,8 +5,12 @@ LecturesService.$inject = [
 ];
 function LecturesService($q, $http, Remote) {
 
-  this.getLectures = function (id) {
+  this.getLectures = function () {
     return Remote.do('lecture', 'GET', {});
+  }
+
+  this.getLecturesByName = function (name) {
+    return Remote.do('lecture?name=' + name, 'GET', {});
   }
 	
   this.get = function (id) {

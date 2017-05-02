@@ -7,7 +7,11 @@ module.exports.update = update;
 module.exports.remove = remove;
 
 function getAll(req, res) {
-	Lecture.find()
+	var selector = {}
+	if (req.query.name) {
+		selector.name = {$regex : new RegExp(".*" + req.query.name + ".*", "i") }
+	}
+	Lecture.find(selector)
 	.select('_course name description body links createdDate')
 	.populate('_course')
 	.exec(function (err, items) {

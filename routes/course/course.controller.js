@@ -14,7 +14,11 @@ module.exports.getLectures = getLectures;
 module.exports.getEntries = getEntries;
 
 function getAll(req, res) {
-	Course.find()
+	var selector = {}
+	if (req.query.name) {
+		selector.name = {$regex : new RegExp(".*" + req.query.name + ".*", "i") }
+	}
+	Course.find(selector)
 	.select('_id _author name description active createdDate updatedDate')
 	.populate('_author')
 	.exec(function (err, courses) {

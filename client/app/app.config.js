@@ -187,6 +187,16 @@ function Config(
 			}
 		}
 	})
+	.state('content.search', {
+		url: '/search',
+		views: { 
+			'main' : {
+				templateUrl: 'app/search/search.html',
+				controller: 'SearchController',
+				controllerAs: 'vm'
+			}
+		}
+	})
 	$urlRouterProvider.otherwise('/login/signin');
 
 	$httpProvider.interceptors.push('AuthInterceptorFactory')

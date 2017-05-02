@@ -13,7 +13,7 @@ mongoose.connect(config.database, function (err) {
 	if (err) {
 		console.log(err);
 	} else {
-		console.log('successfully connected to db');
+		console.log('successfully connected to db'); /**/
 	}
 });
 

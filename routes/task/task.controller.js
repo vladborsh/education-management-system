@@ -11,7 +11,11 @@ module.exports.getTests = getTests;
 module.exports.getWorks = getWorks;
 
 function getAll(req, res) {
-	Task.find()
+	var selector = {}
+	if (req.query.name) {
+		selector.name = {$regex : new RegExp(".*" + req.query.name + ".*", "i") }
+	}
+	Task.find(selector)
 	.populate('_course')
 	.exec(function (err, courses) {
 		if (err) {

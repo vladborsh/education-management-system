@@ -45,11 +45,11 @@ function create(req, res) {
 	.exec( function (err, items) {
 		if (items.length == 0) {
 			student.createdDate = Date.now();
-			student.save(function (err) {
+			student.save(function (err, student) {
 				if (err) {
 					res.json({success: false, message: 'Cannot create student' + err});
 				} else {
-					res.json({success: true, message: 'Student created'})	
+					res.json({success: true, message: 'Student created', item : student})	
 				}
 			})
 		} else {
