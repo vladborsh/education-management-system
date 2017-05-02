@@ -63,14 +63,18 @@
                   <thead>
                     <tr>
                       <th>Ім'я</th>
-                      <th>Пошта</th>
+                      <th>Сума оцінок</th>
+                      <th>Закінчених завдань</th>
+                      <th>Зарахованих відповідей</th>
                       <th></th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr ng-repeat="item in vm.model.courseEntryItemStudents">
                       <td><a ui-sref="content.student_item({id:item._id})" class="underline">{{item._user.firstName}} {{item._user.lastName}}</a></td>
-                      <td>{{item._user.email}}</td>
+                      <td>{{item.marks}}</td>
+                      <td>{{item.completedTasks}}</td>
+                      <td>{{item.passedTasks}}</td>
                       <td>
                         <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteStudent(item._id)">Видалити</button>
                       </td>

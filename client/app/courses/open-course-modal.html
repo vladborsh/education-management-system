@@ -35,7 +35,7 @@
           ng-model="mod.util.lector"
           uib-dropdown-toggle>
         <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
-          <li ng-repeat="lector in mod.util.teachers | filter : mod.model.courseMain">
+          <li ng-repeat="lector in mod.util.teachers | filter : mod.util.lector">
             <a href
               ng-click="mod.setLector(lector)">
               {{lector.firstName}} {{lector.lastName}}

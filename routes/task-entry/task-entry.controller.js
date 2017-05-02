@@ -31,11 +31,12 @@ function getAll(req, res) {
 			path: '_course'
 		}
 	})
-	.exec(function (err, courses) {
+	.exec(function (err, taskEntries) {
 		if (err) {
+			console.log(err)
 			res.json({success: false, message: 'Cannot find task ' + err});
 		} else {
-			res.json(courses);
+			res.json(taskEntries);
 		}
 	})
 }
@@ -62,11 +63,12 @@ function get(req, res) {
 			path: '_course'
 		}
 	})
-	.exec(function (err, course) {
+	.exec(function (err, taskEntry) {
 		if (err) {
+			console.log(err)
 			res.json({success: false, message: 'Cannot find task ' + err});
 		} else {
-			res.json(course);
+			res.json(taskEntry);
 		}
 	})
 }
@@ -74,13 +76,26 @@ function get(req, res) {
 function create(req, res) {
 	var task = new TaskEntry(req.body);
 	task.createdDate = Date.now()
-	task.save(function (err) {
-		if (err) {
-			res.json({success: false, message: 'Cannot create task' + err});
+	TaskEntry
+	.find({
+		_student : req.body._student,
+		_task : req.body._task,
+		_courseEntry : req.body._courseEntry
+	})
+	.exec(function (err, items) {
+		if (items.length > 0) {
+			res.json({success: false, message: 'Неможливо назначити завдання - цей студент вже має його виконувати'});
 		} else {
-			res.json({success: true, message: 'Task created'})	
+			task.save(function (err) {
+				if (err) {
+					res.json({success: false, message: 'Cannot create task' + err});
+				} else {
+					res.json({success: true, message: 'Task created'})	
+				}
+			})
 		}
 	})
+	
 }
 
 function update(req, res) {

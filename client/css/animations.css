@@ -1,1 +1,76 @@
-.fade-down{box-sizing:border-box;padding:7px;width:100%;height:100%;transition:all cubic-bezier(.25, .46, .45, .94) .3s}.fade-down.ng-enter{position:absolute;transform:translate(0, -20px);opacity:0}.fade-down.ng-leave{position:absolute;opacity:1;transform:translate(0, 0)}.fade-down.ng-enter.ng-enter-active{transform:translate(0, 0);opacity:1}.fade-down.ng-leave.ng-leave-active{transform:translate(0, -20px);opacity:0}.fade-right{box-sizing:border-box;position:absolute;width:100%;height:100%;transition:all cubic-bezier(.25, .46, .45, .94) .5s}.fade-right.ng-enter{transform:translate(20px, 0);opacity:0}.fade-right.ng-leave{opacity:1;transform:translate(0, 0)}.fade-right.ng-enter.ng-enter-active{transform:translate(0, 0);opacity:1}.fade-right.ng-leave.ng-leave-active{transform:translate(20px, 0);opacity:0}
+.fade-down {
+  box-sizing: border-box;
+  padding: 7px;
+  width: 100%;
+  height: 100%;
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s;
+}
+.fade-down.ng-enter {
+  position: absolute;
+  transform: translate(0, -20px);
+  opacity: 0;
+}
+.fade-down.ng-leave {
+  position: absolute;
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.fade-down.ng-enter.ng-enter-active {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.fade-down.ng-leave.ng-leave-active {
+  transform: translate(0, -20px);
+  opacity: 0;
+}
+.fade-right {
+  box-sizing: border-box;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: all cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s;
+}
+.fade-right.ng-enter {
+  transform: translate(20px, 0);
+  opacity: 0;
+}
+.fade-right.ng-leave {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+.fade-right.ng-enter.ng-enter-active {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+.fade-right.ng-leave.ng-leave-active {
+  transform: translate(20px, 0);
+  opacity: 0;
+}
+.loader-spinner {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  border-top: 2px solid #0eb779;
+  border-right: 2px solid #0eb779;
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 0.8s linear infinite;
+  animation: spin 0.7s linear infinite;
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

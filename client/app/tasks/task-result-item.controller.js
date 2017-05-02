@@ -20,6 +20,10 @@ function TaskResultItemController (
 
   vm.model = TasksFactory.getModel();
 
+  vm.util = {
+
+  }
+
   vm.init = function () {
     vm.model.testResults = [];
     vm.model.workResults = [];
@@ -95,6 +99,20 @@ function TaskResultItemController (
         $state.go('content.task_e_item', {id : vm.model.taskResultItem._taskEntry})
       }
     )
+  }
+
+  vm.editMark = function () {
+    if (vm.util.editTaskResultMark) {
+      TasksService.updateTaskResult({
+        _id : $stateParams.id,
+        mark : vm.model.taskResultItem.mark
+      }).then(
+        function (data) {
+          console.log(data.data)
+        }
+      );
+    }
+    vm.util.editTaskResultMark = !vm.util.editTaskResultMark;
   }
 
 }

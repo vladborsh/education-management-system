@@ -62,6 +62,7 @@
                     <tr>
                       <th>Назва</th>
                       <th>Студент</th>
+                      <th>Оцінка</th>
                       <th>Виконано</th>
                       <th></th>
                     </tr>
@@ -70,6 +71,7 @@
                     <tr ng-repeat="item in vm.model.taskEntryTaskResults">
                       <td><a ui-sref="content.task_result({id:item._id})" class="underline">{{item._taskEntry._task.name}}</a></td>
                       <td><a ui-sref="content.student_item({id:item._student._user._id})" class="underline">{{item._student._user.firstName}} {{item._student._user.lastName}}</a></td>
+                      <td>{{item.mark}}</td>
                       <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                       <td>
                         <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteTaskResult(item._id)">Видалити</button>

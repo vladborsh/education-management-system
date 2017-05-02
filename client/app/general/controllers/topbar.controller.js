@@ -32,6 +32,7 @@ function TopbarController (
 
   vm.search = function(event) {
     if (event.keyCode == 13 && vm.model.search) {
+      vm.model.loading = true;
       vm.util.searchFct.searchResults = [];
       $q.all([
         CoursesService.getCoursesByName(vm.model.search),
@@ -78,6 +79,7 @@ function TopbarController (
               type: 'Студент'});
           });
           console.log(vm.util.searchFct.searchResults);
+          vm.model.loading = false;
           vm.model.search = ''
           $state.go('content.search')
         }

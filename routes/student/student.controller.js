@@ -14,11 +14,11 @@ function getAll(req, res) {
 	Student
 	.find()
 	.populate('_user') 
-	.exec( function (err, courses) {
+	.exec( function (err, students) {
 		if (err) {
-			res.json({success: false, message: 'Cannot find courses ' + err});
+			res.json({success: false, message: 'Cannot find students ' + err});
 		} else {
-			res.json(courses);
+			res.json(students);
 		}
 	})
 }
@@ -27,11 +27,11 @@ function get(req, res) {
 	Student
 	.findById(req.params.id)
 	.populate('_user') 
-	.exec( function (err, course) {
+	.exec( function (err, student) {
 		if (err) {
-			res.json({success: false, message: 'Cannot find course ' + err});
+			res.json({success: false, message: 'Cannot find student ' + err});
 		} else {
-			res.json(course);
+			res.json(student);
 		}
 	})
 }
@@ -40,11 +40,14 @@ function create(req, res) {
 	var student = new Student(req.body);
 	Student.find({ 
 		_courseEntry : req.body._courseEntry, 
-		_user : req.body._user
+		_user : req.body._user,
 	})
 	.exec( function (err, items) {
 		if (items.length == 0) {
 			student.createdDate = Date.now();
+			student.marks = 0;
+			student.completedTasks = 0;
+			student.passedTasks = 0;
 			student.save(function (err, student) {
 				if (err) {
 					res.json({success: false, message: 'Cannot create student' + err});

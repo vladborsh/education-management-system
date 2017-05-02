@@ -10,6 +10,15 @@ var StudentSchema = new Schema({
 	_user : {
 		type : Schema.Types.ObjectId, ref: 'User', required: true,	
 	},
+  marks : {
+    type : Number
+  },
+  completedTasks : {
+    type : Number
+  },
+  passedTasks : {
+    type : Number
+  },
   createdDate : {
     type : Date
   }
