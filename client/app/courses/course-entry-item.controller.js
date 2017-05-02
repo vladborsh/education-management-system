@@ -63,9 +63,6 @@ function CourseEntryItemController(
   };
   vm.init();
 
-  vm.viewTaskEntry = function (item) {
-    $state.go('content.task_e_item', {id : item._id});
-  }
 
   vm.createTaskEntry = function () {
     vm.util.studentsFct.coursePreset = true;

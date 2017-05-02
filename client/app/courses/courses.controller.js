@@ -61,14 +61,6 @@ function CoursesController(
     );
   }
 
-  vm.viewCourse = function(item) {
-    $state.go('content.course_item', {id : item._id})
-  }
-
-  vm.viewCourseEntry = function(item) {
-    $state.go('content.course_e_item', {id : item._id})
-  }
-
   vm.deleteCourse = function(id) {
     CoursesService.deleteCourse(id)
     .then(
@@ -84,7 +76,6 @@ function CoursesController(
       }
     );
   }
-
 
   vm.deleteCourseEntry = function(id) {
     CoursesService.deleteCourseEntry(id)

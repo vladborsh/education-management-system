@@ -5,6 +5,7 @@ var secret = require('../../config/dev.config').secret;
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.get = get;
+module.exports.update = update;
 module.exports.getInfo = getInfo;
 module.exports.signup = signup;
 module.exports.remove = remove;
@@ -17,18 +18,30 @@ module.exports.getStudentItemsForUser = getStudentItemsForUser;
 
 
 function getAllUsers(req, res) {
-	User.find(function (err, users) {
+	var userData = req.decoded;
+	User.find()
+	.select('email role firstName lastName _id createdDate')
+	.exec(function (err, users) {
+		if (err) {
+			res.json({success:false, message: 'Could not found users'});
+		}
+		for (var i=0; i< users.length; i++) {
+			if (users[i] && users[i]._id == userData._id) {
+				users.splice(i, 1)
+			}
+		}
 		res.send(users);
 	});
 }
 
 function get(req, res) {
-	var userData = req.decoded;
 	User
 	.findOne({ _id: req.params.id })
-	.select('email password role firstName lastName _id')
+	.select('email role firstName lastName _id createdDate')
 	.exec(function (err, user) {
-		if (err) throw err;
+		if (err) {
+			res.json({success:false, message: 'Could not found user'});
+		}
 		if (!user) {
 			res.json({success:false, message: 'Could not authenticate user'});
 		} else {
@@ -38,6 +51,16 @@ function get(req, res) {
 				email: user.email,
 				username: user.firstName + ' ' + user.lastName
 			});
+		}
+	})
+}
+
+function update(req, res) {
+	User.findByIdAndUpdate(req.params.id, req.body, function(err) {
+		if (err) {
+			res.json({success: false, message: 'Неможливо оновити користувача: ' + err});
+		} else {
+			res.json({success: true, message: 'Користвач успішно оновлений'});
 		}
 	})
 }

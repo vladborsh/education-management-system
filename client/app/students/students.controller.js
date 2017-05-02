@@ -1,14 +1,18 @@
 StudentsController.$inject = [
   'StudentsFactory',
   'StudentsService',
+  'UsersService',
   'Modal',
   '$state'
 ];
 function StudentsController(
   StudentsFactory,
   StudentsService,
+  UsersService,
   Modal,
-  $state) {
+  $state) 
+{
+  
   var vm = this;
 
   vm.model = StudentsFactory.getModel();
@@ -40,7 +44,7 @@ function StudentsController(
   }
 
   vm.deleteUser = function(id) {
-    StudentsService.deleteUser(id)
+    UsersService.remove(id)
     .then(
       function( data ) {
         _.remove(vm.model.studentUsers, function(item) {

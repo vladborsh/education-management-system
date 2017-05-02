@@ -4,12 +4,12 @@
       <div class="panel-heading">
         <button type="submit" class="btn btn-default" 
           ui-sref="content.students">Усі студенти</button>
-        <h2>{{vm.model.studentItem.firstName}} {{vm.model.studentItem.lastName}}</h2>
+        <center><h2>{{vm.model.studentItem.firstName}} {{vm.model.studentItem.lastName}}</h2></center>
       </div>
       <!-- Panel body -->
       <div class="panel-body">
-        <p><b>E-mail</b> : {{vm.model.studentItem.email}}</p>
-        <p><b>Роль</b> : {{vm.model.studentItem.role}}</p>
+        <div class="row"><b>E-mail</b> : {{vm.model.studentItem.email}}</div>
+        <div class="row"><b>Роль</b> : {{vm.model.studentItem.role}}</div>
         <hr>
         <uib-tabset >
           <uib-tab>

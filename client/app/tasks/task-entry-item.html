@@ -7,14 +7,14 @@
         <button type="submit" class="btn btn-primary"
           ng-click="vm.createTaskResult()">Скласти відповідь
         </button>
-        <h2>{{vm.model.taskEntryItem._task.name}}</h2>
+        <center><h2>{{vm.model.taskEntryItem._task.name}}</h2></center>
       </div>
       <!-- Panel body -->
       <div class="panel-body">
-        <p><label>Дата створення</label>: {{vm.model.taskEntryItem.createdDate}}</p>
-        <p><label>Потік</label>: <a ui-sref="content.course_e_item({id:vm.model.taskEntryItem._courseEntry._id})" class="underline">{{vm.model.taskEntryItem._courseEntry.name}}</a></p>
-        <p><label>Курс</label>: <a ui-sref="content.course_item({id:vm.model.taskEntryItem._courseEntry._course._id})" class="underline">{{vm.model.taskEntryItem._courseEntry._course.name}}</a></p>
-        <p>{{vm.model.taskEntryItem._task.description}}</p>
+        <div class="row"><label>Дата створення</label>: {{vm.model.taskEntryItem.createdDate}}</div>
+        <div class="row"><label>Потік</label>: <a ui-sref="content.course_e_item({id:vm.model.taskEntryItem._courseEntry._id})" class="underline">{{vm.model.taskEntryItem._courseEntry.name}}</a></div>
+        <div class="row"><label>Курс</label>: <a ui-sref="content.course_item({id:vm.model.taskEntryItem._courseEntry._course._id})" class="underline">{{vm.model.taskEntryItem._courseEntry._course.name}}</a></div>
+        <div class="row">{{vm.model.taskEntryItem._task.description}}</div>
         <hr>
         <uib-tabset >
           <!-- Task info -->

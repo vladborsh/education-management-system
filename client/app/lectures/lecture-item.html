@@ -4,12 +4,12 @@
       <div class="panel-heading">
         <button type="submit" class="btn btn-default"
           ui-sref="content.lectures">Усі лекції</button>
-        <h2>{{vm.model.lectureItem.name}}</h2>
+        <center><h2>{{vm.model.lectureItem.name}}</h2></center>
       </div>
       <!-- Panel body -->
       <div class="panel-body">
-        <p>Створена: {{vm.model.lectureItem.createdDate}}</p>
-        <p>{{vm.model.lectureItem.description}}</p>
+        <div class="row">Створена: {{vm.model.lectureItem.createdDate}}</div>
+        <div class="row">{{vm.model.lectureItem.description}}</div>
         <hr>
         <div ng-bind-html="vm.model.lectureItem.body"></div>
       </div>

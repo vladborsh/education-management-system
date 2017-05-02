@@ -17,29 +17,25 @@
         </div>
         <div class="row">
           <div class="col-md-12">
-            <!-- Lectures -->
+            <!-- Students -->
             <div class="table-responsive">
               <table class="table table-hover" ng-show="vm.model.studentUsers.length > 0">
                 <thead>
                   <tr>
                     <th>Ім'я</th>
                     <th>Пошта</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="item in vm.model.studentUsers | filter : vm.model.searchStudent">
                     <td><a ui-sref="content.student_item({id:item._id})" class="underline">{{item.firstName}} {{item.lastName}}</a></td>
                     <td>{{item.email}}</td>
-                    <td>
-                      <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteUser(item._id)">Видалити</button>
-                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-        <!-- Lectures (END)-->
+        <!-- Students (END)-->
         </div>
       </div>
       <!-- Panel body (end) -->

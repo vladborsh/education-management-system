@@ -6,13 +6,13 @@
           ui-sref="content.tasks">Усі завдання</button>
         <button type="submit" class="btn btn-default" ng-if="vm.model.lastTaskEntry"
           ui-sref="content.task_e_item({ id: vm.model.lastTaskEntry })">Переглянути завдання</button>
-
-        <h2>{{vm.model.taskResultItem._taskEntry._task.name}}</h2>
-        <p ng-if="!vm.model.viewTaskResult">Виконання</p>
-        <p>{{vm.model.taskResultItem._taskEntry._task.description}}</p>
+        <center><h2>{{vm.model.taskResultItem._taskEntry._task.name}}</h2></center>
       </div>
       <!-- Panel body -->
       <div class="panel-body">
+
+        <div class="row" ng-if="!vm.model.viewTaskResult">Виконання</div>
+        <div class="row">{{vm.model.taskResultItem._taskEntry._task.description}}</div>
         <!-- Tests -->
         <h3 ng-if="!vm.model.viewTaskResult">Тести</h3>
         <h3 ng-if="vm.model.viewTaskResult">Відповіді на тести</h3>

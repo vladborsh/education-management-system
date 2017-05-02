@@ -54,11 +54,6 @@ function TaskEntryItemController (
     )
   }
 
-  vm.viewTaskResult = function (item) {
-    vm.model.lastTaskEntry = $stateParams.id;
-    $state.go('content.task_result', {id : item._id});
-  }
-
   vm.deleteTaskResult = function (id) {
     TasksService.deleteTaskResult(id)
     .then(
