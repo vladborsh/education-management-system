@@ -24,12 +24,14 @@
                   <tr>
                     <th>Ім'я</th>
                     <th>Пошта</th>
+                    <th>Дата реєстрації.</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr ng-repeat="item in vm.model.studentUsers | filter : vm.model.searchStudent">
                     <td><a ui-sref="content.student_item({id:item._id})" class="underline">{{item.firstName}} {{item.lastName}}</a></td>
                     <td>{{item.email}}</td>
+                    <td>{{item.createdDate  | date : 'MMM d, y h:mm:ss a' }}</td>
                   </tr>
                 </tbody>
               </table>

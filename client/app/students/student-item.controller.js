@@ -35,7 +35,9 @@ function StudentItemController(
         vm.model.studentItem = data[0].data;
         vm.model.studentCourseEntries = data[1].data;
         vm.model.studentTaskEntries = _.filter(data[2].data, function (e) {
-          return e._student._user._id == $stateParams.id
+          if (e._student && e._student._user)
+            return e._student._user._id == $stateParams.id
+          return false;
         });
         vm.model.studentTaskResults = _.filter(data[3].data, function (e) {
           if (e._student && e._student._user)

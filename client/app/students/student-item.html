@@ -10,6 +10,7 @@
       <div class="panel-body">
         <div class="row"><b>E-mail</b> : {{vm.model.studentItem.email}}</div>
         <div class="row"><b>Роль</b> : {{vm.model.studentItem.role}}</div>
+        <div class="row"><b>Зареєстрований</b> : {{vm.model.studentItem.createdDate | date : 'MMM d, y h:mm:ss a' }}</div>
         <hr>
         <uib-tabset >
           <uib-tab>
@@ -18,23 +19,27 @@
             </uib-tab-heading>
             <!-- Course Entries -->
             <br>
-            <small class="help-block" ng-show="vm.model.studentCourseEntries.length == 0">Початих курсів назараз немає</small>
-            <table class="table table-hover" ng-show="vm.model.studentCourseEntries.length > 0">
-              <thead>
-                <tr>
-                  <th>Головний курс</th>
-                  <th>Потік</th>
-                  <th>Записаний</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in vm.model.studentCourseEntries">
-                  <td><a ui-sref="content.course_item({id:item._courseEntry._course._id})" class="underline">{{item._courseEntry._course.name}}</a></td>
-                  <td><a ui-sref="content.course_e_item({id:item._courseEntry._id})" class="underline">{{item._courseEntry.name}}</a></td>
-                  <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="row">
+              <div class="col-md-12">
+                <small class="help-block" ng-show="vm.model.studentCourseEntries.length == 0">Початих курсів назараз немає</small>
+                <table class="table table-hover" ng-show="vm.model.studentCourseEntries.length > 0">
+                  <thead>
+                    <tr>
+                      <th>Головний курс</th>
+                      <th>Потік</th>
+                      <th>Записаний</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in vm.model.studentCourseEntries">
+                      <td><a ui-sref="content.course_item({id:item._courseEntry._course._id})" class="underline">{{item._courseEntry._course.name}}</a></td>
+                      <td><a ui-sref="content.course_e_item({id:item._courseEntry._id})" class="underline">{{item._courseEntry.name}}</a></td>
+                      <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
             <!-- Course Entries (END) -->
           </uib-tab>
           <uib-tab>
@@ -43,25 +48,29 @@
             </uib-tab-heading>
             <!-- Task Entries -->
             <br>
-            <small class="help-block" ng-show="vm.model.studentTaskEntries.length == 0">Завдань немає</small>
-            <table class="table table-hover" ng-show="vm.model.studentTaskEntries.length > 0">
-              <thead>
-                <tr>
-                  <th>Назва</th>
-                  <th>Опис</th>
-                  <th>Курс</th>
-                  <th>Видано</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in vm.model.studentTaskEntries">
-                  <td><a ui-sref="content.task_item({id:item._task._id})" class="underline">{{item._task.name}}</a></td>
-                  <td>{{item._task.description}}</td>
-                  <td><a ui-sref="content.course_e_item({id:item._courseEntry._id})" class="underline">{{item._courseEntry.name}}</a></td>
-                  <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="row">
+              <div class="col-md-12">
+                <small class="help-block" ng-show="vm.model.studentTaskEntries.length == 0">Завдань немає</small>
+                <table class="table table-hover" ng-show="vm.model.studentTaskEntries.length > 0">
+                  <thead>
+                    <tr>
+                      <th>Назва</th>
+                      <th>Опис</th>
+                      <th>Курс</th>
+                      <th>Видано</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in vm.model.studentTaskEntries">
+                      <td><a ui-sref="content.task_item({id:item._task._id})" class="underline">{{item._task.name}}</a></td>
+                      <td>{{item._task.description}}</td>
+                      <td><a ui-sref="content.course_e_item({id:item._courseEntry._id})" class="underline">{{item._courseEntry.name}}</a></td>
+                      <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
             <!-- Task Entries (END) -->
           </uib-tab>
           <uib-tab>
@@ -70,23 +79,27 @@
             </uib-tab-heading>
             <!-- Task Entries -->
             <br>
-            <small class="help-block" ng-show="vm.model.studentTaskResults.length == 0">Виконаних завдань немає</small>
-            <table class="table table-hover" ng-show="vm.model.studentTaskResults.length > 0">
-              <thead>
-                <tr>
-                  <th>Назва</th>
-                  <th>Опис</th>
-                  <th>Виконано</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="item in vm.model.studentTaskResults">
-                  <td><a ui-sref="content.task_result({id:item._id})" class="underline">{{item._taskEntry._task.name}}</a></td>
-                  <td>{{item._taskEntry._task.description}}</td>
-                  <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="row">
+              <div class="col-md-12">
+                <small class="help-block" ng-show="vm.model.studentTaskResults.length == 0">Виконаних завдань немає</small>
+                <table class="table table-hover" ng-show="vm.model.studentTaskResults.length > 0">
+                  <thead>
+                    <tr>
+                      <th>Назва</th>
+                      <th>Опис</th>
+                      <th>Виконано</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="item in vm.model.studentTaskResults">
+                      <td><a ui-sref="content.task_result({id:item._id})" class="underline">{{item._taskEntry._task.name}}</a></td>
+                      <td>{{item._taskEntry._task.description}}</td>
+                      <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
             <!-- Task Entries (END) -->
           </uib-tab>
         </uib-tabset>

@@ -45,12 +45,7 @@ function get(req, res) {
 		if (!user) {
 			res.json({success:false, message: 'Could not authenticate user'});
 		} else {
-			res.json({
-				role: user.role,
-				id: user._id,
-				email: user.email,
-				username: user.firstName + ' ' + user.lastName
-			});
+			res.json(user);
 		}
 	})
 }
@@ -141,7 +136,7 @@ function role(req, res) {
 function getAdmins(req, res) {
 	User
 	.find({role:'Admin'})
-	.select('_id firstName lastName')
+	.select('email firstName lastName _id createdDate')
 	.exec(function (err, users) {
 		if (err) throw err;
 		res.json({ success: true, users: users});
@@ -151,7 +146,7 @@ function getAdmins(req, res) {
 function getTeachers(req, res) {
 	User
 	.find({ $or : [ {role:'Admin'}, {role:'Teacher'} ] })
-	.select('_id firstName lastName')
+	.select('email firstName lastName _id createdDate')
 	.exec(function (err, users) {
 		if (err) throw err;
 		res.json({ success: true, users: users});
@@ -161,7 +156,7 @@ function getTeachers(req, res) {
 function getStudents(req, res) {
 	User
 	.find({role:'Student'})
-	.select('_id firstName lastName email')
+	.select('email firstName lastName _id createdDate')
 	.exec(function (err, users) {
 		if (err) throw err;
 		res.json({ success: true, users: users});
