@@ -10,7 +10,7 @@ function UsersService(Remote) {
   }
 
   this.update = function (user) {
-    return Remote.do('user/' + user._id, 'POST', {user});
+    return Remote.do('user/' + user._id, 'POST', user);
   }
 
   this.remove = function (id) {

@@ -51,11 +51,12 @@ function get(req, res) {
 }
 
 function update(req, res) {
+	console.log(req.body)
 	User.findByIdAndUpdate(req.params.id, req.body, function(err, user) {
 		if (err) {
 			res.json({success: false, message: 'Неможливо оновити користувача: ' + err});
 		} else {
-			res.json({success: true, message: 'Користвач успішно оновлений', user: user});
+			res.json({success: true, message: 'Користвач успішно оновлений'});
 		}
 	})
 }
