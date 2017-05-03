@@ -6,8 +6,10 @@ var express  = require('express'),
   morgan     = require('morgan'),
   port       = process.env.PORT || 3000,
   router     = express.Router(),
-  config     = require('./config/dev.config')
   favicon    = require('serve-favicon')
+
+var env = process.env.NODE_ENV || 'dev';
+var config = require('./config/' + env + '.config')
 
 mongoose.connect(config.database, function (err) {
 	if (err) {
