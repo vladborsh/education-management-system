@@ -61,15 +61,14 @@ function update(req, res) {
 }
 
 function signup(req,res) {
-	var user = new User(req.body);
-	if (!user.role) {
-		user.role = 'Student';
-	}
-	user.createdDate = Date.now();
 	User.find(function (err, users) {
+		var role = 'Student';
 		if (users.length == 0) {
-			user.role = 'Admin';
-		}
+			role = 'Admin';
+		} 
+		var user = new User(req.body);
+		user.createdDate = Date.now();
+		user.role = role;
 		user.save(function (err) {
 			if (err) {
 				res.json({success:false, message: 'Cannot create user. Error: ' + err});
