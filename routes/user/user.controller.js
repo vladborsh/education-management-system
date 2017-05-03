@@ -51,9 +51,9 @@ function get(req, res) {
 }
 
 function update(req, res) {
-	User.findByIdAndUpdate(req.params.id, req.body, function(err) {
+	User.findByIdAndUpdate(req.params.id, req.body, function(err, user) {
 		if (err) {
-			res.json({success: false, message: 'Неможливо оновити користувача: ' + err});
+			res.json({success: false, message: 'Неможливо оновити користувача: ' + err, user: user});
 		} else {
 			res.json({success: true, message: 'Користвач успішно оновлений'});
 		}
