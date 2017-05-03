@@ -2,7 +2,7 @@
   <h3 class="modal-title" id="modal-title-{{name}}">Почати курс</h3>
 </div>
 <div class="modal-body" id="modal-body-{{name}}">
-  <form>
+  <form name="newCourseEntry" novalidate="true">
     <div class="form-group" ng-hide="mod.util.coursesFct.lectureCoursePreset">
       <label>Головний курс</label>
       <small class="help-block">Оберіть курс із переліку запропонованих, або створіть новий</small>
@@ -11,6 +11,7 @@
           <span uib-dropdown style="width:100%">
             <input type="text" class="form-control" id="courses" 
               ng-model="mod.util.course"
+              ng-required="true"
               uib-dropdown-toggle>
             <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
               <li ng-repeat="course in mod.util.coursesFct.courses | filter : mod.util.course">
@@ -33,6 +34,7 @@
       <span uib-dropdown style="width:100%">
         <input type="text" class="form-control" id="courses" 
           ng-model="mod.util.lector"
+          ng-required="true"
           uib-dropdown-toggle>
         <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown" style="width:100%">
           <li ng-repeat="lector in mod.util.teachers | filter : mod.util.lector">
@@ -50,6 +52,7 @@
       <div class="input-group">
         <input type="text" class="form-control" 
           ng-model="mod.model.startDate" 
+          ng-required="true"
           popup-placement="bottom-right"
           uib-datepicker-popup="dd-MMMM-yyyy"
           is-open="mod.util.sDateOpened" 
@@ -68,6 +71,7 @@
       <div class="input-group">
         <input type="text" class="form-control" 
           ng-model="mod.model.endDate"
+          ng-required="true"
           popup-placement="bottom-right"
           uib-datepicker-popup="dd-MMMM-yyyy"
           is-open="mod.util.eDateOpened" 
@@ -86,6 +90,7 @@
 <div class="modal-footer">
   <button type="submit" class="btn btn-primary" 
     ng-hide="mod.util.isUpdatedCourseEntry" 
+    ng-disabled="newCourseEntry.$invalid"
     ng-click="mod.saveCourseEntry()">Почати</button>
   <button type="submit" class="btn btn-default" 
     ng-click="mod.close()">Закрити</button>
