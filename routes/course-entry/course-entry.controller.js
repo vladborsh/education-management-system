@@ -122,35 +122,7 @@ function getStudents (req, res) {
     if (err) {
       res.json({success: false, message: 'Неможливо вилучити студентів для данного курсу: ' + err});
     } else {
-      var students_list = []
-      var students_map = {};
-      for (var i = 0; i < students.length; i++) {
-        students_list.push(students[i]._id);
-        students_map[students[i]._id] = students[i];
-        students_map[students[i]._id]['marks'] = 0;
-        students_map[students[i]._id]['completedTasks'] = 0;
-        students_map[students[i]._id]['passedTasks'] = 0;
-      }
-      TaskResult
-      .find({_student : {$in : students_list}})
-      .select('mark _student completed')
-      .exec(function(err, taskResults) {
-        if (err) {
-          res.json({success: false, message: 'Cannot select results ' + err});
-        } else {
-          for (var i = 0; i < taskResults.length; i++) {
-            if (taskResults[i].completed) {
-              students_map[taskResults[i]._student]['completedTasks'] += 1;
-            }
-            if (taskResults[i].mark) {
-              students_map[taskResults[i]._student]['marks'] += taskResults[i].mark;
-              students_map[taskResults[i]._student]['passedTasks'] += 1;
-            }
-            
-          }
-          res.json({success: true, items: students});
-        }
-      });
+      res.json({success: true, items: students});
     }
   })
 }

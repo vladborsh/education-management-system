@@ -24,7 +24,7 @@ var StudentSchema = new Schema({
   }
 });
 
-StudentSchema.post('task', function(doc, next) {
+StudentSchema.post('remove', function(doc, next) {
   TaskResult.remove({ _student: doc._id }, function () {
     TaskEntry.remove({ _student: doc._id }, next)
   });

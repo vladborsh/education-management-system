@@ -37,7 +37,7 @@
                     <tr ng-repeat="item in vm.model.courseEntryItemTaskEntries">
                       <td><a ui-sref="content.task_e_item({id:item._id})" class="underline">{{item._task.name}}</a></td>
                       <td>{{item._task.description}}</td>
-                      <td><a ui-sref="content.student_item({id:item._id})" class="underline">{{item._student._user.firstName}} {{item._student._user.lastName}}</a></td>
+                      <td><a ui-sref="content.student_item({id:item._student._user._id})" class="underline">{{item._student._user.firstName}} {{item._student._user.lastName}}</a></td>
                       <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
                       <td>
                         <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteTaskEntry(item._id)">Видалити</button>
@@ -71,7 +71,7 @@
                   </thead>
                   <tbody>
                     <tr ng-repeat="item in vm.model.courseEntryItemStudents">
-                      <td><a ui-sref="content.student_item({id:item._id})" class="underline">{{item._user.firstName}} {{item._user.lastName}}</a></td>
+                      <td><a ui-sref="content.student_item({id:item._user._id})" class="underline">{{item._user.firstName}} {{item._user.lastName}}</a></td>
                       <td>{{item.marks}}</td>
                       <td>{{item.completedTasks}}</td>
                       <td>{{item.passedTasks}}</td>
