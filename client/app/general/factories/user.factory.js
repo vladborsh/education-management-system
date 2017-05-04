@@ -1,6 +1,6 @@
-User.$inject = ['AuthFactory', 'Remote', '$log', '$q'];
+User.$inject = ['AuthFactory', 'Remote', '$log', '$q', '$state'];
 
-function User(AuthFactory, Remote, $log, $q) {
+function User(AuthFactory, Remote, $log, $q, $state) {
 
 	var model = {}
 
@@ -19,9 +19,12 @@ function User(AuthFactory, Remote, $log, $q) {
 					deferred.resolve();
 				}, function (err) {
 					$log.error(err);
+					$state.go('login.signin')
 					deferred.reject(err);
 				}
 			);
+		} else {
+			$state.go('login.signin')
 		}
 		return deferred.promise;
 	}

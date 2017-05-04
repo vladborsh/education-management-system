@@ -4,7 +4,7 @@ var router = require('express').Router();
 
 router.post('/signup', controller.signup);
 router.post('/auth', controller.auth);
-router.delete('/:id', controller.remove);
+router.delete('/:id', auth.isAuthenticated, controller.remove);
 router.get('/', auth.isAuthenticated, controller.getAllUsers);
 router.get('/role', auth.isAuthenticated, controller.role);
 router.get('/admins', auth.isAuthenticated, controller.getAdmins);
