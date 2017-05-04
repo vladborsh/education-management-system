@@ -1,7 +1,9 @@
 var User = require('../../models/user.model');
 var Student = require('../../models/student.model');
 var jwt = require('jsonwebtoken');
-var secret = require('../../config/dev.config').secret;
+
+var env = process.env.NODE_ENV || 'dev';
+var secret = require('../../config/' + env + '.config').secret;
 
 module.exports.getAllUsers = getAllUsers;
 module.exports.get = get;

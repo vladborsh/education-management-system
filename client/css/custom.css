@@ -139,17 +139,6 @@
   overflow-y: scroll;
   padding-top: 80px;
 }
-@media (max-width: 992px) {
-  .content {
-    padding-left: 80px;
-  }
-  .content.hidden-nav {
-    padding-left: 0;
-  }
-  .content .topbar .search-box {
-    display: none;
-  }
-}
 .container-fluid {
   height: 100%;
   padding-left: 0;
@@ -268,6 +257,16 @@ label {
   float: left;
   display: inline-block;
 }
+@media (max-width: 700px) {
+  .login .col-login.gr {
+    display: none;
+  }
+}
+@media (max-width: 700px) {
+  .login .col-login.w {
+    width: 100%;
+  }
+}
 .login .col-login .grad {
   height: 100%;
   background: #180f3a;
@@ -329,6 +328,11 @@ label {
 .login .col-login .grad .small-container a {
   color: #fff;
   text-decoration: underline;
+}
+@media (max-width: 700px) {
+  .login .col-login .grad {
+    display: none;
+  }
 }
 .login .col-login .white-col {
   text-align: center;
