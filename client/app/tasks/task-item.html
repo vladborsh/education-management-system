@@ -14,8 +14,7 @@
         <hr>
 
         <!-- Tests -->
-        <h3>Тести</h3>
-        <button type="button" class="btn btn-primary" ng-click="vm.createTest()" style="margin-bottom: 10px;">Додати тест</button>
+        <h4><b>Тести</b></h4>
         <div ng-repeat="item in vm.model.taskTests">
           <hr>
           <div class="row">
@@ -35,8 +34,7 @@
 
         <!-- Works -->
         <hr>
-        <h3>Роботи на виконання</h3>
-        <button type="button" class="btn btn-primary" ng-click="vm.createWork()" style="margin-bottom: 10px;">Додати роботу</button>
+        <h4><b>Роботи на виконання</b></h4>
         <div ng-repeat="item in vm.model.taskWorks">
           <hr>
           <div class="row">
@@ -52,6 +50,10 @@
         
         <!-- Works (END) -->
 
+    </div>
+    <div class="panel-footer">
+      <button type="button" class="btn btn-primary" ng-click="vm.createTest()"">Додати тест</button>
+      <button type="button" class="btn btn-primary" ng-click="vm.createWork()">Додати роботу</button> 
     </div>
   </div>
 </div>

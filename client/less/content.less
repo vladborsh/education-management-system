@@ -1,56 +1,64 @@
 @import "variables.less";
 
 .content {
-	width: auto;
-	height: 100%;
-	//padding-left: 250px;
-	background: @content-bg;
-	transition: all linear 0.3s;
-	position: relative;
-	overflow: auto;
-	.topbar {
-		padding: 20px;
-		color: @gray;
-		background: @topbar-bg;
-		height: 81px;
-		position:absolute;
-		width: 100%;
-		z-index: 100;
-		border-bottom: 1px solid #dbdbdb;
-		.toggle-menu {
-			border: none;
-			color: #fff;
-			background: @color;
-			padding:5px 9px;
-			margin-right: 15px;
-			font-size: 120%;
-			outline: none;
-			&:hover {
-				background: @color2;
-			}
-		}
-		.search {
-			border:none;
-			font-size: 110%;
-			outline: none;
-			padding: 5px;
-			border-bottom: 1px solid @gray + #666;
-			color: @gray;
-			transition: all ease-in-out .3;
-			&:focus {
-				border-bottom: 1px solid @gray + #666;
-			}
-		}
-	}
-	.main {
-		width: auto;
-		height: 100%;
-		padding-bottom: 0;
-		position: relative;
-		overflow-y:scroll;
-		padding-top: 80px;
-	}
-	@media (max-width: 992px) {
-		
-	}
+  width: auto;
+  height: 100%;
+  //padding-left: 250px;
+  background: @content-bg;
+  transition: all linear 0.3s;
+  position: relative;
+  overflow: hidden;
+  .topbar {
+    padding: 20px;
+    color: @gray;
+    background: @topbar-bg;
+    height: 81px;
+    position:absolute;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid #dbdbdb;
+    .toggle-menu {
+      border: none;
+      color: #fff;
+      background: @color;
+      padding:5px 9px;
+      margin-right: 15px;
+      font-size: 120%;
+      outline: none;
+      &:hover {
+        background: @color2;
+      }
+    }
+    .search {
+      border:none;
+      font-size: 110%;
+      outline: none;
+      padding: 5px;
+      border-bottom: 1px solid @gray + #666;
+      color: @gray;
+      transition: all ease-in-out .3;
+      &:focus {
+        border-bottom: 1px solid @gray + #666;
+      }
+    }
+    @media (max-width: 700px) {
+      .logout {
+        display: none;
+      }
+      .toggle-menu {
+        display: none;
+      }
+      .search {
+        width: : 170%;
+      }
+    }
+  }
+  .main {
+    width: auto;
+    height: 100%;
+    padding-bottom: 0;
+    position: relative;
+    overflow-y: auto;
+    margin-top: 80px;
+  }
 }

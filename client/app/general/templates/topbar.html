@@ -1,3 +1,4 @@
+
 <div ng-controller="TopbarController as topbar">
 	<div class="pull-left">
 		<button class="btn btn-default toggle-menu" ng-click="wrap.toggleMenu()">
@@ -14,10 +15,10 @@
 	<div class="pull-left">
 		<div class="loader-spinner" ng-if="topbar.model.loading"></div>
 	</div>
-	<div class="pull-right">
+	<div class="pull-right logout">
 		<a class="link-item" href="" ng-click="topbar.logout()">
 			<h4>
-				<i class="fa fa-sign-out"></i> Log out
+				<i class="fa fa-sign-out"></i>Log out
 			</h4>
 		</a>
 	</div> 

@@ -79,3 +79,50 @@
     display: none;
   }
 }
+@media (max-width: 992px) {
+  .navigation {
+    width: 0px;
+  }
+}
+.navbar {
+  display: none;
+  padding: 0 10px 0 10px;
+}
+@media (max-width: 700px) {
+  .navbar {
+    display: block;
+    margin-bottom: 0;
+    border: none;
+    color: #fff;
+    background: #008e6b;
+    /* Old browsers */
+    background: -moz-linear-gradient(45deg, #008e6b 0%, #0eb779 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg, #008e6b 0%, #0eb779 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg, #008e6b 0%, #0eb779 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#008e6b', endColorstr='@color', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+  }
+  .navbar .navbar-brand {
+    color: #fff;
+    margin-left: 20px;
+  }
+  .navbar .navbar-toggle {
+    border-color: #fff;
+  }
+  .navbar .navbar-toggle:hover {
+    background-color: #008e6b;
+  }
+  .navbar .navbar-form {
+    border-color: #0eb779;
+  }
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #fff;
+}
+.navbar-inverse .navbar-collapse,
+.navbar-inverse .navbar-form {
+  border-color: #fff;
+}

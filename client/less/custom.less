@@ -40,17 +40,83 @@ label {
 	height: 100%; 
 	.col-login {
 		height: 100%;
-		width: 50%;
 		float: left;
 		display: inline-block;
+		transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) .4s;
 		&.gr {
+			width: 50%;
 			@media (max-width: 700px) {
-				display: none
+				width: 0%;
 			}
 		}
 		&.w {
+			width: 50%;
+			.logo {
+				display:none;
+			}
 			@media (max-width: 700px) {
+				.logo {
+					display:block;
+					margin-bottom:30px;
+				}
+				.header-signin {
+					display:none;
+				}
 				width: 100%;
+				background: @color2; /* Old browsers */
+				background: -moz-linear-gradient(45deg, @color2 0%, @color 100%); /* FF3.6-15 */
+				background: -webkit-linear-gradient(45deg, @color2 0%,@color 100%); /* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient(45deg, @color2 0%,@color 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='@color2', endColorstr='@color',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+				color: #fff;
+				text-align: center;
+				.small-container {
+					padding-top: 50px;
+					width: 400px;
+					margin: auto;
+					.title-icon {
+						font-size: 320%;
+						margin-bottom: 15px;
+					}
+					.title {
+						font-size: 300%;
+						margin-bottom: 15px;
+					}
+					.subtitle {
+						font-size: 150%;
+						margin-bottom: 25px;
+					}
+					.social {
+						font-size: 170%;
+						.fa {
+							margin: 5px;
+						}
+					}
+					.important-btn {
+						background: @color;
+						color: #fff;
+					  border-radius: 30px;
+					  padding: 15px 40px;
+					  margin-top: 20px;
+					  margin-bottom: 20px;
+					  border: none;
+					  outline: none;
+					  &:hover {
+					  	background: @color + #222;
+					  }
+					}
+					.footer {
+						margin-top: 30px;
+						font-size: 80%;
+					}
+					hr {
+						border-color: #fff;
+					}
+					a {
+						color: #fff;
+						text-decoration: underline;
+					}
+				}
 			}
 		}
 		.grad {
@@ -108,9 +174,6 @@ label {
 					color: #fff;
 					text-decoration: underline;
 				}
-			}
-			@media (max-width: 700px) {
-				display: none
 			}
 		}
 		.white-col {

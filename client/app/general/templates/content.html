@@ -1,19 +1,21 @@
 <div class="container-fluid">
-	
-	<div class="navigation" ng-class="{'hidden-nav' : wrap.model.menuHidden, 'titles-hidden' : wrap.model.titlesHidden}">
-		<div ng-include="'app/general/templates/navigation.html'"></div>	
-	</div>
+  
+  <div class="navigation" ng-class="{'hidden-nav' : wrap.model.menuHidden, 'titles-hidden' : wrap.model.titlesHidden}">
+    <div ng-include="'app/general/templates/navigation.html'"></div>  
+  </div>
 
-	<div class="content" ng-class="{'hidden-nav' : wrap.model.menuHidden}">
+  <div class="content" ng-class="{'hidden-nav' : wrap.model.menuHidden}">
 
-		<div class="topbar">
-			<div ng-include="'app/general/templates/topbar.html'"></div>
-		</div>
-		
-		<div class="main">
-			<div class="fade-right pad-top" ui-view="main"></div>	
-		</div>
-	
-	</div>
+    <div ng-include="'app/general/templates/top-navbar.html'"></div>
+
+    <div class="topbar">
+      <div ng-include="'app/general/templates/topbar.html'"></div>
+    </div>
+    
+    <div class="main">
+      <div class="fade-right pad-top" ui-view="main"></div> 
+    </div>
+  
+  </div>
 
 </div>

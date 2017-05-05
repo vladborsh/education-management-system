@@ -16,16 +16,13 @@
         <div class="row"><label>Курс</label>: <a ui-sref="content.course_item({id:vm.model.taskEntryItem._courseEntry._course._id})" class="underline">{{vm.model.taskEntryItem._courseEntry._course.name}}</a></div>
         <div class="row">{{vm.model.taskEntryItem._task.description}}</div>
         <hr>
-        <uib-tabset >
-          <!-- Task info -->
-          <uib-tab>
-            <uib-tab-heading>
-              Завдання
-            </uib-tab-heading>
-            <br>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h4><b>Завдання</b></h4>
             <label>Назва</label>:
             <a ui-sref="content.task_item({id:vm.model.taskEntryItem._task._id})" class="underline">{{vm.model.taskEntryItem._task.name}}</a>
-            <h3>Тести</h3>
+            <h4>Тести</h4>
             <div ng-repeat="item in vm.model.taskTests">
               <hr>
               <div class="row">
@@ -37,8 +34,8 @@
                 </div>
               </div>
             </div>
-            <hr>
-            <h3>Роботи</h3>
+            <br>
+            <h4>Роботи</h4>
             <div ng-repeat="item in vm.model.taskWorks">
               <hr>
               <div class="row">
@@ -47,44 +44,40 @@
                 </div>
               </div>
             </div>
-          </uib-tab>
-          <!-- Task info (END) -->
-          <!-- Task results-->
-          <uib-tab>
-            <uib-tab-heading>
-              Виконання
-            </uib-tab-heading>
-            <br>
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table table-hover" ng-show="vm.model.taskEntryTaskResults.length > 0">
-                  <thead>
-                    <tr>
-                      <th>Назва</th>
-                      <th>Студент</th>
-                      <th>Оцінка</th>
-                      <th>Виконано</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr ng-repeat="item in vm.model.taskEntryTaskResults">
-                      <td><a ui-sref="content.task_result({id:item._id})" class="underline">{{item._taskEntry._task.name}}</a></td>
-                      <td><a ui-sref="content.student_item({id:item._student._user._id})" class="underline">{{item._student._user.firstName}} {{item._student._user.lastName}}</a></td>
-                      <td>{{item.mark}}</td>
-                      <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
-                      <td>
-                        <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteTaskResult(item._id)">Видалити</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+          </div>
+        </div>
+          
+        <hr>
+
+        <div class="row">
+          <div class="col-md-12">
+            <h4><b>Виконання</b></h4>
+            <div class="table-responsive">
+              <table class="table table-hover" ng-show="vm.model.taskEntryTaskResults.length > 0">
+                <thead>
+                  <tr>
+                    <th>Назва</th>
+                    <th>Студент</th>
+                    <th>Оцінка</th>
+                    <th>Виконано</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in vm.model.taskEntryTaskResults">
+                    <td><a ui-sref="content.task_result({id:item._id})" class="underline">{{item._taskEntry._task.name}}</a></td>
+                    <td><a ui-sref="content.student_item({id:item._student._user._id})" class="underline">{{item._student._user.firstName}} {{item._student._user.lastName}}</a></td>
+                    <td>{{item.mark}}</td>
+                    <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                    <td width="100px;">
+                      <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteTaskResult(item._id)">Видалити</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            
-          </uib-tab>
-          <!-- Task results (END) -->
-        </uib-tabset>
+          </div>
+        </div>
       </div>
       <div class="panel-footer">
       </div>

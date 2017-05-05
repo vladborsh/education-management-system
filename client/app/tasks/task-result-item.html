@@ -54,8 +54,8 @@
         </div>
         
         <!-- Tests -->
-        <h3 ng-if="!vm.model.viewTaskResult">Тести</h3>
-        <h3 ng-if="vm.model.viewTaskResult">Відповіді на тести</h3>
+        <h4 ng-if="!vm.model.viewTaskResult">Тести</h4>
+        <h4 ng-if="vm.model.viewTaskResult">Відповіді на тести</h4>
         <form novalidate="true" name="testResults">
           <div ng-repeat="item in vm.model.taskTests">
             <div class="row">
@@ -93,8 +93,8 @@
 
         <!-- Works -->
         <hr>
-        <h3 ng-if="!vm.model.viewTaskResult">Роботи на виконання</h3>
-        <h3 ng-if="vm.model.viewTaskResult">Виконані роботи</h3>
+        <h4 ng-if="!vm.model.viewTaskResult">Роботи на виконання</h4>
+        <h4 ng-if="vm.model.viewTaskResult">Виконані роботи</h4>
         <form novalidate="true" name="workResults">
           <div ng-repeat="item in vm.model.taskWorks">
             <div class="row">

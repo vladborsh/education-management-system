@@ -9,39 +9,34 @@
       <div class="panel-body">
         <div class="form-group">
           <div class="row">
-            <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.searchLecture">
-              <span class="glyphicon glyphicon-search form-control-feedback" style="right: 15px;"></span>
-            </div>
+            <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.searchLecture">
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
-            <!-- Lectures -->
-            <div class="table-responsive">
-              <table class="table table-hover" ng-show="vm.model.lectures.length > 0">
-                <thead>
-                  <tr>
-                    <th>Назва</th>
-                    <th>Курс</th>
-                    <th>Опис</th>
-                    <th>Дата створення</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="item in vm.model.lectures | filter : vm.model.searchLecture">
-                    <td><a ui-sref="content.lecture_item({id:item._id})" class="underline">{{item.name}}</a></td>
-                    <td><a ui-sref="content.course_item({id:item._course._id})" class="underline">{{item._course.name}}</a></td>
-                    <td>{{item.description}}</td>
-                    <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
-                    <td>
-                      <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteLecture(item._id)">Видалити</button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+          <!-- Lectures -->
+          <div class="table-responsive">
+            <table class="table table-hover" ng-show="vm.model.lectures.length > 0">
+              <thead>
+                <tr>
+                  <th>Назва</th>
+                  <th>Курс</th>
+                  <th>Опис</th>
+                  <th>Дата створення</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in vm.model.lectures | filter : vm.model.searchLecture">
+                  <td><a ui-sref="content.lecture_item({id:item._id})" class="underline">{{item.name}}</a></td>
+                  <td><a ui-sref="content.course_item({id:item._course._id})" class="underline">{{item._course.name}}</a></td>
+                  <td>{{item.description}}</td>
+                  <td>{{item.createdDate | date : 'MMM d, y h:mm:ss a' }}</td>
+                  <td>
+                    <button type="button" class="btn btn-default btn-xs" ng-click="vm.deleteLecture(item._id)">Видалити</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         <!-- Lectures (END)-->
         </div>

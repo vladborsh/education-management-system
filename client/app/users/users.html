@@ -9,14 +9,11 @@
       <div class="panel-body">
         <div class="form-group">
           <div class="row">
-            <div class="col-md-12">
-              <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.searchUser">
-              <span class="glyphicon glyphicon-search form-control-feedback" style="right: 15px;"></span>
-            </div>
+            <input type="text" class="form-control" placeholder="Пошук" ng-model="vm.model.searchUser">
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
+          <div class="table-responsive" style="overflow-x: visible">
             <!-- Users -->
             <table class="table table-hover" ng-show="vm.model.users.length > 0">
               <thead>

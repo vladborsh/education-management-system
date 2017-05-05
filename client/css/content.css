@@ -4,7 +4,7 @@
   background: #D5DBD5;
   transition: all linear 0.3s;
   position: relative;
-  overflow: auto;
+  overflow: hidden;
 }
 .content .topbar {
   padding: 20px;
@@ -40,11 +40,22 @@
 .content .topbar .search:focus {
   border-bottom: 1px solid #bbbbbb;
 }
+@media (max-width: 700px) {
+  .content .topbar .logout {
+    display: none;
+  }
+  .content .topbar .toggle-menu {
+    display: none;
+  }
+  .content .topbar .search {
+    width: : 170%;
+  }
+}
 .content .main {
   width: auto;
   height: 100%;
   padding-bottom: 0;
   position: relative;
-  overflow-y: scroll;
-  padding-top: 80px;
+  overflow-y: auto;
+  margin-top: 80px;
 }
