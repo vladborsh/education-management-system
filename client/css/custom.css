@@ -321,6 +321,7 @@ label {
 }
 @media (max-width: 700px) {
   .login .col-login.gr {
+    display: none;
     width: 0%;
   }
 }
